@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object LoginSignup
+object Menu
+object User
+object MovieSerie
+object SavedList
+object Search
+object WatchedList
+object Play
+object Delete
+object Add
+object Choice
+object Save
+
+LoginSignup <|-- User
+
+User <|-- Menu
+'Search <|-- Menu
+
+Menu <|-- SavedList
+Menu <|-- WatchedList
+Menu <|-- Search
+
+'Saved <|- MovieSerie
+
+'Watched <|- MovieSerie
+
+'Delete' <|- MovieSerie
+
+MovieSerie -- Choice
+Search <|-- MovieSerie
+WatchedList <|-- MovieSerie
+SavedList <|-- MovieSerie
+
+Choice-- Play
+Choice -- Save
+Choice-- Delete
+Choice -- Add
+
+'Play-- WatchedList
+'Play *-- SavedList
+
+'Menu <|-- Saved
+'Menu <|-- Watched
+'Menu <|-- Delete
+'Menu <|-- Search
+
+
+
+
+@enduml

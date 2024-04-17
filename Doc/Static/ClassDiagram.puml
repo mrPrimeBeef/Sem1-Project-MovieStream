@@ -1,0 +1,53 @@
+@startuml
+
+interface IMedia {
+}
+
+abstract AInfo {
+}
+
+class Movie {
+}
+
+class Series {
+}
+
+class TextUI {
+}
+
+class User {
+}
+
+class Menu {
+}
+
+class Streaming {
+}
+
+class Main {
+}
+
+class FileUI {
+}
+
+class Search {
+}
+
+class Admin {
+}
+
+Main -- Streaming
+Streaming -- IMedia
+User -- Menu
+User -- Admin
+IMedia -- Menu
+Streaming -- User
+Menu -- Search
+IMedia -- Search
+Streaming -- TextUI
+IMedia <|.. AInfo
+Streaming -- FileUI
+AInfo -- Movie
+AInfo -- Series
+
+@enduml
