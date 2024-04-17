@@ -9,45 +9,68 @@ abstract AInfo {
 class Movie {
 }
 
+
 class Series {
 }
 
 class TextUI {
+- Scanner scanner
++ String promptText()
++ void displayMessage()
++ int promptNumeric(String msg)
 }
 
 class User {
-}
-
-class Menu {
+- String username
+- String password
++ User(String username, String password)
+'Methods
++ createUser(String username, String password)
++ confirmPassword(String password)
++ login(String username, String password)
++ checkUsernameAvailability(String username)
++ validatePassword(String password)
 }
 
 class Streaming {
+- User user
+- TextUI ui
+- FileIO io
+- Search search
+- String moviePath
+- String seriePath
++ void runStreaming()
 }
 
 class Main {
++ static void main(String[] args)
 }
 
-class FileUI {
+class FileIO {
++ ArrayList<String> readMovieData(String path)
++ ArrayList<String >readSerieData(String path))
++ void saveFavorites(ArrayList<User> user, String path)
++ void saveWatched(ArrayList<User> user, String path)
 }
 
 class Search {
+- Scanner scanner
++ String searchByTitle(String title)
+}
+class Episode{
+
 }
 
-class Admin {
-}
-
-Main -- Streaming
-Streaming -- IMedia
-User -- Menu
-User -- Admin
-IMedia -- Menu
-Streaming -- User
-Menu -- Search
-IMedia -- Search
-Streaming -- TextUI
+Main <|-- Streaming
+Streaming <|-- IMedia
+Streaming <|-- User
+Streaming <|-- Search
+Streaming <|-- TextUI
 IMedia <|.. AInfo
-Streaming -- FileUI
-AInfo -- Movie
-AInfo -- Series
+Streaming <|-- FileIO
+AInfo <|-- Movie
+AInfo <|-- Series
+Series *-- Episode
+Movie o-- Episode
 
 @enduml
