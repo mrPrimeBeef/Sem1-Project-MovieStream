@@ -14,7 +14,7 @@ public class FileIO{
 
 
     public ArrayList<String> readMovieData(String moviePath){
-        ArrayList<String> movies = new ArrayList<>();
+        ArrayList<String> movies;
         movies = scanFile(moviePath);
 
         return movies;
@@ -22,7 +22,7 @@ public class FileIO{
 
 
     public ArrayList<String> readSerieData(String seriePath){
-        ArrayList<String> series = new ArrayList<>();
+        ArrayList<String> series;
         series = scanFile(seriePath);
 
         return series;
