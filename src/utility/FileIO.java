@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import domain.User;
 
-public class FileIO extends Streaming {
+public class FileIO{
 
 
     public FileIO() {

@@ -31,6 +31,7 @@ class Episode{
 }
 }
 
+package domain{
 class User {
 - String username
 - String password
@@ -41,6 +42,7 @@ User(String username, String password)
 + login(String username, String password)
 + boolean checkUsernameAvailability(String username)
 + boolean validatePassword(String password)
+}
 }
 
 class Streaming {

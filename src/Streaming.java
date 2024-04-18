@@ -3,6 +3,8 @@ import utility.FileIO;
 import utility.Search;
 import utility.TextUI;
 
+import domain.User;
+
 import java.util.ArrayList;
 
 public class Streaming {
