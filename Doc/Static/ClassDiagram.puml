@@ -1,5 +1,9 @@
 @startuml
 
+class Main {
++ static void main(String[] args)
+}
+
 interface IMedia {
 + playMedia()
 + backToMenu(Char q)
@@ -9,14 +13,16 @@ interface IMedia {
 abstract AMedia {
 - String title
 - String category
--
 }
 
 class Movie {
+
 }
 
 
 class Series {
+- int episode
+- int season
 }
 
 class TextUI {
@@ -29,13 +35,13 @@ class TextUI {
 class User {
 - String username
 - String password
-+ User(String username, String password)
++ boolean User(String username, String password)
 'Methods
-+ createUser(String username, String password)
-+ confirmPassword(String password)
++ User createUser(String username, String password)
++ boolean confirmPassword(String password)
 + login(String username, String password)
-+ checkUsernameAvailability(String username)
-+ validatePassword(String password)
++ boolean checkUsernameAvailability(String username)
++ boolean validatePassword(String password)
 }
 
 class Streaming {
@@ -45,13 +51,12 @@ class Streaming {
 - Search search
 - String moviePath
 - String seriePath
-- Amedia media
+- AMedia media
+- ArrayList<Media>
 + void runStreaming()
 }
 
-class Main {
-+ static void main(String[] args)
-}
+
 
 class FileIO {
 + ArrayList<String> readMovieData(String path)
