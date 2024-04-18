@@ -18,8 +18,19 @@ public class Streaming {
     String moviePath;
     String seriePath;
     AMedia media;
+    ArrayList<User> userList;
 
+public Streaming(String name) {
+    this.name = name;
 
+    userList = new ArrayList();
+}
+
+public void createUser(String username, String password) {
+    user = new User(username, password);
+    this.userList.add(user);
+
+}
 
     public void runStreaming() {
 
@@ -28,5 +39,7 @@ public class Streaming {
     public void Menu(){
 
     }
+
+
 
 }
