@@ -4,6 +4,8 @@ interface IMedia {
 }
 
 abstract AInfo {
+- String title
+- Search search
 }
 
 class Movie {
@@ -57,6 +59,8 @@ class Search {
 - Scanner scanner
 + String searchByTitle(String title)
 + String searchByCategory(String category)
++ String searchUsername(String username)
++ String searchPassword(String password)
 }
 class Episode{
 
