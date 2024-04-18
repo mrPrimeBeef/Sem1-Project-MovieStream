@@ -6,7 +6,7 @@ class Main {
 
 interface IMedia {
 + playMedia()
-+ backToMenu(Char q)
++ backToMenu(String q)
 '+ pauseMedia()
 }
 
@@ -29,8 +29,8 @@ class Series {
 
 class TextUI {
 - Scanner scanner
-+ String promptText()
-+ void displayMessage()
++ String promptText(String msg)
++ void displayMessage(String msg)
 + int promptNumeric(String msg)
 }
 
@@ -48,6 +48,7 @@ User(String username, String password)
 
 class Streaming {
 - User user
+- String name
 - TextUI ui
 - FileIO io
 - Search search
@@ -63,10 +64,11 @@ class Streaming {
 
 
 class FileIO {
-+ ArrayList<String> readMovieData(String path)
-+ ArrayList<String> readSerieData(String path))
++ ArrayList<String> readMovieData(String moviePath)
++ ArrayList<String> readSerieData(String seriePath))
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
++ ArrayList<String> scanFile(String path)
 }
 
 class Search {
