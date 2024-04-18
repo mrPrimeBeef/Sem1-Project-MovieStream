@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object LoginSignup
+object LoginSignupStartmenu
 object Menu
 object User
 object MovieSerie
@@ -11,17 +11,16 @@ object WatchedList
 object Play
 object Delete
 object Add
-object Choice
 object Save
 
-LoginSignup <|-- User
+LoginSignupStartmenu *-- User
 
-User <|-- Menu
+User <--> Menu
 'Search <|-- Menu
 
-Menu <|-- SavedList
-Menu <|-- WatchedList
-Menu <|-- Search
+Menu o-- SavedList
+Menu o-- WatchedList
+Menu *-- Search
 
 'Saved <|- MovieSerie
 
@@ -29,15 +28,20 @@ Menu <|-- Search
 
 'Delete' <|- MovieSerie
 
-MovieSerie -- Choice
-Search <|-- MovieSerie
+Search *-- MovieSerie
 WatchedList <|-- MovieSerie
 SavedList <|-- MovieSerie
 
-Choice-- Play
-Choice -- Save
-Choice-- Delete
-Choice -- Add
+MovieSerie *-- Play
+Play *-- Save
+MovieSerie o-- Delete
+MovieSerie *-- Add
+
+Add --|> SavedList
+Save --o WatchedList
+
+
+SavedList --* Delete
 
 'Play-- WatchedList
 'Play *-- SavedList
@@ -46,8 +50,6 @@ Choice -- Add
 'Menu <|-- Watched
 'Menu <|-- Delete
 'Menu <|-- Search
-
-
 
 
 @enduml
