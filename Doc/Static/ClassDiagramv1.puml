@@ -35,9 +35,9 @@ package domain{
 class User {
 - String username
 - String password
+- ArrayList<Media> watchedList
+- ArrayList<Media> savedList
 User(String username, String password)
-'Methods
-+ User createUser(String username, String password)
 + boolean confirmPassword(String password)
 + login(String username, String password)
 + boolean checkUsernameAvailability(String username)
@@ -54,10 +54,11 @@ class Streaming {
 - String moviePath
 - String seriePath
 - AMedia media
-- ArrayList<Media> watchedList
-- ArrayList<Media> savedList
+- ArrayList<User> userList
+Streaming(String name)
 + void runStreaming()
 + void Menu()
++ User createUser(String username, String password);
 }
 
 
