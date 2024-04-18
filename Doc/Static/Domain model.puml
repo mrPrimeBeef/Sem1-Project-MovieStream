@@ -16,7 +16,7 @@ object Save
 LoginSignupStartmenu *-- User
 
 User <--> Menu
-'Search <|-- Menu
+'utility.Search <|-- Menu
 
 Menu o-- SavedList
 Menu o-- WatchedList
@@ -49,7 +49,7 @@ SavedList --* Delete
 'Menu <|-- Saved
 'Menu <|-- Watched
 'Menu <|-- Delete
-'Menu <|-- Search
+'Menu <|-- utility.Search
 
 
 @enduml

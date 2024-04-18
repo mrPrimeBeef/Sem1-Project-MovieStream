@@ -3,7 +3,7 @@
 class Main {
 + static void main(String[] args)
 }
-
+package application{
 interface IMedia {
 + playMedia()
 + backToMenu(String q)
@@ -26,12 +26,9 @@ class Series {
 - int episode
 - int season
 }
+class Episode{
 
-class TextUI {
-- Scanner scanner
-+ String promptText(String msg)
-+ void displayMessage(String msg)
-+ int promptNumeric(String msg)
+}
 }
 
 class User {
@@ -62,7 +59,7 @@ class Streaming {
 }
 
 
-
+package utilty{
 class FileIO {
 + ArrayList<String> readMovieData(String moviePath)
 + ArrayList<String> readSerieData(String seriePath))
@@ -76,17 +73,22 @@ class Search {
 + Amedia media searchByTitle(String title)
 + Amedia media searchByCategory(String category)
 }
-class Episode{
-
+class TextUI {
+- Scanner scanner
++ String promptText(String msg)
++ void displayMessage(String msg)
++ int promptNumeric(String msg)
+}
 }
 
-Main <|-- Streaming
-Streaming <|-- IMedia
-Streaming <|-- User
-Streaming <|-- Search
-Streaming <|-- TextUI
+
+Main *-- Streaming
+Streaming *-- IMedia
+Streaming *-- User
+Streaming *-- Search
+Streaming *-- TextUI
 IMedia <|.. AMedia
-Streaming <|-- FileIO
+Streaming *-- FileIO
 AMedia <|-- Movie
 AMedia  <|-- Series
 Series *-- Episode

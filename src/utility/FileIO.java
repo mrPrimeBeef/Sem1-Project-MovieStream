@@ -1,13 +1,14 @@
+package utility;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO extends Main{
+public class FileIO extends Streaming {
 
 
     public FileIO() {
-        String name = "Lasse";
     }
 
 

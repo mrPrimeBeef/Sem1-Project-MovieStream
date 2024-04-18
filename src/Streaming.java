@@ -1,3 +1,8 @@
+import application.AMedia;
+import utility.FileIO;
+import utility.Search;
+import utility.TextUI;
+
 import java.util.ArrayList;
 
 public class Streaming {
@@ -11,15 +16,9 @@ public class Streaming {
     String moviePath;
     String seriePath;
     AMedia media;
-    ArrayList<Media> watchedList;
-    ArrayList<Media> SavedList;
+    ArrayList<AMedia> watchedList;
+    ArrayList<AMedia> SavedList;
 
-    public Streaming(String name) {
-        this.name = name;
-
-        this.ui = ui;
-        this.io = io;
-    }
 
     public void runStreaming() {
 
