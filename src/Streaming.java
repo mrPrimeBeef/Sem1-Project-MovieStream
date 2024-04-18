@@ -18,8 +18,7 @@ public class Streaming {
     String moviePath;
     String seriePath;
     AMedia media;
-    ArrayList<AMedia> watchedList;
-    ArrayList<AMedia> SavedList;
+
 
 
     public void runStreaming() {

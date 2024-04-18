@@ -58,7 +58,7 @@ class Streaming {
 Streaming(String name)
 + void runStreaming()
 + void Menu()
-+ User createUser(String username, String password);
++ void createUser(String username, String password);
 }
 
 
