@@ -1,11 +1,15 @@
 @startuml
 
 interface IMedia {
++ playMedia()
++ backToMenu(Char q)
+'+ pauseMedia()
 }
 
 abstract AMedia {
 - String title
-- Search search
+- String category
+-
 }
 
 class Movie {
