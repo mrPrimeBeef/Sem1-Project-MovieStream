@@ -7,7 +7,7 @@ public class FileIO extends Main{
 
 
     public FileIO() {
-
+        String name = "Lasse";
     }
 
 
