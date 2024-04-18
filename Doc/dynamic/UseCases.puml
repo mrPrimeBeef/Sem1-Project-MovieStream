@@ -3,46 +3,47 @@
 
 actor user
 
-usecase createuser
+usecase createUser
 usecase login
 usecase menu
 usecase categories
-usecase titlesearch
-usecase watched
-usecase saved
+usecase titleSearch
+usecase watchedList
+usecase savedList
 usecase add
 usecase play
 usecase delete
-usecase backtomenu
+usecase backToMenu
 usecase media
 
 top to bottom direction
-user -|> createuser
-user -|> login
+user --> createUser
+user --> login
 
-createuser -|> login
+createUser --> login
 
-login -|> menu
+login --> menu
 
-menu <|-left-|> watched
-menu <|-right-|> saved
-menu <|-up-|> categories
-menu <|-down-|> titlesearch
+menu <--> watchedList
+menu <--> savedList
+menu <--> categories
+menu <--> titleSearch
 
-titlesearch -|> media
+titleSearch --> media
 
-media -|> play
-media -|> add
-media <|-|> backtomenu
+media --> play
+media --> add
+media <---> backToMenu
 
-saved -|> delete
-saved -|> play
-saved <|-|> backtomenu
+savedList --> delete
+savedList --> play
+savedList <---> backToMenu
 
-watched <|-|> backtomenu
-watched -|> play
+watchedList <---> backToMenu
+watchedList --> play
 
-categories <|-|> backtomenu
-categories -|> media
+categories <---> backToMenu
+categories --> media
 
+backToMenu --> menu
 @enduml
