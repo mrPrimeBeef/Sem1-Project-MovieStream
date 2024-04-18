@@ -13,6 +13,8 @@ interface IMedia {
 abstract AMedia {
 - String title
 - String category
++ String saveToWatchedList()
++ String saveToSavedList()
 }
 
 class Movie {
@@ -35,7 +37,7 @@ class TextUI {
 class User {
 - String username
 - String password
-+ boolean User(String username, String password)
+User(String username, String password)
 'Methods
 + User createUser(String username, String password)
 + boolean confirmPassword(String password)
@@ -52,8 +54,10 @@ class Streaming {
 - String moviePath
 - String seriePath
 - AMedia media
-- ArrayList<Media>
+- ArrayList<Media> watchedList
+- ArrayList<Media> savedList
 + void runStreaming()
++ void Menu()
 }
 
 
