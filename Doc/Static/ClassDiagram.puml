@@ -3,7 +3,7 @@
 interface IMedia {
 }
 
-abstract AInfo {
+abstract AMedia {
 - String title
 - Search search
 }
@@ -41,6 +41,7 @@ class Streaming {
 - Search search
 - String moviePath
 - String seriePath
+- Amedia media
 + void runStreaming()
 }
 
@@ -50,17 +51,15 @@ class Main {
 
 class FileIO {
 + ArrayList<String> readMovieData(String path)
-+ ArrayList<String >readSerieData(String path))
++ ArrayList<String> readSerieData(String path))
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
 }
 
 class Search {
 - Scanner scanner
-+ String searchByTitle(String title)
-+ String searchByCategory(String category)
-+ String searchUsername(String username)
-+ String searchPassword(String password)
++ Amedia media searchByTitle(String title)
++ Amedia media searchByCategory(String category)
 }
 class Episode{
 
@@ -71,10 +70,10 @@ Streaming <|-- IMedia
 Streaming <|-- User
 Streaming <|-- Search
 Streaming <|-- TextUI
-IMedia <|.. AInfo
+IMedia <|.. AMedia
 Streaming <|-- FileIO
-AInfo <|-- Movie
-AInfo <|-- Series
+AMedia <|-- Movie
+AMedia  <|-- Series
 Series *-- Episode
 Movie o-- Episode
 
