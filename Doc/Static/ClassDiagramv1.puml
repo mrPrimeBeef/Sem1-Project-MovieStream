@@ -69,11 +69,15 @@ Streaming(String name)
 
 package utilty{
 class FileIO {
-+ ArrayList<Movie> readMovieData(String moviePath)
-+ ArrayList<Series> readSerieData(String seriePath))
+- ArrayList<Movie> listOfMovies
+- ArrayList<Series> listOfSeries
++ ArrayList<String> readMovieData(String moviePath)
++ ArrayList<String> readSerieData(String seriePath)
+- ArrayList<String> scanFile(String path)
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
-+ ArrayList<String> scanFile(String path)
++ void saveUserData()
++ void readUserData()
 }
 
 class Search {

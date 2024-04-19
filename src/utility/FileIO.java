@@ -4,43 +4,47 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import application.Movie;
+import application.Series;
 import domain.User;
 
 public class FileIO{
 
+    private ArrayList<Movie> listOfMovies = new ArrayList<>();
+    private ArrayList<Series> listOfSeries = new ArrayList<>();
 
-    public FileIO() {
+    // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
+    // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
+    public ArrayList<Movie> readMovieData(String moviePath){
+        ArrayList<String> list;
+        list = scanFile(moviePath);
+
+        for (String element : list){
+            Movie movie = new Movie();
+
+            listOfMovies.add(movie);
+        }
+
+        return listOfMovies;
     }
 
+    // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
+    // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
+    public ArrayList<Series> readSerieData(String seriePath){
+        ArrayList<String> list;
+        list = scanFile(seriePath);
 
-    public ArrayList<String> readMovieData(String moviePath){
-        ArrayList<String> movies;
-        movies = scanFile(moviePath);
+        for (String element : list){
+            Series serie = new Series();
 
-        return movies;
+            listOfSeries.add(serie);
+        }
+
+        return listOfSeries;
     }
 
-
-    public ArrayList<String> readSerieData(String seriePath){
-        ArrayList<String> series;
-        series = scanFile(seriePath);
-
-        return series;
-    }
-
-
-    public void saveFavorites(ArrayList<User> user, String path){
-
-
-    }
-
-
-    public void saveWatched(ArrayList<User> user, String path){
-
-
-    }
-
-
+    // Køre igennem en fil, og gemmer hvert linje til en arraylist som returneres.
     private ArrayList<String> scanFile(String path){
         ArrayList<String> list = new ArrayList<>();
 
@@ -58,4 +62,25 @@ public class FileIO{
         }
         return list;
     }
+
+    public void saveFavorites(ArrayList<User> user, String path){
+
+
+    }
+
+    public void saveWatched(ArrayList<User> user, String path){
+
+
+    }
+
+    public void saveUserData(){
+
+
+    }
+
+    public void readUserData(){
+
+
+    }
+
 }
