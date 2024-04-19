@@ -15,7 +15,7 @@ public class FileIO{
 
     private ArrayList<Movie> listOfMovies = new ArrayList<>();
     private ArrayList<Series> listOfSeries = new ArrayList<>();
-    private userSavePath = ""
+    private String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
@@ -78,8 +78,8 @@ public class FileIO{
 
     public void saveUserData(User currentUser){
         try {
-            FileWriter writer = new FileWriter("data/UserData.csv");
-            writer.write(currentUser.getUsername() + ", " + currentUser.getPassword());
+            FileWriter writer = new FileWriter(userSavePath);
+            writer.write(currentUser.getUsername() + ", " + currentUser.getPassword() + "\n");
 
             writer.close();
 
