@@ -103,14 +103,14 @@ AMedia  <|-- Series
 Series *-- Episode
 Movie o-- Episode
 
+'https://devhints.io/plantuml
+'Car <|-- SmallCar      # extension
+'Car *-- Engine         # composition
+'Cars o-- Car           # aggregation
+'Car <|.. SmallCar      # dotted line (use .. instead of --)
+'Car <|--* Car
+
+'-left->
+'-right->
+
 @enduml
-
-https://devhints.io/plantuml
-Car <|-- SmallCar      # extension
-Car *-- Engine         # composition
-Cars o-- Car           # aggregation
-Car <|.. SmallCar      # dotted line (use .. instead of --)
-Car <|--* Car
-
--left->
--right->
