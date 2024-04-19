@@ -34,8 +34,8 @@ package domain{
 class User {
 - String username
 - String password
-- LinkedHasList<Media> watchedList
-- LinkedHasList<Media> savedList
+- LinkedHashSet<Media> watchedList
+- LinkedHashSet<Media> savedList
 User(String username, String password)
 
 + void saveToWatchedList()

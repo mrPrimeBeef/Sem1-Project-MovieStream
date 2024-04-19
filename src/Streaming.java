@@ -77,8 +77,10 @@ public void runStreaming(){
 
         if (checkUsernameAvailability(username)) {
             user = new User(username, password);
+            io.saveUserData(user);
             this.userList.add(user);
             this.currentUser = user;
+
         }
 
         return user;
