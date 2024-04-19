@@ -5,16 +5,15 @@ class Main {
 }
 package application{
 interface IMedia {
-+ playMedia()
-+ backToMenu(String q)
++ String playMedia()
++ void backToMenu(String q)
 '+ pauseMedia()
 }
 
 abstract AMedia {
 - String title
 - String category
-+ String saveToWatchedList()
-+ String saveToSavedList()
+
 }
 
 class Movie {
@@ -35,13 +34,14 @@ package domain{
 class User {
 - String username
 - String password
+- LinkedHasList<Media> watchedList
+- LinkedHasList<Media> savedList
 User(String username, String password)
-'Methods
-+ User createUser(String username, String password)
-+ boolean confirmPassword(String password)
-+ login(String username, String password)
-+ boolean checkUsernameAvailability(String username)
-+ boolean validatePassword(String password)
+
++ void saveToWatchedList()
++ void saveToSavedList()
++ void viewWatchedList()
++ void viewSavedList()
 }
 }
 
@@ -54,32 +54,47 @@ class Streaming {
 - String moviePath
 - String seriePath
 - AMedia media
-- ArrayList<Media> watchedList
-- ArrayList<Media> savedList
+- ArrayList<User> userList
+Streaming(String name)
 + void runStreaming()
-+ void Menu()
++ voi startStreaming()
++ void createUser(String username, String password)
++ void quitStreaming(input)
+
++ boolean confirmPassword(String password)
++ login(String username, String password)
++ boolean checkUsernameAvailability(String username)
 }
 
 
 package utilty{
 class FileIO {
+- ArrayList<Movie> listOfMovies
+- ArrayList<Series> listOfSeries
 + ArrayList<String> readMovieData(String moviePath)
-+ ArrayList<String> readSerieData(String seriePath))
++ ArrayList<String> readSerieData(String seriePath)
+- ArrayList<String> scanFile(String path)
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
-+ ArrayList<String> scanFile(String path)
++ void saveUserData()
++ void readUserData()
 }
 
 class Search {
 - Scanner scanner
+- ArrayList<Movie> movies
+- ArrayList<Series> series
 + Amedia media searchByTitle(String title)
 + Amedia media searchByCategory(String category)
+
 }
 class TextUI {
 - Scanner scanner
 + String promptText(String msg)
 + void displayMessage(String msg)
 + int promptNumeric(String msg)
++ void displayList(ArrayList<String> list, String msg)
++ void promptChoice(ArrayList<String> optionslist, String msg)
 }
 }
 
@@ -89,11 +104,21 @@ Streaming *-- IMedia
 Streaming *-- User
 Streaming *-- Search
 Streaming *-- TextUI
-IMedia <|.. AMedia
+IMedia <|-- AMedia
 Streaming *-- FileIO
 AMedia <|-- Movie
 AMedia  <|-- Series
 Series *-- Episode
 Movie o-- Episode
+
+'https://devhints.io/plantuml
+'Car <|-- SmallCar      # extension
+'Car *-- Engine         # composition
+'Cars o-- Car           # aggregation
+'Car <|.. SmallCar      # dotted line (use .. instead of --)
+'Car <|--* Car
+
+'-left->
+'-right->
 
 @enduml

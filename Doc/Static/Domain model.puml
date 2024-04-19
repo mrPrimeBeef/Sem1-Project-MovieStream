@@ -1,55 +1,42 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object LoginSignupStartmenu
-object Menu
-object User
-object MovieSerie
+object streaming
+object user
+object Movie
+object serie
 object SavedList
 object Search
 object WatchedList
-object Play
-object Delete
-object Add
-object Save
-
-LoginSignupStartmenu *-- User
-
-User <--> Menu
-'utility.Search <|-- Menu
-
-Menu o-- SavedList
-Menu o-- WatchedList
-Menu *-- Search
-
-'Saved <|- MovieSerie
-
-'Watched <|- MovieSerie
-
-'Delete' <|- MovieSerie
-
-Search *-- MovieSerie
-WatchedList <|-- MovieSerie
-SavedList <|-- MovieSerie
-
-MovieSerie *-- Play
-Play *-- Save
-MovieSerie o-- Delete
-MovieSerie *-- Add
-
-Add --|> SavedList
-Save --o WatchedList
+object list
+'object Play
+'object Delete
+'object Add
+'object Save
 
 
-SavedList --* Delete
 
-'Play-- WatchedList
-'Play *-- SavedList
+streaming <--> user
 
-'Menu <|-- Saved
-'Menu <|-- Watched
-'Menu <|-- Delete
-'Menu <|-- utility.Search
+
+user o-- SavedList
+user o-- WatchedList
+user *-- Search
+user *-- list
+
+
+Search *-- Movie
+WatchedList <|-- Movie
+SavedList <|-- Movie
+list *-- Movie
+
+Search *-- serie
+WatchedList <|-- serie
+SavedList <|-- serie
+list *-- serie
+
+
+
 
 
 @enduml

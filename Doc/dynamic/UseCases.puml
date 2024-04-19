@@ -33,17 +33,23 @@ titleSearch --> media
 
 media --> play
 media --> add
-media <---> backToMenu
+media --> backToMenu
 
 savedList --> delete
 savedList --> play
 savedList <---> backToMenu
 
-watchedList <---> backToMenu
+watchedList --> backToMenu
 watchedList --> play
 
-categories <---> backToMenu
+categories --> backToMenu
 categories --> media
 
 backToMenu --> menu
+
+play --> backToMenu
+add --> backToMenu
+delete --> backToMenu
+savedList --> backToMenu
+
 @enduml
