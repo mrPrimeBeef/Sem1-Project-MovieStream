@@ -78,8 +78,9 @@ public class FileIO{
 
     public void saveUserData(User currentUser){
         try {
-            FileWriter writer = new FileWriter(userSavePath);
-            writer.write(currentUser.getUsername() + ", " + currentUser.getPassword() + "\n");
+            FileWriter writer = new FileWriter(userSavePath, true);
+
+            writer.append(currentUser.getUsername() + ", " + currentUser.getPassword() + "\n");
 
             writer.close();
 
