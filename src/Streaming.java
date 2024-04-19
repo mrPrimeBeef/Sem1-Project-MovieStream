@@ -47,7 +47,7 @@ public void runStreaming(){
         menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
 
         switch(menuChoice)
-        {
+        {/
             case 1: // Watched
                 this.user.viewWatchedList();
                 break;
