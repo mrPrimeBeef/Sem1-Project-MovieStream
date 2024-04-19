@@ -57,7 +57,7 @@ class Streaming {
 - ArrayList<User> userList
 Streaming(String name)
 + void runStreaming()
-+ void Menu()
++ voi startStreaming()
 + void createUser(String username, String password)
 + void quitStreaming(input)
 
