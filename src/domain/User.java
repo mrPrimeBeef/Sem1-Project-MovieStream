@@ -22,4 +22,26 @@ public class User {
         return password;
     }
 
+    public void viewWatchedList()
+    {
+
+    }
+    public void viewSavedList()
+    {
+
+    }
+    public void searchCatalog()
+    {
+
+    }
+
+    public void exitApplication()
+    {
+
+    }
+
+
+
+
+
 }
