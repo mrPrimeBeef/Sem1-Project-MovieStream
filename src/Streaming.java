@@ -40,45 +40,38 @@ public Streaming(String name) {
     startmenu.add("2) Login");
 }
 
-//public void runStreaming(){
-//    ui.displayMessage(this.name + "'s homepage");
-//    int menuChoice = 0;
-//    mainMenu.add("1");
-//    mainMenu.add("2");
-//    mainMenu.add("3");
-//    mainMenu.add("4");
-//
-//
-//    while(menuChoice != mainMenu.size())
-//    {
-//        menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
-//
-//        switch(menuChoice)
-//        {
-//            case 1: // Watched
-//                ui.displayMessage("view watched list");
-//                this.user.viewWatchedList();
-//                break;
-//            case 2: // Saved
-//                ui.displayMessage("view saved list");
-//                this.user.viewSavedList();
-//                break;
-//            case 3: // Catalog
-//                ui.displayMessage("view all media");
-//                this.user.searchCatalog();
-//                break;
-//            case 4: // exit
-//                ui.displayMessage("exit");
-//                this.user.exitApplication();
-//                break;
-//            default:
-//                break;
-//        }
-//
-//    }
-//
-//
-//}
+public void runStreaming(){
+    ui.displayMessage(this.user.getUsername() + "'s homepage");
+    int menuChoice;
+
+    String menuMessage = ui.promptText("Choose 1-4 from below");
+
+    mainMenu = new ArrayList<>();
+    mainMenu.add("View watched list");
+    mainMenu.add("View saved list");
+    mainMenu.add("Search catalog");
+    mainMenu.add("Exit application");
+
+    menuChoice = ui.promptChoice(mainMenu, menuMessage);
+
+    switch(menuChoice)
+    {
+        case 1: // Watched
+            this.user.viewWatchedList();
+            break;
+        case 2: // Saved
+            this.user.viewSavedList();
+            break;
+        case 3: // Catalog
+            this.user.searchCatalog();
+            break;
+        case 4: // Catalog
+            this.user.exitApplication();
+            break;
+        default:
+            break;
+    }
+}
 
 
 
@@ -98,7 +91,7 @@ public Streaming(String name) {
                 case 2:
                     //Continue (last saved) game
                     this.login();
-                    // this.runStreaming();
+                    this.runStreaming();
                     break;
 
             }
@@ -140,7 +133,7 @@ public Streaming(String name) {
             return false;
         }
 
-            //
+            //String password = ui.promptText("Please enter your password");
 
     }
     boolean checkUsernameAvailability(String username) {
