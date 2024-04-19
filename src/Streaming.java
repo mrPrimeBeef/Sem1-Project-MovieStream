@@ -1,4 +1,5 @@
 import application.AMedia;
+import application.Movie;
 import utility.FileIO;
 import utility.Search;
 import utility.TextUI;
@@ -12,6 +13,7 @@ public class Streaming {
     private String name;
 
     private User user;
+    private User currentUser;
     private TextUI ui;
     FileIO io;
     Search search;
@@ -53,7 +55,6 @@ public void runStreaming(){
 
            switch(action){
                 case 1:
-
                     this.createUser();
                     this.runStreaming();
                     break;
@@ -77,26 +78,29 @@ public void runStreaming(){
         if (checkUsernameAvailability(username)) {
             user = new User(username, password);
             this.userList.add(user);
+            this.currentUser = user;
         }
 
         return user;
 
     }
 
-//    boolean confirmPassword(String password) {
-//        return this.password.equals(password);
-//    }
+    boolean confirmPassword(String password) {
+        return user.getPassword().equals(password);
+    }
+
     boolean login() {
         String username = ui.promptText("Please enter your username");
+        String password = ui.promptText("Please enter your password");
 
-        if(userList.contains(username)){
+        if(userList.contains(username) && confirmPassword(password)){
             return true;
         } else {
             ui.displayMessage("Wrong username or password");
             return false;
         }
 
-            //String password = ui.promptText("Please enter your password");
+            //
 
     }
     boolean checkUsernameAvailability(String username) {
@@ -109,6 +113,10 @@ public void runStreaming(){
             }
             ui.displayMessage(username + "user exists... ");
             return false;
+    }
+
+    public User getCurrentUser() {
+    return currentUser;
     }
 
 
