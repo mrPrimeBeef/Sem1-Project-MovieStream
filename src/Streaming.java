@@ -1,4 +1,5 @@
 import application.AMedia;
+import application.Movie;
 import utility.FileIO;
 import utility.Search;
 import utility.TextUI;
@@ -12,6 +13,7 @@ public class Streaming {
     private String name;
 
     private User user;
+    private User currentUser;
     private TextUI ui;
     FileIO io;
     Search search;
@@ -38,36 +40,45 @@ public Streaming(String name) {
     startmenu.add("2) Login");
 }
 
-public void runStreaming(){
-    ui.displayMessage(this.name + "'s homepage");
-    int menuChoice = 1;
-
-    while(menuChoice != mainMenu.size())
-    {
-        menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
-
-        switch(menuChoice)
-        {/
-            case 1: // Watched
-                this.user.viewWatchedList();
-                break;
-            case 2: // Saved
-                this.user.viewSavedList();
-                break;
-            case 3: // Catalog
-                this.user.searchCatalog();
-                break;
-            case 4: // Catalog
-                this.user.exitApplication();
-                break;
-            default:
-                break;
-        }
-
-    }
-
-
-}
+//public void runStreaming(){
+//    ui.displayMessage(this.name + "'s homepage");
+//    int menuChoice = 0;
+//    mainMenu.add("1");
+//    mainMenu.add("2");
+//    mainMenu.add("3");
+//    mainMenu.add("4");
+//
+//
+//    while(menuChoice != mainMenu.size())
+//    {
+//        menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
+//
+//        switch(menuChoice)
+//        {
+//            case 1: // Watched
+//                ui.displayMessage("view watched list");
+//                this.user.viewWatchedList();
+//                break;
+//            case 2: // Saved
+//                ui.displayMessage("view saved list");
+//                this.user.viewSavedList();
+//                break;
+//            case 3: // Catalog
+//                ui.displayMessage("view all media");
+//                this.user.searchCatalog();
+//                break;
+//            case 4: // exit
+//                ui.displayMessage("exit");
+//                this.user.exitApplication();
+//                break;
+//            default:
+//                break;
+//        }
+//
+//    }
+//
+//
+//}
 
 
 
@@ -81,14 +92,13 @@ public void runStreaming(){
 
            switch(action){
                 case 1:
-
                     this.createUser();
-                    this.runStreaming();
+                    //this.runStreaming();
                     break;
                 case 2:
                     //Continue (last saved) game
                     this.login();
-                    this.runStreaming();
+                    // this.runStreaming();
                     break;
             }
         }
@@ -104,27 +114,32 @@ public void runStreaming(){
 
         if (checkUsernameAvailability(username)) {
             user = new User(username, password);
+            io.saveUserData(user);
             this.userList.add(user);
+            this.currentUser = user;
+
         }
 
         return user;
 
     }
 
-//    boolean confirmPassword(String password) {
-//        return this.password.equals(password);
-//    }
+    boolean confirmPassword(String password) {
+        return user.getPassword().equals(password);
+    }
+
     boolean login() {
         String username = ui.promptText("Please enter your username");
+        String password = ui.promptText("Please enter your password");
 
-        if(userList.contains(username)){
+        if(userList.contains(username) && confirmPassword(password)){
             return true;
         } else {
             ui.displayMessage("Wrong username or password");
             return false;
         }
 
-            //String password = ui.promptText("Please enter your password");
+            //
 
     }
     boolean checkUsernameAvailability(String username) {
@@ -137,6 +152,11 @@ public void runStreaming(){
             }
             ui.displayMessage(username + "user exists... ");
             return false;
+    }
+
+    public User getCurrentUser() {
+    return currentUser;
+
     }
 
 
