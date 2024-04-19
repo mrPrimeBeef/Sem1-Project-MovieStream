@@ -117,6 +117,7 @@ public void runStreaming(){
 
     public User getCurrentUser() {
     return currentUser;
+
     }
 
 
