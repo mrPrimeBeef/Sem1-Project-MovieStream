@@ -22,6 +22,7 @@ public class Streaming {
     AMedia media;
     ArrayList<User> userList;
     ArrayList<String> startmenu;
+    ArrayList<String> mainMenu;
 
 public Streaming(String name) {
     this.name = name;
@@ -40,6 +41,33 @@ public Streaming(String name) {
 }
 
 public void runStreaming(){
+    ui.displayMessage(this.name + "'s homepage");
+    int menuChoice = 1;
+
+    while(menuChoice != mainMenu.size())
+    {
+        menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
+
+        switch(menuChoice)
+        {
+            case 1: // Watched
+                this.user.viewWatchedList();
+                break;
+            case 2: // Saved
+                this.user.viewSavedList();
+                break;
+            case 3: // Catalog
+                this.user.searchCatalog();
+                break;
+            case 4: // Catalog
+                this.user.exitApplication();
+                break;
+            default:
+                break;
+        }
+
+    }
+
 
 }
 
