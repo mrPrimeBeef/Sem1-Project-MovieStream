@@ -37,6 +37,10 @@ public Streaming(String name) {
     startmenu.add("2) Login");
 }
 
+public void runStreaming(){
+
+}
+
 
 
     public void startStreaming() {
