@@ -13,10 +13,7 @@ interface IMedia {
 abstract AMedia {
 - String title
 - String category
-+ void saveToWatchedList()
-+ void saveToSavedList()
-+ void viewWatchedList()
-+ void viewSavedList()
+
 }
 
 class Movie {
@@ -40,10 +37,11 @@ class User {
 - LinkedHasList<Media> watchedList
 - LinkedHasList<Media> savedList
 User(String username, String password)
-+ boolean confirmPassword(String password)
-+ login(String username, String password)
-+ boolean checkUsernameAvailability(String username)
-+ boolean validatePassword(String password)
+
++ void saveToWatchedList()
++ void saveToSavedList()
++ void viewWatchedList()
++ void viewSavedList()
 }
 }
 
@@ -62,13 +60,17 @@ Streaming(String name)
 + void Menu()
 + void createUser(String username, String password)
 + void quitStreaming(input)
+
++ boolean confirmPassword(String password)
++ login(String username, String password)
++ boolean checkUsernameAvailability(String username)
 }
 
 
 package utilty{
 class FileIO {
-+ ArrayList<String> readMovieData(String moviePath)
-+ ArrayList<String> readSerieData(String seriePath))
++ ArrayList<Movie> readMovieData(String moviePath)
++ ArrayList<Series> readSerieData(String seriePath))
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
 + ArrayList<String> scanFile(String path)
@@ -76,6 +78,8 @@ class FileIO {
 
 class Search {
 - Scanner scanner
+- ArrayList<Movie> movies
+- ArrayList<Series> series
 + Amedia media searchByTitle(String title)
 + Amedia media searchByCategory(String category)
 
