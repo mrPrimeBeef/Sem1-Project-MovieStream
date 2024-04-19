@@ -44,29 +44,30 @@ public void runStreaming(){
     ui.displayMessage(this.user.getUsername() + "'s homepage");
     int menuChoice;
 
-    String menuMessage = ui.promptText("Choose 1-4 from below");
 
     mainMenu = new ArrayList<>();
-    mainMenu.add("View watched list");
-    mainMenu.add("View saved list");
-    mainMenu.add("Search catalog");
-    mainMenu.add("Exit application");
+    mainMenu.add("1) View watched list");
+    mainMenu.add("2) View saved list");
+    mainMenu.add("3) Search catalog");
+    mainMenu.add("4) Exit application");
 
-    menuChoice = ui.promptChoice(mainMenu, menuMessage);
+    menuChoice = ui.promptChoice(mainMenu, "Choose 1-4 from below");
+
 
     switch(menuChoice)
+
     {
         case 1: // Watched
-            this.user.viewWatchedList();
+           // this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
-            this.user.viewSavedList();
+           // this.currentUser.viewSavedList();
             break;
         case 3: // Catalog
-            this.user.searchCatalog();
+           // this.currentUser.searchCatalog();
             break;
         case 4: // Catalog
-            this.user.exitApplication();
+            // this.currentUser.exitApplication();
             break;
         default:
             break;
@@ -86,7 +87,7 @@ public void runStreaming(){
            switch(action){
                 case 1:
                     this.createUser();
-                    //this.runStreaming();
+                    this.runStreaming();
                     break;
                 case 2:
                     //Continue (last saved) game
