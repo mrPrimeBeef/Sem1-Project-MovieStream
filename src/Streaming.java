@@ -39,34 +39,36 @@ public Streaming(String name) {
 }
 
 public void runStreaming(){
-    ui.displayMessage(this.name + "'s homepage");
-    int menuChoice = 1;
+    ui.displayMessage(this.user.getUsername() + "'s homepage");
+    int menuChoice;
 
-    while(menuChoice != mainMenu.size())
+    String menuMessage = ui.promptText("Choose 1-4 from below");
+
+    mainMenu = new ArrayList<>();
+    mainMenu.add("View watched list");
+    mainMenu.add("View saved list");
+    mainMenu.add("Search catalog");
+    mainMenu.add("Exit application");
+
+    menuChoice = ui.promptChoice(mainMenu, menuMessage);
+
+    switch(menuChoice)
     {
-        menuChoice = ui.promptChoice(mainMenu, "Choose one of the options");
-
-        switch(menuChoice)
-        {/
-            case 1: // Watched
-                this.user.viewWatchedList();
-                break;
-            case 2: // Saved
-                this.user.viewSavedList();
-                break;
-            case 3: // Catalog
-                this.user.searchCatalog();
-                break;
-            case 4: // Catalog
-                this.user.exitApplication();
-                break;
-            default:
-                break;
-        }
-
+        case 1: // Watched
+            this.user.viewWatchedList();
+            break;
+        case 2: // Saved
+            this.user.viewSavedList();
+            break;
+        case 3: // Catalog
+            this.user.searchCatalog();
+            break;
+        case 4: // Catalog
+            this.user.exitApplication();
+            break;
+        default:
+            break;
     }
-
-
 }
 
 
