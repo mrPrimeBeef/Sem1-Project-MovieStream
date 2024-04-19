@@ -22,16 +22,4 @@ public class User {
         return password;
     }
 
-    boolean confirmPassword(String password) {
-        return this.password.equals(password);
-    }
-    boolean login(String password) {
-        return this.password.equals(password);
-    }
-    boolean checkUsernameAvailability(String username) {
-        return this.username.equals(username);
-    }
-    boolean validatePassword(String password) {
-        return this.password.equals(password);
-    }
 }
