@@ -100,6 +100,7 @@ public Streaming(String name) {
                     this.login();
                     // this.runStreaming();
                     break;
+
             }
         }
     }
