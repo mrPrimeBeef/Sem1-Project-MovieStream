@@ -3,13 +3,12 @@ package domain;
 import application.AMedia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class User {
     private String username;
     private String password;
-    LinkedList<AMedia> watchedList;
-    LinkedList<AMedia> savedList;
+    ArrayList<AMedia> watchedList;
+    ArrayList<AMedia> SavedList;
 
     public User(String username, String password) {
         this.username = username;
@@ -23,30 +22,25 @@ public class User {
         return password;
     }
 
-    public LinkedList<AMedia> getSavedList() {
-        return savedList;
+    public void viewWatchedList()
+    {
+
+    }
+    public void viewSavedList()
+    {
+
+    }
+    public void searchCatalog()
+    {
+
     }
 
-    public LinkedList<AMedia> getWatchedList() {
-        return watchedList;
+    public void exitApplication()
+    {
+
     }
 
 
-    public void addSavedMedia(AMedia media){
-        if(!savedList.contains(media)) {
-            savedList.add(media);
-        }
-    }
-    public void removeSavedMedia(AMedia media){
-        if(savedList.contains(media)){
-            savedList.remove(media);
-        }
-    }
-    public void addWatchedMedia(AMedia media) {
-        if (!watchedList.contains(media)){
-            watchedList.add(media);
-        }
-    }
 
 
 
