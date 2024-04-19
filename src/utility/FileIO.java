@@ -22,6 +22,7 @@ public class FileIO{
 
         for (String element : list){
             Movie movie = new Movie();
+
             listOfMovies.add(movie);
         }
 
@@ -36,6 +37,7 @@ public class FileIO{
 
         for (String element : list){
             Series serie = new Series();
+
             listOfSeries.add(serie);
         }
 
