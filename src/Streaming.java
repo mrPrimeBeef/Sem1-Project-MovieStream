@@ -132,8 +132,6 @@ public void runStreaming(){
         // indlæs userdata.csv filen og cross reference 'username' + 'password'
         // username og password skal valideres med userdata
 
-        io.readUserData();
-
         if(userList.contains(username) && userList.contains(password)){
             runStreaming();
             return true;
