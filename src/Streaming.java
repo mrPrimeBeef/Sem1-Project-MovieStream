@@ -41,14 +41,14 @@ public Streaming(String name) {
 }
 
 public void runStreaming(){
-    ui.displayMessage(this.user.getUsername() + "'s homepage");
+    //ui.displayMessage(this.user.getUsername() + "'s homepage");
     int menuChoice;
 
 
     mainMenu = new ArrayList<>();
     mainMenu.add("1) View watched list");
     mainMenu.add("2) View saved list");
-    mainMenu.add("3) Search catalog");
+    mainMenu.add("3) Search for media");
     mainMenu.add("4) Exit application");
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-4 from below");
@@ -58,22 +58,21 @@ public void runStreaming(){
 
     {
         case 1: // Watched
-           // this.currentUser.viewWatchedList();
+           this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
-           // this.currentUser.viewSavedList();
+           this.currentUser.viewSavedList();
             break;
         case 3: // Catalog
-           // this.currentUser.searchCatalog();
+          // searchCatalog();
             break;
         case 4: // Catalog
-            // this.currentUser.exitApplication();
+            exitApplication();
             break;
         default:
             break;
     }
 }
-
 
 
     public void startStreaming() {
@@ -154,6 +153,11 @@ public void runStreaming(){
 
     }
 
+    public void exitApplication(){
 
+    // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
+//    io.saveFavorites();
+//    io.saveWatched();
+    }
 
 }
