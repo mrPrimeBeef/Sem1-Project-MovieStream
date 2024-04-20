@@ -111,7 +111,7 @@ public void runStreaming(){
 
         if (checkCredentialAvailability(username)) {
             user = new User(username, password);
-            io.saveUserData(user);
+            io.saveUserData(user); //
             this.userList.add(user);
             this.currentUser = user;
 
