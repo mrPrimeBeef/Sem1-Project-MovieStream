@@ -89,7 +89,12 @@ public class FileIO{
         }
     }
 
-    public void readUserData(){
+    public void readUserData(String path){
+        // metoden skal indlæse userdata.csv filen
+        // dernæst skal username lagres i en arraylist også password
+        ArrayList<String> usernames;
+        ArrayList<String> passwords;
+        path = scanFile(userSavePath);
 
 
     }
