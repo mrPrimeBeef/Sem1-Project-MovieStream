@@ -40,8 +40,6 @@ class User {
 
 User(String username, String password)
 
-+ void saveToWatchedList()
-+ void saveToSavedList()
 + void viewWatchedList()
 + void viewSavedList()
 }

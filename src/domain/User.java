@@ -40,10 +40,6 @@ public class User {
         }
 
     }
-
-    public void saveToWatchedList(AMedia option) {
-        watchedList.add(option);
-    }
     public void viewSavedList() {
         Movie movie1 = new Movie();
         Movie movie2 = new Movie();
@@ -55,10 +51,5 @@ public class User {
         }
 
     }
-
-    public void saveToSavedList(AMedia option) {
-        savedList.add(option);
-    }
-
 
 }

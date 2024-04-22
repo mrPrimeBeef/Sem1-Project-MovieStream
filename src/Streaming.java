@@ -57,12 +57,10 @@ public void runStreaming(){
     {
         case 1: // Watched
             ui.promptText("list of your watched list ...");
-           // this.currentUser.viewWatchedList();
            this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
             ui.promptText("list of your saved list ...");
-           // this.currentUser.viewSavedList();
            this.currentUser.viewSavedList();
             break;
         case 3: // Catalog
@@ -71,9 +69,9 @@ public void runStreaming(){
           // searchCatalog();
             break;
         case 4: // Exit
-            ui.promptText("exiiing ...");
+            ui.promptText("exiting ...");
             // this.currentUser.exitApplication();
-        case 4: // Catalog
+        case 5: // Catalog
             exitApplication();
             break;
         default:
