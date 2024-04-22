@@ -82,7 +82,7 @@ public class FileIO {
         try {
             FileWriter writer = new FileWriter(userSavePath, true);
 
-            writer.append(currentUser.getUsername() + ", " + currentUser.getPassword() + "\n");
+            writer.append("\n" + currentUser.getUsername() + ", " + currentUser.getPassword());
 
             writer.close();
 
@@ -96,7 +96,7 @@ public class FileIO {
         ArrayList<String> data = scanFile(userSavePath);
 
         for (String line : data) {
-            String[] parts = line.split(",");
+            String[] parts = line.split(", ");
             if (parts.length >= 2) {
                 String username = parts[0].trim();
                 String password = parts[1].trim();

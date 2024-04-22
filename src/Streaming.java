@@ -6,7 +6,11 @@ import utility.TextUI;
 
 import domain.User;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Streaming {
 
@@ -29,6 +33,7 @@ public Streaming(String name) {
 
     userList = new ArrayList();
 
+
     this.ui = new TextUI();
     this.io = new FileIO();
 
@@ -39,7 +44,7 @@ public Streaming(String name) {
 }
 
 public void runStreaming(){
-    ui.displayMessage(this.user.getUsername() + "'s homepage");
+    ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
     int menuChoice;
 
 
@@ -81,22 +86,21 @@ public void runStreaming(){
 
     public void startStreaming() {
         ui.displayMessage("Welcome to " + this.name);
-       userList = io.readUserData();
+        userList = io.readUserData();
         boolean action = true;
         int choice;
 
 
-        while(action){
+        while (action) {
             choice = ui.promptChoice(startmenu, "Create a user or login:");
 
-           switch(choice){
+            switch (choice) {
                 case 1:
                     this.createUser();
                     this.runStreaming();
                     break;
                 case 2:
                     this.login();
-                    this.runStreaming();
                     break;
             }
         }
@@ -126,23 +130,44 @@ public void runStreaming(){
         return user.getPassword().equals(password);
     }
 
-    boolean login() {
+    public void login( ) {
         String username = ui.promptText("Please enter your username");
         String password = ui.promptText("Please enter your password");
+       // userList = io.readUserData();
 
         // indlæs userdata.csv filen og cross reference 'username' + 'password'
         // username og password skal valideres med userdata
 
-        if(userList.contains(username) && userList.contains(password)){
-            runStreaming();
+        for (User u : userList) {
+            if (username.equals(u.getUsername())) {
+                if (password.equals(u.getPassword())) {
+                    setCurrentUser(u);
+                    ui.displayMessage("Login successful");
+                    runStreaming();
+                    return;
+                }
+            }else {
+                ui.displayMessage("invalid username or password, create a new user");
+                startStreaming();
+            }
+        }
+    }
+
+
+
+
+       /* if (userList.contains(username) && userList.contains(password)){
+            ui.displayMessage("Login successful");
             this.currentUser = user;
-            return true;
+            runStreaming();
+            return;
         } else {
             ui.displayMessage("Wrong username or password");
             startStreaming();
-            return false;
-        }
-    }
+            return;
+        }*/
+
+    
     boolean checkCredentialAvailability(String credential) {
 
 
@@ -158,6 +183,10 @@ public void runStreaming(){
     public User getCurrentUser() {
     return currentUser;
 
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     public void exitApplication(){
