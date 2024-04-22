@@ -20,6 +20,18 @@ class Movie {
 
 }
 
+class Catelog{
+- ArrayList<AMedia> Series
+- ArrayList<AMedia> Movie
+- FileIO io
+
++ void addMovieToCatalog()
+ArrayList<Movie> showMovieCatalog()
+ArrayList<Series> showSerieCatalog()
+int getSeries()
+int getMovies()
+}
+
 
 class Series {
 - int episode
@@ -104,7 +116,8 @@ Streaming *-- IMedia
 Streaming *-- User
 Streaming *-- Search
 Streaming *-- TextUI
-IMedia <|-- AMedia
+IMedia <|-- Catelog
+Catelog <|-- AMedia
 Streaming *-- FileIO
 AMedia <|-- Movie
 AMedia  <|-- Series

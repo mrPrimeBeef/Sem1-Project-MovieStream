@@ -9,25 +9,23 @@ import application.Series;
 public class Catalog
 {
     FileIO io;
-    ArrayList<AMedia> movies = new ArrayList<>();
+    ArrayList<Movie> movies = new ArrayList<>();
 
     ArrayList<Series> series = new ArrayList<>();
 
-    public void addMovieToCatalog(AMedia Movie)
+    public void addMovieToCatalog(Movie movie)
     {
-        movies.add(Movie);
+        movies.add(movie);
     }
 
-    public ArrayList<Movie> showMovieCatalog()
-    {
-
-        ArrayList<Movie> movies = io.readMovieData();
+    public ArrayList<String> showMovieCatalog() {
+        ArrayList<String> movies = io.readMovieData();
         return movies;
     }
 
-    public ArrayList<Series> showSerieCatalog()
+    public ArrayList<String> showSerieCatalog()
     {
-        ArrayList<Series> series = io.readSerieData();
+        ArrayList<String> series = io.readSerieData();
         return series;
     }
 

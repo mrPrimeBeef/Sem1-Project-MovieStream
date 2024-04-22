@@ -26,7 +26,6 @@ public class FileIO {
         list = scanFile(moviePath);
 
         for (String element : list) {
-
             listOfMovies.add(element);
         }
 

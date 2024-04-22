@@ -27,7 +27,7 @@ public class Streaming {
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
-    ArrayList<Movie> movieList;
+    ArrayList<String> movieList;
 
 public Streaming(String name) {
     this.name = name;
@@ -94,8 +94,6 @@ public void runStreaming(){
         boolean action = true;
         int choice;
 
-
-        while (action) {
             choice = ui.promptChoice(startmenu, "Create a user or login:");
 
             switch (choice) {
@@ -104,10 +102,11 @@ public void runStreaming(){
                     this.runStreaming();
                     break;
                 case 2:
-                    this.login();
+                    if (this.login()) {
+                        runStreaming();
+                    }
                     break;
             }
-        }
     }
 
     public void Menu(){
@@ -134,7 +133,7 @@ public void runStreaming(){
         return user.getPassword().equals(password);
     }
 
-    public void login( ) {
+    public boolean login( ) {
         String username = ui.promptText("Please enter your username");
         String password = ui.promptText("Please enter your password");
        // userList = io.readUserData();
@@ -147,29 +146,16 @@ public void runStreaming(){
                 if (password.equals(u.getPassword())) {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
-                    runStreaming();
-                    return;
+                    return true;
                 }
             }else {
                 ui.displayMessage("invalid username or password, create a new user");
                 startStreaming();
+                return false;
             }
         }
+        return false;
     }
-
-
-
-
-       /* if (userList.contains(username) && userList.contains(password)){
-            ui.displayMessage("Login successful");
-            this.currentUser = user;
-            runStreaming();
-            return;
-        } else {
-            ui.displayMessage("Wrong username or password");
-            startStreaming();
-            return;
-        }*/
 
     
     boolean checkCredentialAvailability(String credential) {
