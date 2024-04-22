@@ -112,12 +112,12 @@ class TextUI {
 
 
 Main *-- Streaming
-Streaming *-- IMedia
+Streaming *-- Catelog
 Streaming *-- User
 Streaming *-- Search
 Streaming *-- TextUI
-IMedia <|-- Catelog
-Catelog <|-- AMedia
+Catelog <|-- IMedia
+IMedia <|-- AMedia
 Streaming *-- FileIO
 AMedia <|-- Movie
 AMedia  <|-- Series
