@@ -15,11 +15,13 @@ public class FileIO{
 
     private ArrayList<Movie> listOfMovies = new ArrayList<>();
     private ArrayList<Series> listOfSeries = new ArrayList<>();
+    private String moviePath = "data/moviePath.csv";
+    private String seriePath = "data/seriePath.csv";
     private String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Movie> readMovieData(String moviePath){
+    public ArrayList<Movie> readMovieData(){
         ArrayList<String> list;
         list = scanFile(moviePath);
 
@@ -34,7 +36,7 @@ public class FileIO{
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Series> readSerieData(String seriePath){
+    public ArrayList<Series> readSerieData(){
         ArrayList<String> list;
         list = scanFile(seriePath);
 
