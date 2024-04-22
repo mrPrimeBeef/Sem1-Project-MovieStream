@@ -1,14 +1,21 @@
 package domain;
 
 import application.AMedia;
+import application.Movie;
+import utility.FileIO;
+import utility.Search;
+import utility.TextUI;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class User {
     private String username;
     private String password;
-    ArrayList<AMedia> watchedList;
-    ArrayList<AMedia> SavedList;
+    private Search search = new Search();
+    private ArrayList<AMedia> catelog = new ArrayList<>();
+    private LinkedHashSet<AMedia> watchedList = new LinkedHashSet<>();
+    private LinkedHashSet<AMedia> savedList = new LinkedHashSet<>();
 
     public User(String username, String password) {
         this.username = username;
@@ -22,16 +29,19 @@ public class User {
         return password;
     }
 
-    boolean confirmPassword(String password) {
-        return this.password.equals(password);
+    public void viewWatchedList() {
+        // TODO add search
+        for (AMedia option : watchedList) {
+            System.out.println(option);
+        }
+
     }
-    boolean login(String password) {
-        return this.password.equals(password);
+    public void viewSavedList() {
+        // TODO add search
+        for (AMedia option : savedList) {
+            System.out.println(option);
+        }
+
     }
-    boolean checkUsernameAvailability(String username) {
-        return this.username.equals(username);
-    }
-    boolean validatePassword(String password) {
-        return this.password.equals(password);
-    }
+
 }

@@ -20,6 +20,18 @@ class Movie {
 
 }
 
+class Catelog{
+- ArrayList<AMedia> Series
+- ArrayList<AMedia> Movie
+- FileIO io
+
++ void addMovieToCatalog()
+ArrayList<Movie> showMovieCatalog()
+ArrayList<Series> showSerieCatalog()
+int getSeries()
+int getMovies()
+}
+
 
 class Series {
 - int episode
@@ -34,12 +46,12 @@ package domain{
 class User {
 - String username
 - String password
+- Search search
 - LinkedHashSet<Media> watchedList
 - LinkedHashSet<Media> savedList
+
 User(String username, String password)
 
-+ void saveToWatchedList()
-+ void saveToSavedList()
 + void viewWatchedList()
 + void viewSavedList()
 }
@@ -77,7 +89,7 @@ class FileIO {
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
 + void saveUserData()
-+ void readUserData()
++ ArrayList<User> readUserData()
 }
 
 class Search {
@@ -100,10 +112,11 @@ class TextUI {
 
 
 Main *-- Streaming
-Streaming *-- IMedia
+Streaming *-- Catelog
 Streaming *-- User
 Streaming *-- Search
 Streaming *-- TextUI
+Catelog <|-- IMedia
 IMedia <|-- AMedia
 Streaming *-- FileIO
 AMedia <|-- Movie
