@@ -1,4 +1,5 @@
 import application.AMedia;
+import application.Catalog;
 import application.Movie;
 import utility.FileIO;
 import utility.Search;
@@ -28,6 +29,7 @@ public class Streaming {
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
     ArrayList<String> movieList;
+    Catalog catelog = new Catalog();
 
 public Streaming(String name) {
     this.name = name;
@@ -43,6 +45,28 @@ public Streaming(String name) {
     startmenu.add("1) Create user");
     startmenu.add("2) Login");
 }
+
+    public void startStreaming() {
+        ui.displayMessage("Welcome to " + this.name);
+        userList = io.readUserData();
+        boolean action = true;
+        int choice;
+
+        choice = ui.promptChoice(startmenu, "Create a user or login:");
+
+        switch (choice) {
+            case 1:
+                this.createUser();
+                this.runStreaming();
+                break;
+            case 2:
+                if (this.login()) {
+                    runStreaming();
+                }
+                break;
+        }
+    }
+
 
 public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
@@ -75,8 +99,7 @@ public void runStreaming(){
            // searchCatalog();
             break;
         case 4: // Catelog
-            ui.displayMessage("list of our catalog: ");
-            movieList = io.readMovieData();
+            ui.displayList(catelog.showMovieCatalog(),"list of our catalog: ");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -87,31 +110,6 @@ public void runStreaming(){
     }
 }
 
-
-    public void startStreaming() {
-        ui.displayMessage("Welcome to " + this.name);
-        userList = io.readUserData();
-        boolean action = true;
-        int choice;
-
-            choice = ui.promptChoice(startmenu, "Create a user or login:");
-
-            switch (choice) {
-                case 1:
-                    this.createUser();
-                    this.runStreaming();
-                    break;
-                case 2:
-                    if (this.login()) {
-                        runStreaming();
-                    }
-                    break;
-            }
-    }
-
-    public void Menu(){
-
-    }
 
     public User createUser() {
         String username = ui.promptText("Please enter your username");
@@ -129,17 +127,9 @@ public void runStreaming(){
 
     }
 
-    boolean confirmPassword(String password) {
-        return user.getPassword().equals(password);
-    }
-
     public boolean login( ) {
         String username = ui.promptText("Please enter your username");
         String password = ui.promptText("Please enter your password");
-       // userList = io.readUserData();
-
-        // indlæs userdata.csv filen og cross reference 'username' + 'password'
-        // username og password skal valideres med userdata
 
         for (User u : userList) {
             if (username.equals(u.getUsername())) {
@@ -161,10 +151,8 @@ public void runStreaming(){
     boolean checkCredentialAvailability(String credential) {
 
 
-            if (!io.userSavePath.contains(credential))
-            {
+            if (!io.userSavePath.contains(credential)){
                 ui.displayMessage(credential + " is available");
-                runStreaming();
                 return true;
             }
             ui.displayMessage(credential + " user exists... ");
