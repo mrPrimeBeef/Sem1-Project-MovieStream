@@ -11,7 +11,7 @@ import application.Movie;
 import application.Series;
 import domain.User;
 
-public class FileIO{
+public class FileIO {
 
     private ArrayList<Movie> listOfMovies = new ArrayList<>();
     private ArrayList<Series> listOfSeries = new ArrayList<>();
@@ -21,11 +21,11 @@ public class FileIO{
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Movie> readMovieData(){
+    public ArrayList<Movie> readMovieData() {
         ArrayList<String> list;
         list = scanFile(moviePath);
 
-        for (String element : list){
+        for (String element : list) {
             Movie movie = new Movie();
 
             listOfMovies.add(movie);
@@ -36,11 +36,11 @@ public class FileIO{
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Series> readSerieData(){
+    public ArrayList<Series> readSerieData() {
         ArrayList<String> list;
         list = scanFile(seriePath);
 
-        for (String element : list){
+        for (String element : list) {
             Series serie = new Series();
 
             listOfSeries.add(serie);
@@ -50,7 +50,7 @@ public class FileIO{
     }
 
     // Køre igennem en fil, og gemmer hvert linje til en arraylist som returneres.
-    private ArrayList<String> scanFile(String path){
+    private ArrayList<String> scanFile(String path) {
         ArrayList<String> list = new ArrayList<>();
 
         try {
@@ -58,7 +58,7 @@ public class FileIO{
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
-                list.add(scanner.next());
+                list.add(scanner.nextLine()); // den er ændre fra next() --> nextLine()
             }
 
             scanner.close();
@@ -68,17 +68,17 @@ public class FileIO{
         return list;
     }
 
-    public void saveFavorites(ArrayList<User> user, String path){
+    public void saveFavorites(ArrayList<User> user, String path) {
 
 
     }
 
-    public void saveWatched(ArrayList<User> user, String path){
+    public void saveWatched(ArrayList<User> user, String path) {
 
 
     }
 
-    public void saveUserData(User currentUser){
+    public void saveUserData(User currentUser) {
         try {
             FileWriter writer = new FileWriter(userSavePath, true);
 
@@ -91,8 +91,23 @@ public class FileIO{
         }
     }
 
-    public void readUserData(){
+    public ArrayList<User> readUserData() {
+        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<String> data = scanFile(userSavePath);
 
+        for (String line : data) {
+            String[] parts = line.split(",");
+            if (parts.length >= 2) {
+                String username = parts[0].trim();
+                String password = parts[1].trim();
+
+                User user = new User(username, password);
+
+                userList.add(user);
+            } else {
+                System.out.println("Invalid data format: " + line);
+            }
+        }
+        return userList;
     }
-
 }

@@ -56,19 +56,19 @@ public void runStreaming(){
 
     {
         case 1: // Watched
-            ui.promptText("list of your watched list ...");
+            ui.displayMessage("list of your watched list ...");
            this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
-            ui.promptText("list of your saved list ...");
+            ui.displayMessage("list of your saved list ...");
            this.currentUser.viewSavedList();
             break;
         case 3: // Catalog
-            ui.promptText("list of our catalog ...");
+            ui.displayMessage("list of our catalog ...");
            // searchCatalog();
             break;
         case 4: // Exit
-            ui.promptText("exiting ...");
+            ui.displayMessage("exiting ...");
             // exitApplication();
         case 5: // Catalog
             exitApplication();
@@ -81,6 +81,7 @@ public void runStreaming(){
 
     public void startStreaming() {
         ui.displayMessage("Welcome to " + this.name);
+       userList = io.readUserData();
         boolean action = true;
         int choice;
 
@@ -90,16 +91,13 @@ public void runStreaming(){
 
            switch(choice){
                 case 1:
-                    //TODO indlæs userdata
                     this.createUser();
                     this.runStreaming();
                     break;
                 case 2:
-                    //TODO indlæs user data
                     this.login();
                     this.runStreaming();
                     break;
-
             }
         }
     }
@@ -137,6 +135,7 @@ public void runStreaming(){
 
         if(userList.contains(username) && userList.contains(password)){
             runStreaming();
+            this.currentUser = user;
             return true;
         } else {
             ui.displayMessage("Wrong username or password");
