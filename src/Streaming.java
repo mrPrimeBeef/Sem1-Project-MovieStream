@@ -99,7 +99,11 @@ public void runStreaming(){
            // searchCatalog();
             break;
         case 4: // Catelog
-            ui.displayList(catelog.showMovieCatalog(),"list of our catalog: ");
+            int numberM = ui.promptNumeric("How many movies do you want to see?");
+            ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
+            int numberS = ui.promptNumeric("How many series do you want to see?");
+            ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
+            ui.promptText("Choose one of the following series to see, or show more ");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
