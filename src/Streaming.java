@@ -146,12 +146,14 @@ public void runStreaming(){
     boolean checkCredentialAvailability(String credential) {
 
 
-            if (!userList.contains(credential))
+            if (!io.userSavePath.contains(credential))
             {
                 ui.displayMessage(credential + " is available");
+                runStreaming();
                 return true;
             }
             ui.displayMessage(credential + " user exists... ");
+            startStreaming();
             return false;
     }
 

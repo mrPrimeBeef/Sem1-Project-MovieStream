@@ -17,7 +17,7 @@ public class FileIO {
     private ArrayList<Series> listOfSeries = new ArrayList<>();
     private String moviePath = "data/moviePath.csv";
     private String seriePath = "data/seriePath.csv";
-    private String userSavePath = "data/UserData.csv";
+    public String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
