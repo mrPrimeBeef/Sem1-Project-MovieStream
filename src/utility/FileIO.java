@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import application.Movie;
@@ -17,6 +20,8 @@ public class FileIO {
     private ArrayList<String> listOfSeries = new ArrayList<>();
     private String moviePath = "data/moviePath.csv";
     private String seriePath = "data/seriePath.csv";
+    private String favoritesPath = "data/favoritesPath.csv";
+    private String watchedPath = "data/savedPath.csv";
     public String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
@@ -65,13 +70,77 @@ public class FileIO {
         return list;
     }
 
-    public void saveFavorites(ArrayList<User> user, String path) {
-
+    public void saveFavorites(User currentUser, String mediaToAdd) {
+        saveMedia(currentUser, mediaToAdd, favoritesPath);
 
     }
 
-    public void saveWatched(ArrayList<User> user, String path) {
 
+    public void saveWatched(User currentUser, String mediaToAdd) {
+        saveMedia(currentUser, mediaToAdd, watchedPath);
+
+    }
+
+
+    // Indlæser enten hele favorites eller watched filen, og indsætter filmen eller serien på
+    // den korrekte linje.
+    public void saveMedia(User currentUser, String mediaToAdd, String path){
+
+        int counter = 0;
+
+        try {
+            File file = new File(path);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) { //finder hvor i favorites filen en bruger er
+                String[] nameSearch = scanner.nextLine().split(";");
+                if(currentUser.getUsername().equals(nameSearch[0].trim())){
+                    break;
+                }
+                counter++;
+            }
+            scanner.close();
+
+            List<String> lines = Files.readAllLines(Path.of(path));
+
+            String lineToEdit = lines.get(counter);
+            String[] arrayToEdit = lineToEdit.split(";");
+            arrayToEdit[1] += ", " + mediaToAdd;
+
+            FileWriter writer = new FileWriter(path, true);
+            writer.append(currentUser.getUsername() + "; ");
+            for(String element : arrayToEdit){
+                writer.append(element);
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public String getFavorites(User currentUser) {
+        return getMedia(currentUser, favoritesPath);
+    }
+
+    public String getWatched(User currentUser) {
+        return getMedia(currentUser, watchedPath);
+
+    }
+
+    public String getMedia(User currentUser, String path){
+        Scanner scanner = new Scanner(path);
+        String str;
+
+        while (scanner.hasNextLine()) { //finder hvor i favorites filen en bruger er
+            String[] nameSearch = scanner.nextLine().split(";");
+            if(currentUser.getUsername().equals(nameSearch[0].trim())){
+                str = nameSearch[0] + "; " + nameSearch[1];
+                return str;
+            }
+        }
+        return "ingen bruger fundet med dette navn!\n";
 
     }
 
