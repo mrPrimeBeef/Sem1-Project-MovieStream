@@ -65,12 +65,11 @@ public void runStreaming(){
             break;
         case 3: // Catalog
             ui.promptText("list of our catalog ...");
-           // this.currentUser.searchCatalog();
-          // searchCatalog();
+           // searchCatalog();
             break;
         case 4: // Exit
             ui.promptText("exiting ...");
-            // this.currentUser.exitApplication();
+            // exitApplication();
         case 5: // Catalog
             exitApplication();
             break;
@@ -91,10 +90,12 @@ public void runStreaming(){
 
            switch(choice){
                 case 1:
+                    //TODO indlæs userdata
                     this.createUser();
                     this.runStreaming();
                     break;
                 case 2:
+                    //TODO indlæs user data
                     this.login();
                     this.runStreaming();
                     break;
