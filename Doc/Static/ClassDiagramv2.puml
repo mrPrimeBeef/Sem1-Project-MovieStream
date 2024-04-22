@@ -6,7 +6,6 @@ class Main {
 package application{
 interface IMedia {
 + String playMedia()
-+ void backToMenu(String q)
 '+ pauseMedia()
 }
 

@@ -15,7 +15,7 @@ public class Series extends AMedia{
     }
 
     @Override
-    public void playMedia() {
+    public void playMedia(AMedia media) {
 
     }
 
