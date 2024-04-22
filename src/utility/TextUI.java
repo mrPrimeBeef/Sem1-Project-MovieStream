@@ -11,10 +11,15 @@ public class TextUI {
         return scanner.nextLine();
     }
 
-   public int promptNumeric(String msg){
-       String input = promptText(msg);
-       return Integer.parseInt(input);
-   }
+    public int promptNumeric(String msg) {
+        String input = promptText(msg);
+        if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
+            displayMessage("Invalid input, try again");
+            return promptNumeric(msg); // Returner resultatet af det rekursive kald
+        } else {
+            return Integer.parseInt(input);
+        }
+    }
 
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);

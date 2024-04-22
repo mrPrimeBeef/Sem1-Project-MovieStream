@@ -77,7 +77,7 @@ class FileIO {
 + void saveFavorites(ArrayList<User> user, String path)
 + void saveWatched(ArrayList<User> user, String path)
 + void saveUserData()
-+ void readUserData()
++ ArrayList<User> readUserData()
 }
 
 class Search {

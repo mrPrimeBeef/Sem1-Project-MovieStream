@@ -23,6 +23,7 @@ public class Streaming {
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
+    ArrayList<Movie> movieList;
 
 public Streaming(String name) {
     this.name = name;
@@ -47,30 +48,33 @@ public void runStreaming(){
     mainMenu.add("1) View watched list");
     mainMenu.add("2) View saved list");
     mainMenu.add("3) Search catalog");
-    mainMenu.add("4) Exit application");
+    mainMenu.add("4) List of catalog");
+    mainMenu.add("5) Exit application");
 
-    menuChoice = ui.promptChoice(mainMenu, "Choose 1-4 from below");
+    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
 
     switch(menuChoice)
 
     {
         case 1: // Watched
-            ui.displayMessage("list of your watched list ...");
+            ui.displayMessage("list of your watched list: ");
            this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
-            ui.displayMessage("list of your saved list ...");
+            ui.displayMessage("list of your saved list: ");
            this.currentUser.viewSavedList();
             break;
-        case 3: // Catalog
-            ui.displayMessage("list of our catalog ...");
+        case 3: // Search
+            ui.displayMessage("Search for a title or category");
            // searchCatalog();
             break;
-        case 4: // Exit
-            ui.displayMessage("exiting ...");
-            // exitApplication();
-        case 5: // Catalog
+        case 4: // Catelog
+            ui.displayMessage("list of our catalog: ");
+            movieList = io.readMovieData();
+            break;
+        case 5: // Exit
+            ui.displayMessage("exiting");
             exitApplication();
             break;
         default:
