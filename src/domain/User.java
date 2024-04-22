@@ -30,10 +30,6 @@ public class User {
     }
 
     public void viewWatchedList() {
-        Movie movie1 = new Movie();
-        Movie movie2 = new Movie();
-        watchedList.add(movie1);
-        watchedList.add(movie2);
         // TODO add search
         for (AMedia option : watchedList) {
             System.out.println(option);
@@ -41,10 +37,6 @@ public class User {
 
     }
     public void viewSavedList() {
-        Movie movie1 = new Movie();
-        Movie movie2 = new Movie();
-        savedList.add(movie1);
-        savedList.add(movie2);
         // TODO add search
         for (AMedia option : savedList) {
             System.out.println(option);

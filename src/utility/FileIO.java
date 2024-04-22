@@ -13,22 +13,21 @@ import domain.User;
 
 public class FileIO {
 
-    private ArrayList<Movie> listOfMovies = new ArrayList<>();
-    private ArrayList<Series> listOfSeries = new ArrayList<>();
+    private ArrayList<String> listOfMovies = new ArrayList<>();
+    private ArrayList<String> listOfSeries = new ArrayList<>();
     private String moviePath = "data/moviePath.csv";
     private String seriePath = "data/seriePath.csv";
     private String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Movie> readMovieData() {
+    public ArrayList<String> readMovieData() {
         ArrayList<String> list;
         list = scanFile(moviePath);
 
         for (String element : list) {
-            Movie movie = new Movie();
 
-            listOfMovies.add(movie);
+            listOfMovies.add(element);
         }
 
         return listOfMovies;
@@ -36,14 +35,13 @@ public class FileIO {
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
-    public ArrayList<Series> readSerieData() {
+    public ArrayList<String> readSerieData() {
         ArrayList<String> list;
         list = scanFile(seriePath);
 
         for (String element : list) {
-            Series serie = new Series();
 
-            listOfSeries.add(serie);
+            listOfSeries.add(element);
         }
 
         return listOfSeries;
