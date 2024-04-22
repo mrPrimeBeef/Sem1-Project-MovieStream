@@ -1,17 +1,33 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import utility.FileIO;
 
 public class Catalog {
     FileIO io = new FileIO();
+    Scanner scan = new Scanner(System.in);
     ArrayList<Movie> movies = new ArrayList<>();
 
     ArrayList<Series> series = new ArrayList<>();
 
+    public ArrayList<Movie> movieCatalog() {
+        ArrayList<Movie> movieList = new ArrayList<>();
+        ArrayList<String> list =  io.readMovieData();
+        while(scan.hasNextLine()) {
+        list.get(0).split(";");
+        }
+
+    return movieList;
+    }
+
     public void addMovieToCatalog(Movie movie) {
         movies.add(movie);
+    }
+
+    public void addSeriesToCatalog(Series serie) {
+        series.add(serie);
     }
 
     public ArrayList<String> showMovieCatalog(int number) {
