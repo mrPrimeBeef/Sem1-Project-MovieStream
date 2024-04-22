@@ -15,12 +15,7 @@ public class Series extends AMedia{
     }
 
     @Override
-    public void playMedia() {
-
-    }
-
-    @Override
-    public void backToMenu(String q) {
+    public void playMedia(AMedia media) {
 
     }
 

@@ -10,6 +10,7 @@ import domain.User;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,8 +43,8 @@ public Streaming(String name) {
 
     startmenu = new ArrayList<>();
 
-    startmenu.add("1) Create user");
-    startmenu.add("2) Login");
+    startmenu.add("Create user");
+    startmenu.add("Login");
 }
 
     public void startStreaming() {
@@ -72,20 +73,16 @@ public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
     int menuChoice;
 
-
     mainMenu = new ArrayList<>();
-    mainMenu.add("1) View watched list");
-    mainMenu.add("2) View saved list");
-    mainMenu.add("3) Search catalog");
-    mainMenu.add("4) List of catalog");
-    mainMenu.add("5) Exit application");
+    mainMenu.add("View watched list");
+    mainMenu.add("View saved list");
+    mainMenu.add("Search catalog");
+    mainMenu.add("List of catalog");
+    mainMenu.add("Exit application");
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
-
-    switch(menuChoice)
-
-    {
+    switch(menuChoice) {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
            this.currentUser.viewWatchedList();
@@ -101,9 +98,15 @@ public void runStreaming(){
         case 4: // Catelog
             int numberM = ui.promptNumeric("How many movies do you want to see?");
             ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
+            String input = ui.promptText("Choose one? Y/N");
+            if (input.toLowerCase().equals("y")){
+                numberM = ui.promptNumeric("Choose a movie");
+                catelog.showMovieCatalog(numberM).get(numberM-1);
+                media.playMedia(media);
+            }
             int numberS = ui.promptNumeric("How many series do you want to see?");
             ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
-            ui.promptText("Choose one of the following series to see, or show more ");
+            ui.promptNumeric("Choose one of the series or see more");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -116,52 +119,59 @@ public void runStreaming(){
 
 
     public User createUser() {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+        while (true) {
+            String username = ui.promptText("Please enter your username");
 
-        if (checkCredentialAvailability(username)) {
-            user = new User(username, password);
-            io.saveUserData(user);
-            this.userList.add(user);
-            this.currentUser = user;
-
+            if (checkCredentialAvailability(username)) {
+                String password = ui.promptText("Please enter your password");
+                User newUser = new User(username, password);
+                io.saveUserData(newUser);
+                userList.add(newUser);
+                setCurrentUser(newUser);
+                ui.displayMessage("User created successfully");
+                return newUser;
+            } else {
+                ui.displayMessage("Username already exists. Please choose a different username.");
+                String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
+                if (!choice.equals("y")) {
+                    return null;
+                }
+            }
         }
-
-        return user;
-
     }
 
-    public boolean login( ) {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+    public boolean login() {
+        while (true) {
+            String username = ui.promptText("Please enter your username");
+            String password = ui.promptText("Please enter your password");
 
-        for (User u : userList) {
-            if (username.equals(u.getUsername())) {
-                if (password.equals(u.getPassword())) {
+            for (User u : userList) {
+                if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
-                    return true;
+                    return true; // Successful login
                 }
-            }else {
-                ui.displayMessage("invalid username or password, create a new user");
-                startStreaming();
+            }
+
+            ui.displayMessage("Invalid username or password");
+            String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
+            if (!choice.equals("y")) {
                 return false;
             }
         }
-        return false;
     }
 
-    
-    boolean checkCredentialAvailability(String credential) {
 
-
-            if (!io.userSavePath.contains(credential)){
-                ui.displayMessage(credential + " is available");
-                return true;
+    public boolean checkCredentialAvailability(String credential) {
+        for (User user : userList) {
+            if (user.getUsername().equals(credential)) {
+                ui.displayMessage(credential + " user exists... ");
+                return false; // Credential exists
             }
-            ui.displayMessage(credential + " user exists... ");
-            startStreaming();
-            return false;
+        }
+
+        ui.displayMessage(credential + " is available");
+        return true; // Credential is available
     }
 
     public User getCurrentUser() {
@@ -176,8 +186,8 @@ public void runStreaming(){
     public void exitApplication(){
 
     // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
-//    io.saveFavorites();
-//    io.saveWatched();
+    //    io.saveFavorites();
+    //    io.saveWatched();
     }
 
 }

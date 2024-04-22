@@ -31,7 +31,10 @@ public class TextUI {
 
     public void displayList(ArrayList<String> list, String msg){
         System.out.println(msg);
+        int counter = 1;
         for (String option : list) {
+            System.out.print(counter + ") ");
+            counter++;
             System.out.println(option);
         }
     }

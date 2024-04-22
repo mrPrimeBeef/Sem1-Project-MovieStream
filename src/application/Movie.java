@@ -16,13 +16,13 @@ public class Movie extends AMedia {
     }
 
     @Override
-    public void playMedia() {
+    public void playMedia(AMedia media) {
+    ui.displayMessage("playing " + title);
     //user.addToWatchedList();
     }
 
-    @Override
-    public void backToMenu(String q) {
-
+    public String getTitle() {
+        return this.title;
     }
 
 }
