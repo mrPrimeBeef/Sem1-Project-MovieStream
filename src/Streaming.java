@@ -119,52 +119,59 @@ public void runStreaming(){
 
 
     public User createUser() {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+        while (true) {
+            String username = ui.promptText("Please enter your username");
 
-        if (checkCredentialAvailability(username)) {
-            user = new User(username, password);
-            io.saveUserData(user);
-            this.userList.add(user);
-            this.currentUser = user;
-
+            if (checkCredentialAvailability(username)) {
+                String password = ui.promptText("Please enter your password");
+                User newUser = new User(username, password);
+                io.saveUserData(newUser);
+                userList.add(newUser);
+                setCurrentUser(newUser);
+                ui.displayMessage("User created successfully");
+                return newUser;
+            } else {
+                ui.displayMessage("Username already exists. Please choose a different username.");
+                String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
+                if (!choice.equals("y")) {
+                    return null;
+                }
+            }
         }
-
-        return user;
-
     }
 
-    public boolean login( ) {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+    public boolean login() {
+        while (true) {
+            String username = ui.promptText("Please enter your username");
+            String password = ui.promptText("Please enter your password");
 
-        for (User u : userList) {
-            if (username.equals(u.getUsername())) {
-                if (password.equals(u.getPassword())) {
+            for (User u : userList) {
+                if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
-                    return true;
+                    return true; // Successful login
                 }
-            }else {
-                ui.displayMessage("invalid username or password, create a new user");
-                startStreaming();
+            }
+
+            ui.displayMessage("Invalid username or password");
+            String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
+            if (!choice.equals("y")) {
                 return false;
             }
         }
-        return false;
     }
 
-    
-    boolean checkCredentialAvailability(String credential) {
 
-
-            if (!io.userSavePath.contains(credential)){
-                ui.displayMessage(credential + " is available");
-                return true;
+    public boolean checkCredentialAvailability(String credential) {
+        for (User user : userList) {
+            if (user.getUsername().equals(credential)) {
+                ui.displayMessage(credential + " user exists... ");
+                return false; // Credential exists
             }
-            ui.displayMessage(credential + " user exists... ");
-            startStreaming();
-            return false;
+        }
+
+        ui.displayMessage(credential + " is available");
+        return true; // Credential is available
     }
 
     public User getCurrentUser() {

@@ -19,11 +19,6 @@ public class Series extends AMedia{
 
     }
 
-    @Override
-    public void backToMenu(String q) {
-
-    }
-
 
 
 }
