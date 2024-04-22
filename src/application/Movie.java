@@ -8,6 +8,8 @@ public class Movie extends AMedia {
     public Movie() {
     }
 
+
+
     @Override
     public void playMedia() {
     //user.addToWatchedList();

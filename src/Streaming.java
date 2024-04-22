@@ -29,8 +29,6 @@ public Streaming(String name) {
 
     userList = new ArrayList();
 
-    this.name = name;
-
     this.ui = new TextUI();
     this.io = new FileIO();
 
@@ -41,14 +39,14 @@ public Streaming(String name) {
 }
 
 public void runStreaming(){
-    //ui.displayMessage(this.user.getUsername() + "'s homepage");
+    ui.displayMessage(this.user.getUsername() + "'s homepage");
     int menuChoice;
 
 
     mainMenu = new ArrayList<>();
     mainMenu.add("1) View watched list");
     mainMenu.add("2) View saved list");
-    mainMenu.add("3) Search for media");
+    mainMenu.add("3) Search catalog");
     mainMenu.add("4) Exit application");
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-4 from below");
@@ -58,14 +56,23 @@ public void runStreaming(){
 
     {
         case 1: // Watched
+            ui.promptText("list of your watched list ...");
+           // this.currentUser.viewWatchedList();
            this.currentUser.viewWatchedList();
             break;
         case 2: // Saved
+            ui.promptText("list of your saved list ...");
+           // this.currentUser.viewSavedList();
            this.currentUser.viewSavedList();
             break;
         case 3: // Catalog
+            ui.promptText("list of our catalog ...");
+           // this.currentUser.searchCatalog();
           // searchCatalog();
             break;
+        case 4: // Exit
+            ui.promptText("exiiing ...");
+            // this.currentUser.exitApplication();
         case 4: // Catalog
             exitApplication();
             break;
@@ -76,20 +83,20 @@ public void runStreaming(){
 
 
     public void startStreaming() {
-        ui.displayMessage("Welcome to "+this.name);
-        int action=0;
+        ui.displayMessage("Welcome to " + this.name);
+        boolean action = true;
+        int choice;
 
 
-        while(action != startmenu.size()){// the quit action is the last action
-            action = ui.promptChoice(startmenu, "Create a user or login:");
+        while(action){
+            choice = ui.promptChoice(startmenu, "Create a user or login:");
 
-           switch(action){
+           switch(choice){
                 case 1:
                     this.createUser();
                     this.runStreaming();
                     break;
                 case 2:
-                    //Continue (last saved) game
                     this.login();
                     this.runStreaming();
                     break;
@@ -106,7 +113,7 @@ public void runStreaming(){
         String username = ui.promptText("Please enter your username");
         String password = ui.promptText("Please enter your password");
 
-        if (checkUsernameAvailability(username)) {
+        if (checkCredentialAvailability(username)) {
             user = new User(username, password);
             io.saveUserData(user);
             this.userList.add(user);
@@ -126,25 +133,27 @@ public void runStreaming(){
         String username = ui.promptText("Please enter your username");
         String password = ui.promptText("Please enter your password");
 
-        if(userList.contains(username) && confirmPassword(password)){
+        // indlæs userdata.csv filen og cross reference 'username' + 'password'
+        // username og password skal valideres med userdata
+
+        if(userList.contains(username) && userList.contains(password)){
+            runStreaming();
             return true;
         } else {
             ui.displayMessage("Wrong username or password");
+            startStreaming();
             return false;
         }
-
-            //String password = ui.promptText("Please enter your password");
-
     }
-    boolean checkUsernameAvailability(String username) {
+    boolean checkCredentialAvailability(String credential) {
 
 
-            if (!userList.contains(username))
+            if (!userList.contains(credential))
             {
-                ui.displayMessage(username + " is available");
+                ui.displayMessage(credential + " is available");
                 return true;
             }
-            ui.displayMessage(username + "user exists... ");
+            ui.displayMessage(credential + " user exists... ");
             return false;
     }
 
