@@ -31,7 +31,7 @@ public class TextUI {
         return input;
 
     }
-    public int promptChoiceM(ArrayList<Movie> optionslist, String msg, int number){
+    public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
         displayMessage(msg);
         displayListM(optionslist, "", number);
         int input = promptNumeric("");
@@ -48,7 +48,7 @@ public class TextUI {
             System.out.println(option);
         }
     }
-    public void displayListM(ArrayList<Movie> list, String msg, int number){
+    public void displayListM(ArrayList<AMedia> list, String msg, int number){
         System.out.println(msg);
         for (int i = 0; i < number; i++) {
             System.out.println(i + 1 + ") " + list.get(i));

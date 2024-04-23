@@ -95,18 +95,18 @@ public void streamning(){
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
             io.getFavorites(currentUser);
+            streamning();
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
             io.getWatched(currentUser);
+            streamning();
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
             // searchCatalog();
             break;
         case 4: // Catelog
-
-
             int number = ui.promptNumeric("How many choice do you want?");
             number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
             String input = ui.promptText("Want to add to favorite? y/n");

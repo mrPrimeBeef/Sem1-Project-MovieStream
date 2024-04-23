@@ -94,7 +94,7 @@ public class FileIO {
             Scanner scanner = new Scanner(file);
             FileWriter writer = new FileWriter(path, true);
 
-            while (scanner.hasNextLine()) { //finder hvor i favorites filen en bruger er
+            while (scanner.hasNextLine()) { //finder hvor i filen en bruger er
                 String[] nameSearch = scanner.nextLine().split(";");
                 if(currentUser.getUsername().equals(nameSearch[0].trim())){
                     break;
