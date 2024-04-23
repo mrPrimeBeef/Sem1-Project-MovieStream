@@ -70,21 +70,22 @@ public class FileIO {
         return list;
     }
 
-    public void saveFavorites(User currentUser, String mediaToAdd) {
-        saveMedia(currentUser, mediaToAdd, favoritesPath);
+    // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
+    public void saveFavorites(User currentUser, Movie movie) {
+        saveMedia(currentUser, movie, favoritesPath);
+
+    }
+
+    // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
+    public void saveWatched(User currentUser, Movie movie) {
+        saveMedia(currentUser, movie, watchedPath);
 
     }
 
 
-    public void saveWatched(User currentUser, String mediaToAdd) {
-        saveMedia(currentUser, mediaToAdd, watchedPath);
-
-    }
-
-
-    // Indlæser enten hele favorites eller watched filen, og indsætter filmen eller serien på
-    // den korrekte linje.
-    public void saveMedia(User currentUser, String mediaToAdd, String path){
+    // Indlæser enten hele favorites eller watched filen, og indsætter film eller serie titlen på
+    // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til en bruger.
+    public void saveMedia(User currentUser, Movie movie, String path){
 
         int counter = 0;
 
@@ -105,7 +106,7 @@ public class FileIO {
 
             String lineToEdit = lines.get(counter);
             String[] arrayToEdit = lineToEdit.split(";");
-            arrayToEdit[1] += ", " + mediaToAdd;
+            arrayToEdit[1] += ", " + movie.getTitle();
 
             FileWriter writer = new FileWriter(path, true);
             writer.append(currentUser.getUsername() + "; ");
@@ -120,15 +121,18 @@ public class FileIO {
 
     }
 
+    // Henter User favorites via 'getMedia' (Undgår dobbeltkode)
     public String getFavorites(User currentUser) {
         return getMedia(currentUser, favoritesPath);
     }
 
+    // Henter User watched via 'getMedia' (Undgår dobbeltkode)
     public String getWatched(User currentUser) {
         return getMedia(currentUser, watchedPath);
 
     }
 
+    // Leder efter userName i favorites/watched filen, og returnere deres favorites/watched film/movies
     public String getMedia(User currentUser, String path){
         Scanner scanner = new Scanner(path);
         String str;
@@ -136,7 +140,7 @@ public class FileIO {
         while (scanner.hasNextLine()) { //finder hvor i favorites filen en bruger er
             String[] nameSearch = scanner.nextLine().split(";");
             if(currentUser.getUsername().equals(nameSearch[0].trim())){
-                str = nameSearch[0] + "; " + nameSearch[1];
+                str = nameSearch[1];
                 return str;
             }
         }
@@ -144,6 +148,7 @@ public class FileIO {
 
     }
 
+    // gemmer brugerens username og password i en fil
     public void saveUserData(User currentUser) {
         try {
             FileWriter writer = new FileWriter(userSavePath, true);
