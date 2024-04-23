@@ -15,5 +15,9 @@ public abstract class AMedia implements IMedia {
 
     public void saveToWatchedList() {
 
-}
+    }
+
+    public String getTitle(){
+        return title;
+    }
 }
