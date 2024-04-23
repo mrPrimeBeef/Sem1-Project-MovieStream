@@ -101,9 +101,15 @@ public void runStreaming(){
         case 4: // Catelog
             int numberM = ui.promptNumeric("How many movies do you want to see?");
             ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
+            String input = ui.promptText("Choose one? Y/N");
+            if (input.toLowerCase().equals("y")){
+                numberM = ui.promptNumeric("Choose a movie");
+                catelog.showMovieCatalog(numberM).get(numberM-1);
+                media.playMedia(media);
+            }
             int numberS = ui.promptNumeric("How many series do you want to see?");
             ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
-            ui.promptText("Choose one of the following series to see, or show more ");
+            ui.promptNumeric("Choose one of the series or see more");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -130,10 +136,6 @@ public void runStreaming(){
             } else {
                 ui.displayMessage("Username already exists. Please choose a different username.");
 
-                String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
-                if (!choice.equals("y")) {
-                    return null;
-                }
             }
         }
     }
@@ -150,12 +152,8 @@ public void runStreaming(){
                     return true;
                 }
             }
+            ui.displayMessage("Invalid username or password, try again");
 
-            ui.displayMessage("Invalid username or password");
-            String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
-            if (!choice.equals("y")) {
-                return false;
-            }
         }
     }
 
@@ -163,7 +161,6 @@ public void runStreaming(){
     boolean checkCredentialAvailability(String credential) {
         for (User user : userList) {
             if (user.getUsername().equals(credential)) {
-                ui.displayMessage(credential + " user exists... ");
                 return false; // Credential exists
             }
         }
