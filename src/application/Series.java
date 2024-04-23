@@ -16,6 +16,8 @@ public class Series extends AMedia{
         this.rating = rating;
     }
 
-
-
+    @Override
+    public String toString() {
+        return title;
+    }
 }

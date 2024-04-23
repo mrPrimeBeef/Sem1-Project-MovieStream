@@ -1,24 +1,23 @@
 package application;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import utility.FileIO;
 
 public class Catalog {
     FileIO io = new FileIO();
 
-    public ArrayList<AMedia> movieCatelog = new ArrayList<>();
-    public ArrayList<AMedia> seriesCatelog = new ArrayList<>();
+    public ArrayList<AMedia> movieCatalog = new ArrayList<>();
+    public ArrayList<AMedia> seriesCatalog = new ArrayList<>();
 
     public ArrayList<AMedia> showMovieCatalog() {
-        createMovieFromString();
-        return movieCatelog;
+        movieCatalog = createMovieFromString();
+        return movieCatalog;
     }
 
-    public ArrayList<AMedia> showSeriesCatalog() {
-        createSerieFromString();
-        return seriesCatelog;
+    public ArrayList<AMedia> showSerieCatalog() {
+        seriesCatalog = createSerieFromString();
+        return seriesCatalog;
     }
 
     public ArrayList<AMedia> createMovieFromString(){
@@ -37,23 +36,23 @@ public class Catalog {
 
         Movie movie = new Movie(title, genre, rating);
 
-        movieCatelog.add(movie);
+        movieCatalog.add(movie);
     }
-    return movieCatelog;
+    return movieCatalog;
     }
 
     public ArrayList<AMedia> createSerieFromString() {
         ArrayList<String> list = io.readSerieData();
         ArrayList<AMedia> seriesCatalog = new ArrayList<>();
-        ArrayList<String> genres = new ArrayList<>();
 
         for (String s : list) {
             String[] split = s.split(";");
 
             // Extracting title, genre, and rating
             String title = split[0].trim();
+            ArrayList<String> genres = new ArrayList<>();
             for (String g : split[2].split(",")) {
-                genres.add(split[2].trim());
+                genres.add(g.trim()); // Add individual genre to the list
             }
             float rating = Float.parseFloat(split[3].trim());
 
@@ -74,4 +73,5 @@ public class Catalog {
 
         return seriesCatalog;
     }
+
 }

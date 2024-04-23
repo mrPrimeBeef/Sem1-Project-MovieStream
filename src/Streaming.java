@@ -1,17 +1,12 @@
 import application.AMedia;
 import application.Catalog;
-import application.Movie;
 import utility.FileIO;
 import utility.Search;
 import utility.TextUI;
 
 import domain.User;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Streaming {
 
@@ -24,17 +19,16 @@ public class Streaming {
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
-    ArrayList<String> movieList; //Skal muligvis bruges senere. Gemmes ind til videre
     Catalog catelog = new Catalog();
+    ArrayList<AMedia> movieList = catelog.showMovieCatalog();
+    ArrayList<AMedia> serieList = catelog.showSerieCatalog();
 
     public Streaming(String name) {
         this.name = name;
 
         userList = new ArrayList();
-        //ArrayList<Movie> movieList = catelog.showMovieCatalog();
-        //ArrayList<AMedia> serieList = catelog.showSerieCatalog();
-        //search.makeMovieHashMaps(movieList);
-        //search.makeSeriesHashMaps(serieList);
+
+
 
 
         this.ui = new TextUI();
@@ -187,29 +181,29 @@ public class Streaming {
 
         if (choice.equalsIgnoreCase("m")) {
             int number = ui.promptNumeric("How many movies do you want?");
-            number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
+            number = ui.promptChoiceM(movieList,"Choose from the list", number);
             String input = ui.promptText("Want to add to favorite? y/n");
             if (!input.toLowerCase().equals("y")) {
-                playMedia(catelog.showMovieCatalog().get(number-1));
+                playMedia(movieList.get(number-1));
                 streamning();
 
             } else {
-                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
-                playMedia(catelog.showMovieCatalog().get(number-1));
+                io.saveFavorites(currentUser, movieList.get(number-1));
+                playMedia(movieList.get(number-1));
                 streamning();
             }
         } else if (choice.equalsIgnoreCase("s"))
         {
             int number = ui.promptNumeric("How many series do you want?");
-            number = ui.promptChoiceM(catelog.showSeriesCatalog(),"Choose from the list", number);
+            number = ui.promptChoiceM(serieList,"Choose from the list", number);
             String input = ui.promptText("Want to add to favorite? y/n");
             if (!input.toLowerCase().equals("y")) {
-                playMedia(catelog.showSeriesCatalog().get(number-1));
+                playMedia(serieList.get(number-1));
                 streamning();
 
             } else {
-                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
-                playMedia(catelog.showMovieCatalog().get(number-1));
+                io.saveFavorites(currentUser, movieList.get(number-1));
+                playMedia(movieList.get(number-1));
                 streamning();
             }
         }
