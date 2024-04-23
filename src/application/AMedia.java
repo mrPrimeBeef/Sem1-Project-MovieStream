@@ -8,14 +8,6 @@ public abstract class AMedia implements IMedia {
     public String category;
     TextUI ui = new TextUI();
 
-    @Override
-    public void playMedia(AMedia media) {
-
-    }
-
-    public void saveToWatchedList() {
-
-    }
 
     public String getTitle(){
         return title;

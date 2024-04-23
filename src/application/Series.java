@@ -16,11 +16,6 @@ public class Series extends AMedia{
         this.rating = rating;
     }
 
-    @Override
-    public void playMedia(AMedia media) {
-
-    }
-
 
 
 }

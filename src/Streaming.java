@@ -209,7 +209,7 @@ public class Streaming {
             String input = ui.promptText("Want to add to favorite? y/n");
             if (!input.toLowerCase().equals("y")) {
                 playMedia(catelog.showSeriesCatalog().get(number-1));
-                streamning(); //
+                streamning();
 
             } else {
                 io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
