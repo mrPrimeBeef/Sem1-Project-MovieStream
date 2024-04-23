@@ -31,24 +31,24 @@ public class Streaming {
     ArrayList<String> movieList;
     Catalog catelog = new Catalog();
 
-public Streaming(String name) {
-    this.name = name;
+    public Streaming(String name) {
+        this.name = name;
 
-    userList = new ArrayList();
-    //ArrayList<Movie> movieList = catelog.showMovieCatalog();
-    //ArrayList<AMedia> serieList = catelog.showSerieCatalog();
-    //search.makeMovieHashMaps(movieList);
-    //search.makeSeriesHashMaps(serieList);
+        userList = new ArrayList();
+        //ArrayList<Movie> movieList = catelog.showMovieCatalog();
+        //ArrayList<AMedia> serieList = catelog.showSerieCatalog();
+        //search.makeMovieHashMaps(movieList);
+        //search.makeSeriesHashMaps(serieList);
 
 
-    this.ui = new TextUI();
-    this.io = new FileIO();
+        this.ui = new TextUI();
+        this.io = new FileIO();
 
-    startmenu = new ArrayList<>();
+        startmenu = new ArrayList<>();
 
-    startmenu.add("Create user");
-    startmenu.add("Login");
-}
+        startmenu.add("Create user");
+        startmenu.add("Login");
+    }
 
     public void startStreaming() {
         ui.displayMessage("Welcome to " + this.name + "\n");
@@ -72,52 +72,52 @@ public Streaming(String name) {
     }
 
 
-public void runStreaming(){
-    ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
+    public void runStreaming(){
+        ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
 
-    streamning();
-}
-
-public void streamning(){
-    int menuChoice;
-
-    mainMenu = new ArrayList<>();
-    mainMenu.add("View watched list");
-    mainMenu.add("View saved list");
-    mainMenu.add("Search catalog");
-    mainMenu.add("List of catalog");
-    mainMenu.add("Exit application");
-
-
-    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
-
-    switch(menuChoice) {
-        case 1: // Watched
-            ui.displayMessage("list of your watched list: ");
-            io.getFavorites(currentUser);
-            streamning();
-            break;
-        case 2: // Saved
-            ui.displayMessage("list of your saved list: ");
-            io.getWatched(currentUser);
-            streamning();
-            break;
-        case 3: // Search
-            ui.displayMessage("Search for a title or category");
-            // searchCatalog();
-            break;
-        case 4: // Catelog
-            chooseMovieOrSeries();
-            break;
-        case 5: // Exit
-            ui.displayMessage("exiting");
-            exitApplication();
-            break;
-        default:
-            break;
+        streamning();
     }
 
-}
+    public void streamning(){
+        int menuChoice;
+
+        mainMenu = new ArrayList<>();
+        mainMenu.add("View watched list");
+        mainMenu.add("View saved list");
+        mainMenu.add("Search catalog");
+        mainMenu.add("List of catalog");
+        mainMenu.add("Exit application");
+
+
+        menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
+
+        switch(menuChoice) {
+            case 1: // Watched
+                ui.displayMessage("list of your watched list: ");
+                io.getFavorites(currentUser);
+                streamning();
+                break;
+            case 2: // Saved
+                ui.displayMessage("list of your saved list: ");
+                io.getWatched(currentUser);
+                streamning();
+                break;
+            case 3: // Search
+                ui.displayMessage("Search for a title or category");
+                // searchCatalog();
+                break;
+            case 4: // Catelog
+                chooseMovieOrSeries();
+                break;
+            case 5: // Exit
+                ui.displayMessage("exiting");
+                exitApplication();
+                break;
+            default:
+                break;
+        }
+
+    }
 
 
     public User createUser() {
@@ -168,7 +168,7 @@ public void streamning(){
     }
 
     public User getCurrentUser() {
-    return currentUser;
+        return currentUser;
 
     }
 
@@ -176,8 +176,8 @@ public void streamning(){
     {
         io.saveWatched(currentUser, media);
         ui.displayMessage( "----------------\n" +
-                                "Playing " + media + "\n"
-                              + "----------------");
+                "Playing " + media + "\n"
+                + "----------------");
     }
 
     private void chooseMovieOrSeries()
@@ -204,7 +204,7 @@ public void streamning(){
             String input = ui.promptText("Want to add to favorite? y/n");
             if (!input.toLowerCase().equals("y")) {
                 playMedia(catelog.showSeriesCatalog().get(number-1));
-                streamning();
+                streamning(); //
 
             } else {
                 io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
@@ -225,7 +225,7 @@ public void streamning(){
 
     public void exitApplication(){
 
-    // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
+        // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
 //    io.saveFavorites();
 //    io.saveWatched();
     }
