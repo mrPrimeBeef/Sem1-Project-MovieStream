@@ -130,10 +130,6 @@ public void runStreaming(){
             } else {
                 ui.displayMessage("Username already exists. Please choose a different username.");
 
-                String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
-                if (!choice.equals("y")) {
-                    return null;
-                }
             }
         }
     }
@@ -150,12 +146,8 @@ public void runStreaming(){
                     return true;
                 }
             }
+            ui.displayMessage("Invalid username or password, try again");
 
-            ui.displayMessage("Invalid username or password");
-            String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
-            if (!choice.equals("y")) {
-                return false;
-            }
         }
     }
 
@@ -163,7 +155,6 @@ public void runStreaming(){
     boolean checkCredentialAvailability(String credential) {
         for (User user : userList) {
             if (user.getUsername().equals(credential)) {
-                ui.displayMessage(credential + " user exists... ");
                 return false; // Credential exists
             }
         }
