@@ -9,6 +9,7 @@ import utility.TextUI;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+
 public class User {
     private String username;
     private String password;
