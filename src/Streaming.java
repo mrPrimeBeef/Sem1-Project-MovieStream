@@ -105,14 +105,21 @@ public void streamning(){
             // searchCatalog();
             break;
         case 4: // Catelog
+
+
             int number = ui.promptNumeric("How many choice do you want?");
             number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
-            String input = ui.promptText("Want to add to favorite? Y/N");
-            if (input.toUpperCase().equals("Y")) {
-                 io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+
+            } else {
+                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
             }
-            playMedia(catelog.showMovieCatalog().get(number-1));
-            streamning();
+
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -177,10 +184,12 @@ public void streamning(){
 
     }
 
-    private void playMedia(Movie media)
+    private void playMedia(AMedia media)
     {
         io.saveWatched(currentUser, media);
-        ui.displayMessage("Playing " + media);
+        ui.displayMessage( "----------------\n" +
+                                "Playing " + media + "\n"
+                              + "----------------");
     }
 
     public void setCurrentUser(User currentUser) {

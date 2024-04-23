@@ -8,7 +8,7 @@ public class Series extends AMedia{
     String category;
     float rating;
 
-    public Series(String title, String category, float rating) {
+    public Series(String title, String category, float rating, int episode, int season) {
         this.title = title;
         this.category = category;
         this.rating = rating;

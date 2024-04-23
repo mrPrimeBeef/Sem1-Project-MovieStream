@@ -2,7 +2,6 @@ package application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 import utility.FileIO;
@@ -11,20 +10,31 @@ public class Catalog {
     FileIO io = new FileIO();
     Scanner scan = new Scanner(System.in);
 
-    public ArrayList<Movie> movieCatelog = new ArrayList<>();
-    // public ArrayList<Serie> seriesCatelog = new ArrayList<Serie>();
+    public ArrayList<AMedia> movieCatelog = new ArrayList<>();
+    public ArrayList<AMedia> seriesCatelog = new ArrayList<>();
 
-    public ArrayList<Movie> showMovieCatalog() {
+    public ArrayList<AMedia> showMovieCatalog() {
         createMovieFromString();
         return movieCatelog;
     }
 
-    public ArrayList<Movie> createMovieFromString(){
+//    public ArrayList<AMedia> showSereiesCatalog() {
+//        createSerieFromString();
+//        return seriesCatelog;
+//    }
+
+    public ArrayList<AMedia> createMovieFromString(){
     ArrayList<String> list = io.readMovieData();
+
+    ArrayList<String> genre = new ArrayList<>();
+
     for (String s : list) {
         String[] split = s.split(";");
         String title = split[0].trim();
-        String genre = split[2].trim();
+        for (String g : split[2].split(",")) {
+            genre.add(split[2].trim());
+        }
+
         float rating = Float.parseFloat(split[3].trim());
 
         Movie movie = new Movie(title, genre, rating);
@@ -33,20 +43,34 @@ public class Catalog {
     }
     return movieCatelog;
     }
+
+//    public ArrayList<AMedia> createSerieFromString() {
+//        ArrayList<String> list = io.readSerieData();
+//        ArrayList<AMedia> seriesCatalog = new ArrayList<>();
 //
-//    public ArrayList<Movie> seriesCatalog() {
-//        ArrayList<String> list =  io.readMovieData();
-//        while(scan.hasNextLine()) {
-//            list.get(0).split(";");
+//        for (String s : list) {
+//            String[] split = s.split(";");
+//
+//            // Extracting title, genre, and rating
+//            String title = split[0].trim();
+//            String[] genres = split[2].trim().split(", ");
+//            float rating = Float.parseFloat(split[3].trim());
+//
+//            // Extracting season and episodes information
+//            String[] seasonEpisodes = split[4].trim().split(",");
+//            ArrayList<Integer> seasons = new ArrayList<>();
+//            ArrayList<Integer> episodes = new ArrayList<>();
+//            for (String seasonEpisode : seasonEpisodes) {
+//                String[] seasonEpisodeSplit = seasonEpisode.split("-");
+//                seasons.add(Integer.parseInt(seasonEpisodeSplit[0].trim()));
+//                episodes.add(Integer.parseInt(seasonEpisodeSplit[1].trim()));
+//            }
+//
+//            // Create a Series object and add it to the catalog
+//            Series series = new Series(title, genres, rating, seasons, episodes);
+//            seriesCatalog.add(series);
 //        }
 //
-//        return
-//    }
-
-
-
-
-//    public int getSeries() {
-//        return seriesCatelog.size();
+//        return seriesCatalog;
 //    }
 }
