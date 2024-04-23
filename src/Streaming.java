@@ -173,6 +173,12 @@ public void streamning(){
 
     }
 
+    private void playMedia(Movie media)
+    {
+        io.saveWatched(currentUser, media);
+        ui.displayMessage("Playing " + media);
+    }
+
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
