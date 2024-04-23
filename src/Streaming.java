@@ -107,19 +107,7 @@ public void streamning(){
             // searchCatalog();
             break;
         case 4: // Catelog
-            int number = ui.promptNumeric("How many choice do you want?");
-            number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
-            String input = ui.promptText("Want to add to favorite? y/n");
-            if (!input.toLowerCase().equals("y")) {
-                playMedia(catelog.showMovieCatalog().get(number-1));
-                streamning();
-
-            } else {
-                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
-                playMedia(catelog.showMovieCatalog().get(number-1));
-                streamning();
-            }
-
+            chooseMovieOrSeries();
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -190,6 +178,45 @@ public void streamning(){
         ui.displayMessage( "----------------\n" +
                                 "Playing " + media + "\n"
                               + "----------------");
+    }
+
+    private void chooseMovieOrSeries()
+    {
+        String choice = ui.promptText("Do you want to view movies or series? (M/S)");
+
+        if (choice.equalsIgnoreCase("m")) {
+            int number = ui.promptNumeric("How many movies do you want?");
+            number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+
+            } else {
+                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+            }
+        } else if (choice.equalsIgnoreCase("s"))
+        {
+            int number = ui.promptNumeric("How many series do you want?");
+            number = ui.promptChoiceM(catelog.showSeriesCatalog(),"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(catelog.showSeriesCatalog().get(number-1));
+                streamning();
+
+            } else {
+                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+            }
+        }
+        else
+        {
+            ui.displayMessage("Choose either movies or series to continue (M/S)");
+            chooseMovieOrSeries();
+        }
     }
 
     public void setCurrentUser(User currentUser) {
