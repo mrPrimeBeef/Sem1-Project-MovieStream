@@ -1,6 +1,7 @@
 package utility;
 
 import application.AMedia;
+import application.Movie;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,6 +31,13 @@ public class TextUI {
         return input;
 
     }
+    public int promptChoiceM(ArrayList<Movie> optionslist, String msg, int number){
+        displayMessage(msg);
+        displayListM(optionslist, "", number);
+        int input = promptNumeric("");
+        return input;
+
+    }
 
     public void displayList(ArrayList<String> list, String msg){
         System.out.println(msg);
@@ -40,7 +48,7 @@ public class TextUI {
             System.out.println(option);
         }
     }
-    public void displayListM(ArrayList<AMedia> list, String msg, int number){
+    public void displayListM(ArrayList<Movie> list, String msg, int number){
         System.out.println(msg);
         for (int i = 0; i < number; i++) {
             System.out.println(i + 1 + ") " + list.get(i));

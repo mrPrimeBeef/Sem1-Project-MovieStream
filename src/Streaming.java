@@ -70,8 +70,12 @@ public Streaming(String name) {
 
 public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
-    int menuChoice;
 
+    streamning();
+}
+
+public void streamning(){
+    int menuChoice;
 
     mainMenu = new ArrayList<>();
     mainMenu.add("View watched list");
@@ -80,26 +84,31 @@ public void runStreaming(){
     mainMenu.add("List of catalog");
     mainMenu.add("Exit application");
 
-    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
+    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
     switch(menuChoice) {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
-           io.getFavorites(currentUser);
+            io.getFavorites(currentUser);
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
-           io.getFavorites(currentUser);
+            io.getFavorites(currentUser);
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
-           // searchCatalog();
+            // searchCatalog();
             break;
         case 4: // Catelog
             int number = ui.promptNumeric("How many choice do you want?");
-            ui.displayListM(catelog.showMovieCatalog(),"Choose from the list", number);
-
+            number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? Y/N");
+            if (input.toLowerCase().equals("Y")) {
+                 io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+            }
+            playMedia(catelog.showMovieCatalog().get(number-1));
+            streamning();
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -108,6 +117,7 @@ public void runStreaming(){
         default:
             break;
     }
+
 }
 
 

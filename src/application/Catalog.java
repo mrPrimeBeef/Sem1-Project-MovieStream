@@ -11,15 +11,15 @@ public class Catalog {
     FileIO io = new FileIO();
     Scanner scan = new Scanner(System.in);
 
-    public ArrayList<AMedia> movieCatelog = new ArrayList<>();
+    public ArrayList<Movie> movieCatelog = new ArrayList<>();
     // public ArrayList<Serie> seriesCatelog = new ArrayList<Serie>();
 
-    public ArrayList<AMedia> showMovieCatalog() {
+    public ArrayList<Movie> showMovieCatalog() {
         createMovieFromString();
         return movieCatelog;
     }
 
-    public ArrayList<AMedia> createMovieFromString(){
+    public ArrayList<Movie> createMovieFromString(){
     ArrayList<String> list = io.readMovieData();
     for (String s : list) {
         String[] split = s.split(";");
