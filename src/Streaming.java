@@ -98,7 +98,7 @@ public void streamning(){
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
-            io.getFavorites(currentUser);
+            io.getWatched(currentUser);
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
