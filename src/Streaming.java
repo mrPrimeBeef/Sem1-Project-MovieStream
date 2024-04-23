@@ -81,12 +81,12 @@ public class Streaming {
     public void streamning(){
         int menuChoice;
 
-        mainMenu = new ArrayList<>();
-        mainMenu.add("View watched list");
-        mainMenu.add("View saved list");
-        mainMenu.add("Search catalog");
-        mainMenu.add("List of catalog");
-        mainMenu.add("Exit application");
+    mainMenu = new ArrayList<>();
+    mainMenu.add("View watched list");
+    mainMenu.add("View saved list");
+    mainMenu.add("Search catalog");
+    mainMenu.add("List of catalog");
+    mainMenu.add("Log out");
 
 
         menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
@@ -110,14 +110,20 @@ public class Streaming {
                 chooseMovieOrSeries();
                 break;
             case 5: // Exit
-                ui.displayMessage("exiting");
-                exitApplication();
-                break;
+            case 5: // Log out
+                String logOut = ui.promptText("Do you want to log out? y/n");
+                if (logOut.toLowerCase().equals("y")) {
+                    logOut();
+                }else if(logOut.toLowerCase().equals("n"))  {
+                    streamning();
+
+                }
             default:
                 break;
         }
 
-    }
+
+}
 
 
     public User createUser() {
@@ -149,6 +155,7 @@ public class Streaming {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
                     return true;
+
                 }
             }
             ui.displayMessage("Invalid username or password, try again");
@@ -223,9 +230,13 @@ public class Streaming {
         this.currentUser = currentUser;
     }
 
-    public void exitApplication(){
+    public void logOut(){
+    currentUser = null;
+    ui.displayMessage("You are now logged out \n \n \n ");
+    startStreaming();
 
-        // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
+
+    // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
 //    io.saveFavorites();
 //    io.saveWatched();
     }
