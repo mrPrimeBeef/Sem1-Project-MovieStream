@@ -10,7 +10,6 @@ import domain.User;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,6 +72,7 @@ public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
     int menuChoice;
 
+
     mainMenu = new ArrayList<>();
     mainMenu.add("View watched list");
     mainMenu.add("View saved list");
@@ -82,7 +82,10 @@ public void runStreaming(){
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
-    switch(menuChoice) {
+
+    switch(menuChoice)
+
+    {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
            this.currentUser.viewWatchedList();
@@ -98,15 +101,9 @@ public void runStreaming(){
         case 4: // Catelog
             int numberM = ui.promptNumeric("How many movies do you want to see?");
             ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
-            String input = ui.promptText("Choose one? Y/N");
-            if (input.toLowerCase().equals("y")){
-                numberM = ui.promptNumeric("Choose a movie");
-                catelog.showMovieCatalog(numberM).get(numberM-1);
-                media.playMedia(media);
-            }
             int numberS = ui.promptNumeric("How many series do you want to see?");
             ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
-            ui.promptNumeric("Choose one of the series or see more");
+            ui.promptText("Choose one of the following series to see, or show more ");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
@@ -132,6 +129,7 @@ public void runStreaming(){
                 return newUser;
             } else {
                 ui.displayMessage("Username already exists. Please choose a different username.");
+
                 String choice = ui.promptText("Do you want to try again? (Y/N)").toLowerCase();
                 if (!choice.equals("y")) {
                     return null;
@@ -149,7 +147,7 @@ public void runStreaming(){
                 if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
-                    return true; // Successful login
+                    return true;
                 }
             }
 
@@ -162,14 +160,13 @@ public void runStreaming(){
     }
 
 
-    public boolean checkCredentialAvailability(String credential) {
+    boolean checkCredentialAvailability(String credential) {
         for (User user : userList) {
             if (user.getUsername().equals(credential)) {
                 ui.displayMessage(credential + " user exists... ");
                 return false; // Credential exists
             }
         }
-
         ui.displayMessage(credential + " is available");
         return true; // Credential is available
     }
@@ -186,8 +183,8 @@ public void runStreaming(){
     public void exitApplication(){
 
     // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
-    //    io.saveFavorites();
-    //    io.saveWatched();
+//    io.saveFavorites();
+//    io.saveWatched();
     }
 
 }
