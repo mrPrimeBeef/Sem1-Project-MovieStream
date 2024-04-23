@@ -17,18 +17,14 @@ public class Streaming {
 
     private String name;
 
-    private User user;
     private User currentUser;
     private TextUI ui;
     FileIO io;
     Search search;
-    String moviePath;
-    String seriePath;
-    AMedia media;
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
-    ArrayList<String> movieList;
+    ArrayList<String> movieList; //Skal muligvis bruges senere. Gemmes ind til videre
     Catalog catelog = new Catalog();
 
     public Streaming(String name) {

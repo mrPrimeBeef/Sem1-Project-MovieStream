@@ -2,13 +2,11 @@ package application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import utility.FileIO;
 
 public class Catalog {
     FileIO io = new FileIO();
-    Scanner scan = new Scanner(System.in);
 
     public ArrayList<AMedia> movieCatelog = new ArrayList<>();
     public ArrayList<AMedia> seriesCatelog = new ArrayList<>();
