@@ -101,9 +101,15 @@ public void runStreaming(){
         case 4: // Catelog
             int numberM = ui.promptNumeric("How many movies do you want to see?");
             ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
+            String input = ui.promptText("Choose one? Y/N");
+            if (input.toLowerCase().equals("y")){
+                numberM = ui.promptNumeric("Choose a movie");
+                catelog.showMovieCatalog(numberM).get(numberM-1);
+                media.playMedia(media);
+            }
             int numberS = ui.promptNumeric("How many series do you want to see?");
             ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
-            ui.promptText("Choose one of the following series to see, or show more ");
+            ui.promptNumeric("Choose one of the series or see more");
             break;
         case 5: // Exit
             ui.displayMessage("exiting");
