@@ -53,7 +53,6 @@ public class Streaming {
     public void startStreaming() {
         ui.displayMessage("Welcome to " + this.name + "\n");
         userList = io.readUserData();
-        boolean action = true;
         int choice;
 
         choice = ui.promptChoice(startmenu, "Create a user or login:");
@@ -93,12 +92,12 @@ public class Streaming {
 
         switch(menuChoice) {
             case 1: // Watched
-                ui.displayMessage("list of your watched list: ");
+                ui.displayMessage("list of your favorites list: ");
                 io.getFavorites(currentUser);
                 streamning();
                 break;
             case 2: // Saved
-                ui.displayMessage("list of your saved list: ");
+                ui.displayMessage("list of your watched list: ");
                 io.getWatched(currentUser);
                 streamning();
                 break;
@@ -109,7 +108,6 @@ public class Streaming {
             case 4: // Catelog
                 chooseMovieOrSeries();
                 break;
-            case 5: // Exit
             case 5: // Log out
                 String logOut = ui.promptText("Do you want to log out? y/n");
                 if (logOut.toLowerCase().equals("y")) {

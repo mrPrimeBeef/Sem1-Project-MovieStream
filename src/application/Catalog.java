@@ -18,7 +18,7 @@ public class Catalog {
         return movieCatelog;
     }
 
-    public ArrayList<AMedia> showSereiesCatalog() {
+    public ArrayList<AMedia> showSeriesCatalog() {
         createSerieFromString();
         return seriesCatelog;
     }

@@ -18,12 +18,6 @@ public class Movie extends AMedia {
         this.rating = rating;
     }
 
-    @Override
-    public void playMedia(AMedia media) {
-    ui.displayMessage("playing " + title);
-    //user.addToWatchedList();
-    }
-
     public String getTitle() {
         return this.title;
     }
