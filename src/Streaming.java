@@ -47,7 +47,7 @@ public Streaming(String name) {
 }
 
     public void startStreaming() {
-        ui.displayMessage("Welcome to " + this.name);
+        ui.displayMessage("Welcome to " + this.name + "\n");
         userList = io.readUserData();
         boolean action = true;
         int choice;
@@ -83,33 +83,23 @@ public void runStreaming(){
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
 
-    switch(menuChoice)
-
-    {
+    switch(menuChoice) {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
-           this.currentUser.viewWatchedList();
+           io.getFavorites(currentUser);
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
-           this.currentUser.viewSavedList();
+           io.getFavorites(currentUser);
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
            // searchCatalog();
             break;
         case 4: // Catelog
-            int numberM = ui.promptNumeric("How many movies do you want to see?");
-            ui.displayList(catelog.showMovieCatalog(numberM),"list of our movies: ");
-            String input = ui.promptText("Choose one? Y/N");
-            if (input.toLowerCase().equals("y")){
-                numberM = ui.promptNumeric("Choose a movie");
-                catelog.showMovieCatalog(numberM).get(numberM-1);
-                media.playMedia(media);
-            }
-            int numberS = ui.promptNumeric("How many series do you want to see?");
-            ui.displayList(catelog.showSerieCatalog(numberS),"list of our series: ");
-            ui.promptNumeric("Choose one of the series or see more");
+            int number = ui.promptNumeric("How many choice do you want?");
+            ui.displayListM(catelog.showMovieCatalog(),"Choose from the list", number);
+
             break;
         case 5: // Exit
             ui.displayMessage("exiting");

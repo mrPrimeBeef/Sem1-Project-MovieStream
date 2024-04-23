@@ -1,5 +1,7 @@
 package utility;
 
+import application.AMedia;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,6 +38,12 @@ public class TextUI {
             System.out.print(counter + ") ");
             counter++;
             System.out.println(option);
+        }
+    }
+    public void displayListM(ArrayList<AMedia> list, String msg, int number){
+        System.out.println(msg);
+        for (int i = 0; i < number; i++) {
+            System.out.println(i + 1 + ") " + list.get(i));
         }
     }
 
