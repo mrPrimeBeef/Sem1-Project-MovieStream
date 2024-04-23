@@ -10,7 +10,6 @@ import domain.User;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,7 +47,7 @@ public Streaming(String name) {
 }
 
     public void startStreaming() {
-        ui.displayMessage("Welcome to " + this.name);
+        ui.displayMessage("Welcome to " + this.name + "\n");
         userList = io.readUserData();
         boolean action = true;
         int choice;
@@ -73,6 +72,7 @@ public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
     int menuChoice;
 
+
     mainMenu = new ArrayList<>();
     mainMenu.add("View watched list");
     mainMenu.add("View saved list");
@@ -82,7 +82,10 @@ public void runStreaming(){
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
-    switch(menuChoice) {
+
+    switch(menuChoice)
+
+    {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
            this.currentUser.viewWatchedList();
@@ -119,52 +122,50 @@ public void runStreaming(){
 
 
     public User createUser() {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+        while (true) {
+            String username = ui.promptText("Please enter your username");
 
-        if (checkCredentialAvailability(username)) {
-            user = new User(username, password);
-            io.saveUserData(user);
-            this.userList.add(user);
-            this.currentUser = user;
+            if (checkCredentialAvailability(username)) {
+                String password = ui.promptText("Please enter your password");
+                User newUser = new User(username, password);
+                io.saveUserData(newUser);
+                userList.add(newUser);
+                setCurrentUser(newUser);
+                ui.displayMessage("User created successfully");
+                return newUser;
+            } else {
+                ui.displayMessage("Username already exists. Please choose a different username.");
 
+            }
         }
-
-        return user;
-
     }
 
-    public boolean login( ) {
-        String username = ui.promptText("Please enter your username");
-        String password = ui.promptText("Please enter your password");
+    public boolean login() {
+        while (true) {
+            String username = ui.promptText("Please enter your username");
+            String password = ui.promptText("Please enter your password");
 
-        for (User u : userList) {
-            if (username.equals(u.getUsername())) {
-                if (password.equals(u.getPassword())) {
+            for (User u : userList) {
+                if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
                     return true;
                 }
-            }else {
-                ui.displayMessage("invalid username or password, create a new user");
-                startStreaming();
-                return false;
             }
+            ui.displayMessage("Invalid username or password, try again");
+
         }
-        return false;
     }
 
-    
+
     boolean checkCredentialAvailability(String credential) {
-
-
-            if (!io.userSavePath.contains(credential)){
-                ui.displayMessage(credential + " is available");
-                return true;
+        for (User user : userList) {
+            if (user.getUsername().equals(credential)) {
+                return false; // Credential exists
             }
-            ui.displayMessage(credential + " user exists... ");
-            startStreaming();
-            return false;
+        }
+        ui.displayMessage(credential + " is available");
+        return true; // Credential is available
     }
 
     public User getCurrentUser() {
@@ -179,8 +180,8 @@ public void runStreaming(){
     public void exitApplication(){
 
     // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
-    //    io.saveFavorites();
-    //    io.saveWatched();
+//    io.saveFavorites();
+//    io.saveWatched();
     }
 
 }
