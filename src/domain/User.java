@@ -13,7 +13,6 @@ public class User {
     private String username;
     private String password;
     private Search search = new Search();
-    private ArrayList<AMedia> catelog = new ArrayList<>();
     private LinkedHashSet<AMedia> watchedList = new LinkedHashSet<>();
     private LinkedHashSet<AMedia> savedList = new LinkedHashSet<>();
 
@@ -30,14 +29,12 @@ public class User {
     }
 
     public void viewWatchedList() {
-        // TODO add search
         for (AMedia option : watchedList) {
             System.out.println(option);
         }
 
     }
     public void viewSavedList() {
-        // TODO add search
         for (AMedia option : savedList) {
             System.out.println(option);
         }

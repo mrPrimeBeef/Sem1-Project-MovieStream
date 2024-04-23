@@ -1,6 +1,8 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 import utility.FileIO;
@@ -8,52 +10,43 @@ import utility.FileIO;
 public class Catalog {
     FileIO io = new FileIO();
     Scanner scan = new Scanner(System.in);
-    ArrayList<Movie> movies = new ArrayList<>();
 
-    ArrayList<Series> series = new ArrayList<>();
+    public ArrayList<AMedia> movieCatelog = new ArrayList<>();
+    // public ArrayList<Serie> seriesCatelog = new ArrayList<Serie>();
 
-    public ArrayList<Movie> movieCatalog() {
-        ArrayList<Movie> movieList = new ArrayList<>();
-        ArrayList<String> list =  io.readMovieData();
-        while(scan.hasNextLine()) {
-        list.get(0).split(";");
-        }
-
-    return movieList;
+    public ArrayList<AMedia> showMovieCatalog() {
+        createMovieFromString();
+        return movieCatelog;
     }
 
-    public void addMovieToCatalog(Movie movie) {
-        movies.add(movie);
-    }
+    public ArrayList<AMedia> createMovieFromString(){
+    ArrayList<String> list = io.readMovieData();
+    for (String s : list) {
+        String[] split = s.split(";");
+        String title = split[0].trim();
+        String genre = split[2].trim();
+        float rating = Float.parseFloat(split[3].trim());
 
-    public void addSeriesToCatalog(Series serie) {
-        series.add(serie);
-    }
+        Movie movie = new Movie(title, genre, rating);
 
-    public ArrayList<String> showMovieCatalog(int number) {
-        ArrayList<String> movies = io.readMovieData();
-        ArrayList<String> movieList = new ArrayList<>();
-
-        for (int i = 0; i < number; i++) {
-            movieList.add(movies.get(i));
-        }
-        return movieList;
+        movieCatelog.add(movie);
     }
-
-    public ArrayList<String> showSerieCatalog(int number) {
-        ArrayList<String> series = io.readSerieData();
-        ArrayList<String> serieList = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            serieList.add(series.get(i));
-        }
-        return serieList;
+    return movieCatelog;
     }
+//
+//    public ArrayList<Movie> seriesCatalog() {
+//        ArrayList<String> list =  io.readMovieData();
+//        while(scan.hasNextLine()) {
+//            list.get(0).split(";");
+//        }
+//
+//        return
+//    }
 
-    public int getSeries() {
-        return series.size();
-    }
 
-    public int getMovies() {
-        return movies.size();
-    }
+
+
+//    public int getSeries() {
+//        return seriesCatelog.size();
+//    }
 }

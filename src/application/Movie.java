@@ -25,4 +25,8 @@ public class Movie extends AMedia {
         return this.title;
     }
 
+    @Override
+    public String toString() {
+        return title;
+    }
 }
