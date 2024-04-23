@@ -64,9 +64,9 @@ public Streaming(String name) {
                 this.runStreaming();
                 break;
             case 2:
-                if (this.login()) {
-                    runStreaming();
-                }
+                this.login();
+                    this.runStreaming();
+
                 break;
         }
     }
@@ -86,7 +86,7 @@ public void streamning(){
     mainMenu.add("View saved list");
     mainMenu.add("Search catalog");
     mainMenu.add("List of catalog");
-    mainMenu.add("Exit application");
+    mainMenu.add("Log out");
 
 
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
@@ -121,9 +121,14 @@ public void streamning(){
             }
 
             break;
-        case 5: // Exit
-            ui.displayMessage("exiting");
-            exitApplication();
+        case 5: // Log out
+            String logOut = ui.promptText("Do you want to log out? y/n");
+            if (logOut.toLowerCase().equals("y")) {
+                logOut();
+            }else if(logOut.toLowerCase().equals("n"))  {
+                streamning();
+
+            }
             break;
         default:
             break;
@@ -161,6 +166,7 @@ public void streamning(){
                     setCurrentUser(u);
                     ui.displayMessage("Login successful");
                     return true;
+
                 }
             }
             ui.displayMessage("Invalid username or password, try again");
@@ -196,7 +202,11 @@ public void streamning(){
         this.currentUser = currentUser;
     }
 
-    public void exitApplication(){
+    public void logOut(){
+    currentUser = null;
+    ui.displayMessage("You are now logged out \n \n \n ");
+    startStreaming();
+
 
     // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
 //    io.saveFavorites();
