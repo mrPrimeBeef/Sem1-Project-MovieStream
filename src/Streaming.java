@@ -35,6 +35,10 @@ public Streaming(String name) {
     this.name = name;
 
     userList = new ArrayList();
+    //ArrayList<Movie> movieList = catelog.showMovieCatalog();
+    //ArrayList<AMedia> serieList = catelog.showSerieCatalog();
+    //search.makeMovieHashMaps(movieList);
+    //search.makeSeriesHashMaps(serieList);
 
 
     this.ui = new TextUI();
@@ -70,8 +74,12 @@ public Streaming(String name) {
 
 public void runStreaming(){
     ui.displayMessage(this.currentUser.getUsername() + "'s homepage");
-    int menuChoice;
 
+    streamning();
+}
+
+public void streamning(){
+    int menuChoice;
 
     mainMenu = new ArrayList<>();
     mainMenu.add("View watched list");
@@ -80,25 +88,37 @@ public void runStreaming(){
     mainMenu.add("List of catalog");
     mainMenu.add("Exit application");
 
-    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
+    menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
     switch(menuChoice) {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
-           io.getFavorites(currentUser);
+            io.getFavorites(currentUser);
+            streamning();
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
-           io.getFavorites(currentUser);
+            io.getWatched(currentUser);
+            streamning();
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
-           // searchCatalog();
+            // searchCatalog();
             break;
         case 4: // Catelog
             int number = ui.promptNumeric("How many choice do you want?");
-            ui.displayListM(catelog.showMovieCatalog(),"Choose from the list", number);
+            number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+
+            } else {
+                io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
+                playMedia(catelog.showMovieCatalog().get(number-1));
+                streamning();
+            }
 
             break;
         case 5: // Exit
@@ -108,6 +128,7 @@ public void runStreaming(){
         default:
             break;
     }
+
 }
 
 
@@ -161,6 +182,14 @@ public void runStreaming(){
     public User getCurrentUser() {
     return currentUser;
 
+    }
+
+    private void playMedia(AMedia media)
+    {
+        io.saveWatched(currentUser, media);
+        ui.displayMessage( "----------------\n" +
+                                "Playing " + media + "\n"
+                              + "----------------");
     }
 
     public void setCurrentUser(User currentUser) {

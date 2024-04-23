@@ -1,6 +1,7 @@
 package utility;
 
 import application.AMedia;
+import application.Movie;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,6 +27,13 @@ public class TextUI {
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");
+        int input = promptNumeric("");
+        return input;
+
+    }
+    public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
+        displayMessage(msg);
+        displayListM(optionslist, "", number);
         int input = promptNumeric("");
         return input;
 
