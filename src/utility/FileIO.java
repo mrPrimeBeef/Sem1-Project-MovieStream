@@ -21,7 +21,7 @@ public class FileIO {
     private String moviePath = "data/moviePath.csv";
     private String seriePath = "data/seriePath.csv";
     private String favoritesPath = "data/favoritesPath.csv";
-    private String watchedPath = "data/savedPath.csv";
+    private String watchedPath = "data/watchedPath.csv";
     public String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
@@ -151,11 +151,17 @@ public class FileIO {
     // gemmer brugerens username og password i en fil
     public void saveUserData(User currentUser) {
         try {
-            FileWriter writer = new FileWriter(userSavePath, true);
+            FileWriter userWriter = new FileWriter(userSavePath, true);
+            FileWriter favoritesWriter = new FileWriter(favoritesPath, true);
+            FileWriter watchedWriter = new FileWriter(watchedPath, true);
 
-            writer.append("\n" + currentUser.getUsername() + ", " + currentUser.getPassword());
+            userWriter.append("\n" + currentUser.getUsername() + ", " + currentUser.getPassword());
+            favoritesWriter.append("\n" + currentUser.getUsername() + "; ");
+            watchedWriter.append("\n" + currentUser.getUsername() + "; ");
 
-            writer.close();
+            userWriter.close();
+            favoritesWriter.close();
+            watchedWriter.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
