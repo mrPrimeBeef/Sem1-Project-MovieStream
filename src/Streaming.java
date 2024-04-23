@@ -83,16 +83,14 @@ public void runStreaming(){
     menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
 
-    switch(menuChoice)
-
-    {
+    switch(menuChoice) {
         case 1: // Watched
             ui.displayMessage("list of your watched list: ");
-           //this.currentUser.viewWatchedList();
+           io.getFavorites(currentUser);
             break;
         case 2: // Saved
             ui.displayMessage("list of your saved list: ");
-           //this.currentUser.viewSavedList();
+           io.getFavorites(currentUser);
             break;
         case 3: // Search
             ui.displayMessage("Search for a title or category");
