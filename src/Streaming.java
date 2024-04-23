@@ -47,7 +47,7 @@ public Streaming(String name) {
 }
 
     public void startStreaming() {
-        ui.displayMessage("Welcome to " + this.name);
+        ui.displayMessage("Welcome to " + this.name + "\n");
         userList = io.readUserData();
         boolean action = true;
         int choice;
