@@ -71,22 +71,22 @@ public class Streaming {
         int menuChoice;
 
     mainMenu = new ArrayList<>();
+    mainMenu.add("View favorite list");
     mainMenu.add("View watched list");
-    mainMenu.add("View saved list");
     mainMenu.add("Search catalog");
-    mainMenu.add("List of catalog");
+    mainMenu.add("Show selection");
     mainMenu.add("Log out");
 
 
         menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
 
         switch(menuChoice) {
-            case 1: // Watched
+            case 1: // Favs
                 ui.displayMessage("list of your favorites list: ");
                 io.getFavorites(currentUser);
                 streamning();
                 break;
-            case 2: // Saved
+            case 2: // Seen
                 ui.displayMessage("list of your watched list: ");
                 io.getWatched(currentUser);
                 streamning();
