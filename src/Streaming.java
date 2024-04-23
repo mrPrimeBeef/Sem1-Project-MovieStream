@@ -35,6 +35,10 @@ public Streaming(String name) {
     this.name = name;
 
     userList = new ArrayList();
+    //ArrayList<Movie> movieList = catelog.showMovieCatalog();
+    //ArrayList<AMedia> serieList = catelog.showSerieCatalog();
+    //search.makeMovieHashMaps(movieList);
+    //search.makeSeriesHashMaps(serieList);
 
 
     this.ui = new TextUI();
@@ -104,7 +108,7 @@ public void streamning(){
             int number = ui.promptNumeric("How many choice do you want?");
             number = ui.promptChoiceM(catelog.showMovieCatalog(),"Choose from the list", number);
             String input = ui.promptText("Want to add to favorite? Y/N");
-            if (input.toLowerCase().equals("Y")) {
+            if (input.toUpperCase().equals("Y")) {
                  io.saveFavorites(currentUser, catelog.showMovieCatalog().get(number-1));
             }
             playMedia(catelog.showMovieCatalog().get(number-1));
