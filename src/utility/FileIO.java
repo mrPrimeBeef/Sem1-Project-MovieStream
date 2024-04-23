@@ -22,7 +22,7 @@ public class FileIO {
     private String seriePath = "data/seriePath.csv";
     private String favoritesPath = "data/favoritesPath.csv";
     private String watchedPath = "data/watchedPath.csv";
-    public String userSavePath = "data/UserData.csv";
+    private String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
@@ -85,7 +85,7 @@ public class FileIO {
 
     // Indlæser enten hele favorites eller watched filen, og indsætter film eller serie titlen på
     // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til en bruger.
-    public void saveMedia(User currentUser, AMedia media, String path){
+    private void saveMedia(User currentUser, AMedia media, String path){
 
         int counter = 0;
 
@@ -144,7 +144,7 @@ public class FileIO {
     }
 
     // Leder efter userName i favorites/watched filen, og returnere deres favorites/watched film/movies
-    public String getMedia(User currentUser, String path){
+    private String getMedia(User currentUser, String path){
         File file = new File(path);
 
         try{

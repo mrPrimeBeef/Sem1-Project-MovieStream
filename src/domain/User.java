@@ -12,7 +12,6 @@ import java.util.LinkedHashSet;
 public class User {
     private String username;
     private String password;
-    private Search search = new Search();
     private LinkedHashSet<AMedia> watchedList = new LinkedHashSet<>();
     private LinkedHashSet<AMedia> savedList = new LinkedHashSet<>();
 
