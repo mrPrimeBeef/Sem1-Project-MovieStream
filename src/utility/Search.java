@@ -16,7 +16,10 @@ public class Search {
 
     }
 
-    public void makeSeriesHashMaps(ArrayList<Movie> seriesList){
+    public void makeSeriesByTitle(ArrayList<Series> seriesList){
+        for(int i = 0; i < seriesList.size(); i++){
+            seriesByTitle.put(seriesList.get(i).getTitle(), (List<Series>) seriesList.get(i));
+        }
 
     }
 

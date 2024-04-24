@@ -70,12 +70,12 @@ public class Streaming {
     public void streamning(){
         int menuChoice;
 
-    mainMenu = new ArrayList<>();
-    mainMenu.add("View favorite list");
-    mainMenu.add("View watched list");
-    mainMenu.add("Search catalog");
-    mainMenu.add("Show selection");
-    mainMenu.add("Log out");
+        mainMenu = new ArrayList<>();
+        mainMenu.add("View favorite list");
+        mainMenu.add("View watched list");
+        mainMenu.add("Search catalog");
+        mainMenu.add("Show selection");
+        mainMenu.add("Log out");
 
 
         menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
@@ -95,7 +95,7 @@ public class Streaming {
                 ui.displayMessage("Search for a title or category");
                 // searchCatalog();
                 break;
-            case 4: // Catelog
+            case 4: // Catalog
                 chooseMovieOrSeries();
                 break;
             case 5: // Log out
@@ -111,7 +111,25 @@ public class Streaming {
         }
 
 
-}
+    }
+    public void searchChoice()
+    {
+        int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
+        switch(choice){
+            case 1:
+                String title = ui.promptText("Skriv titlen:\n");
+                search.searchByTitle(title);
+                break;
+            case 2:
+                String category = ui.promptText("Search by category:\n ");
+                search.searchByCategory(category);
+                break;
+            case 3:
+                double rating = ui.promptDouble("Search by rating: ");
+                search.searchByRating(rating);
+                break;
+        }
+    }
 
 
     public User createUser() {

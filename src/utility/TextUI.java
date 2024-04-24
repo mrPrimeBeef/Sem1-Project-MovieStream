@@ -24,6 +24,16 @@ public class TextUI {
         }
     }
 
+    public double promptDouble(String msg) {
+        String input = promptText(msg);
+        if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
+            displayMessage("Invalid input, try again");
+            return promptNumeric(msg); // Returner resultatet af det rekursive kald
+        } else {
+            return Double.parseDouble(input);
+        }
+    }
+
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");
