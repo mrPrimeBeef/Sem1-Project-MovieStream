@@ -19,11 +19,11 @@ public class Search {
         }
     }
 
-    public void makeMediaByCategory(ArrayList<AMedia> MediaList){
-        for(int i = 0; i < MediaList.size(); i++){
-            mediaByTitle.put(MediaList.get(i).getCategory(), MediaList.get(i));
-        }
-    }
+//    public void makeMediaByCategory(ArrayList<AMedia> MediaList){
+//        for(int i = 0; i < MediaList.size(); i++){
+//            mediaByTitle.put(MediaList.get(i).getCategory(), MediaList.get(i));
+//        }
+//    }
 
 
     /*
