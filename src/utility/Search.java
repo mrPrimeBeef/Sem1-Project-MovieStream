@@ -5,6 +5,8 @@ import java.util.*;
 import application.AMedia;
 import application.Movie;
 import application.Series;
+import utility.TextUI;
+
 
 public class Search {
 

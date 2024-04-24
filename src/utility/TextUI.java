@@ -33,7 +33,19 @@ public class TextUI {
             return Double.parseDouble(input);
         }
     }
+    public void showTitle(String media)
+    {
+        displayMessage(" You have chosen " + media);
+    }
+    public void showCategory(String category)
+    {
+        displayMessage("You have chosen " + category);
+    }
+    public void showRating(double rating)
+    {
+        displayMessage("You have chosen " + rating);
 
+    }
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");

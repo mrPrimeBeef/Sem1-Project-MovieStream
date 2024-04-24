@@ -118,11 +118,12 @@ public class Streaming {
         switch(choice){
             case 1:
                 String title = ui.promptText("Skriv titlen:\n");
-                search.searchByTitle(title);
+                ui.showTitle(title);
                 break;
             case 2:
                 String category = ui.promptText("Search by category:\n ");
                 search.searchByCategory(category);
+                ui.showCategory(category);
                 break;
             case 3:
                 double rating = ui.promptDouble("Search by rating: ");
