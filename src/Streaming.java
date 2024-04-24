@@ -7,27 +7,29 @@ import utility.TextUI;
 import domain.User;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Streaming {
 
     private String name;
 
     private User currentUser;
-    TextUI ui;
+    private TextUI ui;
     FileIO io;
-    Search search;
+    Search search = new Search();
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
     Catalog catelog = new Catalog();
-    ArrayList<AMedia> movieList = catelog.showMediaCatalog();
-
+    ArrayList<AMedia> movieList = catelog.showMovieCatalog();
+    ArrayList<AMedia> serieList = catelog.showSeriesCatalog();
 
     public Streaming(String name) {
         this.name = name;
 
         userList = new ArrayList();
+
+
+
 
         this.ui = new TextUI();
         this.io = new FileIO();
@@ -94,7 +96,7 @@ public class Streaming {
                 // searchCatalog();
                 break;
             case 4: // Catalog
-                selection();
+                chooseMovieOrSeries();
                 break;
             case 5: // Log out
                 String logOut = ui.promptText("Do you want to log out? y/n");
@@ -109,6 +111,26 @@ public class Streaming {
         }
 
 
+    }
+    public void searchChoice()
+    {
+        int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
+        switch(choice){
+            case 1:
+                String title = ui.promptText("Skriv titlen:\n");
+                search.searchByTitle(title);
+                ui.showTitle(title);
+                break;
+            case 2:
+                String category = ui.promptText("Search by category:\n ");
+                search.searchByCategory(category);
+                ui.showCategory(category);
+                break;
+            /*case 3:
+                double rating = ui.promptDouble("Search by rating: ");
+                search.searchByRating(rating);
+                break;*/
+        }
     }
 
 
@@ -169,71 +191,48 @@ public class Streaming {
     {
         io.saveWatched(currentUser, media);
         ui.displayMessage( "----------------\n" +
-                "Playing " + media.getTitle() + "\n"
+                "Playing " + media + "\n"
                 + "----------------");
     }
 
-    private void selection() {
-       ArrayList<AMedia> showList = ui.randomList(movieList);
-       int choice = 0;
-       int number = 0;
-        while(number < 4){
-        number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
-       switch (number) {
-           case 1:
-             choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+    private void chooseMovieOrSeries()
+    {
+        String choice = ui.promptText("Do you want to view movies or series? (M/S)");
 
-               choicesForMedia(showList, choice);
-           case 2:
-               showList = ui.randomList(movieList);
-               while(number == 2){
-                   number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
-                   if(number == 1){
-                        choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
-                       choicesForMedia(showList, choice);
-                   } else if (number == 2) {
-                       showList = ui.randomList(movieList);
-                   }
-
-               } if (number == 3) {
-               streamning();
-           }
-           break;
-           case 3:
-           streamning();
-           break;
-             default:
-                 ui.displayMessage("Invalid choice, try again");
-                 selection();
-             break;
-
-            }
-        }
-    }
-
-    public void choicesForMedia(ArrayList<AMedia> showList, int choice){
-        int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
-
-        if (input == 2) {
-            playMedia(showList.get(choice - 1));
-            streamning();
-
-        } else if (input == 1) {
-            io.saveFavorites(currentUser, showList.get(choice - 1));
-            String stringInput = ui.promptText("Favorites added successfully, Play movie? y/n");
-            if (stringInput.toLowerCase().equals("y")) {
-                playMedia(showList.get(choice - 1));
+        if (choice.equalsIgnoreCase("m")) {
+            int number = ui.promptNumeric("How many movies do you want?");
+            number = ui.promptChoiceM(movieList,"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(movieList.get(number-1));
                 streamning();
-            }else if (stringInput.toLowerCase().equals("n")){
+
+            } else {
+                io.saveFavorites(currentUser, movieList.get(number-1));
+                playMedia(movieList.get(number-1));
                 streamning();
             }
+        } else if (choice.equalsIgnoreCase("s"))
+        {
+            int number = ui.promptNumeric("How many series do you want?");
+            number = ui.promptChoiceM(serieList,"Choose from the list", number);
+            String input = ui.promptText("Want to add to favorite? y/n");
+            if (!input.toLowerCase().equals("y")) {
+                playMedia(serieList.get(number-1));
+                streamning();
 
-        } else if (input == 3) {
-            streamning();
-
+            } else {
+                io.saveFavorites(currentUser, movieList.get(number-1));
+                playMedia(movieList.get(number-1));
+                streamning();
+            }
+        }
+        else
+        {
+            ui.displayMessage("Choose either movies or series to continue (M/S)");
+            chooseMovieOrSeries();
         }
     }
-
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;

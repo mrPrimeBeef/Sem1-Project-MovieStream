@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public abstract class AMedia implements IMedia {
     public String title;
-    public String category;
     TextUI ui = new TextUI();
     public String year;
     public ArrayList<String> genres;
