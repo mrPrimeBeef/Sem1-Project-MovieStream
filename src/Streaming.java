@@ -22,7 +22,7 @@ public class Streaming {
     ArrayList<String> mainMenu;
     Catalog catelog = new Catalog();
     ArrayList<AMedia> movieList = catelog.showMovieCatalog();
-    ArrayList<AMedia> serieList = catelog.showSerieCatalog();
+    ArrayList<AMedia> serieList = catelog.showSeriesCatalog();
 
     public Streaming(String name) {
         this.name = name;
@@ -98,9 +98,6 @@ public class Streaming {
                 break;
             case 4: // Catalog
                 selection();
-            case 4: // Catalog
-                chooseMovieOrSeries();
-                break;
             case 5: // Log out
                 String logOut = ui.promptText("Do you want to log out? y/n");
                 if (logOut.toLowerCase().equals("y")) {
