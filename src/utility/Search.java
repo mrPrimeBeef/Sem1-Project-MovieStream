@@ -3,9 +3,6 @@ package utility;
 import java.util.*;
 
 import application.AMedia;
-import application.Movie;
-import application.Series;
-import utility.TextUI;
 
 
 public class Search {
@@ -24,7 +21,7 @@ public class Search {
 
     public void makeMediaByCategory(ArrayList<AMedia> MediaList){
         for(int i = 0; i < MediaList.size(); i++){
-            mediaByTitle.put(MediaList.get(i).getGenres(), MediaList.get(i));
+            mediaByTitle.put(MediaList.get(i).getCategory(), MediaList.get(i));
         }
     }
 

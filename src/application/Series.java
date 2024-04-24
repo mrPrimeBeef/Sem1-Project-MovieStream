@@ -9,8 +9,8 @@ public class Series extends AMedia {
     private int episodeNumber;
 
 
-    public Series(String title, String year, ArrayList<String> genres, float rating, ArrayList<Integer> seasons, ArrayList<Integer> episodes) {
-        super(title, year, genres, rating);
+    public Series(String title, String year, ArrayList<String> category, float rating, ArrayList<Integer> seasons, ArrayList<Integer> episodes) {
+        super(title, year, category, rating);
         this.seasons = seasons;
         this.episodes = episodes;
     }
