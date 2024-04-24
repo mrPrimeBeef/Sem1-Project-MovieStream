@@ -93,7 +93,7 @@ public class Streaming {
                     AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number-1));
                     playMedia(media);
                 } else if (choice == 2) {
-                    //io.deleteMedia(io.getFavorites(currentUser).get(number));
+                    io.deleteFavorites(io.getFavorites(currentUser).get(number-1), currentUser);
                 } else {
                     streamning();
                 }
@@ -210,7 +210,7 @@ public class Streaming {
 
     private void playMedia(AMedia media)
     {
-        io.saveWatched(currentUser, media);
+        io.saveWatched(currentUser, media.getTitle());
         ui.displayMessage( "----------------\n" +
                 "Playing " + media + "\n"
                 + "----------------");
@@ -262,7 +262,7 @@ public class Streaming {
             streamning();
 
         } else if (input == 1) {
-            io.saveFavorites(currentUser, showList.get(choice - 1));
+            io.saveFavorites(currentUser, showList.get(choice - 1).getTitle());
             String stringInput = ui.promptText("Favorites added successfully, Play movie? y/n");
             if (stringInput.toLowerCase().equals("y")) {
                 playMedia(showList.get(choice - 1));
