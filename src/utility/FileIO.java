@@ -133,12 +133,12 @@ public class FileIO {
     }
 
     // Henter User favorites via 'getMedia' (Undgår dobbeltkode)
-    public String getFavorites(User currentUser) {
+    public ArrayList<String> getFavorites(User currentUser) {
         return getMedia(currentUser, favoritesPath);
     }
 
     // Henter User watched via 'getMedia' (Undgår dobbeltkode)
-    public String getWatched(User currentUser) {
+    public ArrayList<String> getWatched(User currentUser) {
         return getMedia(currentUser, watchedPath);
 
     }
@@ -147,8 +147,9 @@ public class FileIO {
     // deres favorites/watched film/movies
     //todo:
     // Skal ændres til at returnere array, i stedet for en string, da man kan søge i arrayed
-    private String getMedia(User currentUser, String path){
+    private ArrayList<String> getMedia(User currentUser, String path){
         File file = new File(path);
+        ArrayList<String> list = new ArrayList<>();
 
         try{
         Scanner scanner = new Scanner(file);
@@ -159,17 +160,21 @@ public class FileIO {
             String[] nameSearch = line.split(";");
 
             if(currentUser.getUsername().equals(nameSearch[0].trim())){ //returnere brugerens favorites/watched
-                str = nameSearch[1];
-                System.out.println(str);
-                return str;
+                String[] titles = nameSearch[1].split(",");
+                for(String s : titles){
+                    list.add(s.trim());
+                }
+
+                return list;
             }
         }
         scanner.close();
 
-        return "Ingen bruger fundet med dette navn!\n";
+        return null;
 
         }catch(FileNotFoundException e){
-            return "Det gik Skidt det der!";
+            System.out.println("File not found");
+            return null;
         }
     }
 

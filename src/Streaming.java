@@ -29,9 +29,6 @@ public class Streaming {
 
         userList = new ArrayList();
 
-
-
-
         this.ui = new TextUI();
         this.io = new FileIO();
 
@@ -84,7 +81,17 @@ public class Streaming {
         switch(menuChoice) {
             case 1: // Favs
                 ui.displayMessage("list of your favorites list: ");
-                io.getFavorites(currentUser);
+                int number = ui.promptChoice(io.getFavorites(currentUser),"Choose a title");
+
+                int choice = ui.promptNumeric("1) Play \n2) Delete\n3) Back to menu");
+                if (choice == 1) {
+                    AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number));
+                    playMedia(media);
+                } else if (choice == 2) {
+                    //io.deleteMedia(io.getFavorites(currentUser).get(number));
+                } else {
+                    streamning();
+                }
                 streamning();
                 break;
             case 2: // Seen
