@@ -26,6 +26,7 @@ public class Catalog {
         for (String s : list) {
             String[] split = s.split(";");
             String title = split[0].trim();
+            String year = split[1].trim();
 
             ArrayList<String> genres = new ArrayList<>();
             for (String genre : split[2].trim().split(", ")) {
@@ -36,7 +37,7 @@ public class Catalog {
 
 
             if (movieCount < 100) {
-                Movie movie = new Movie(title, genres, rating);
+                Movie movie = new Movie(title, year, genres, rating);
                 mediaCatalog.add(movie);
             } else {
 
@@ -51,7 +52,7 @@ public class Catalog {
 
 
                 // Create a Series object and add it to the catalog
-                Series series = new Series(title, genres, rating, seasons);
+                Series series = new Series(title, year, genres, rating, seasons);
                 mediaCatalog.add(series);
 
             }

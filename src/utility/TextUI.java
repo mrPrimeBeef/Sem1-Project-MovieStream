@@ -33,18 +33,22 @@ public class TextUI {
 
     }
     public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
-                displayListM(optionslist, "",number);
+        displayListM(optionslist, "",number);
         displayMessage(msg);
         int input = promptNumeric("");
+        if(input > number) {
+            displayMessage("Invalid input, try againASFASF");
+            return promptChoiceM(optionslist, msg, number);
+        }
         return input;
 
     }
     public ArrayList<AMedia> randomList(ArrayList<AMedia> optionslist){
         Random r = new Random();
         ArrayList<AMedia> returnList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             int index = r.nextInt(200);
-            returnList.add(optionslist.get(index+1));
+            returnList.add(optionslist.get(index));
         }
         return returnList;
     }

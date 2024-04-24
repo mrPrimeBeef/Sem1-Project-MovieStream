@@ -9,8 +9,8 @@ public class Series extends AMedia {
     private int episodeNumber;
 
 
-    public Series(String title, ArrayList<String> category, float rating, Map<Integer, Integer> seasons) {
-        super(title, category, rating);
+    public Series(String title, String year, ArrayList<String> category, float rating, Map<Integer, Integer> seasons) {
+        super(title, year, category, rating);
         this.seasons = seasons;
     }
 
@@ -18,6 +18,6 @@ public class Series extends AMedia {
 
     @Override
     public String toString() {
-        return "" + title + ": "+ "Seasons and episodes: " + seasons;
+        return "" + title + " Release year: " + year + ": "+ "Seasons and episodes: " + seasons;
     }
 }

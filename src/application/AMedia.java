@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public abstract class AMedia implements IMedia {
     TextUI ui = new TextUI();
     public String title;
+    public String year;
     public ArrayList<String> genres;
     public float rating;
 
-    public AMedia(String title, ArrayList<String> genres, float rating) {
+    public AMedia(String title, String year,  ArrayList<String> genres, float rating) {
         this.title = title;
+        this.year = year;
         this.genres = genres;
         this.rating = rating;
     }

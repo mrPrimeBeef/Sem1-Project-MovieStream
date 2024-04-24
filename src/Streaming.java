@@ -29,9 +29,6 @@ public class Streaming {
 
         userList = new ArrayList();
 
-
-
-
         this.ui = new TextUI();
         this.io = new FileIO();
 
@@ -96,7 +93,7 @@ public class Streaming {
                 ui.displayMessage("Search for a title or category");
                 // searchCatalog();
                 break;
-            case 4: // Catelog
+            case 4: // Catalog
                 selection();
                 break;
             case 5: // Log out
@@ -179,27 +176,43 @@ public class Streaming {
     private void selection() {
        ArrayList<AMedia> showList = ui.randomList(movieList);
        int choice = 0;
-        int number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
-         if(number == 1){
-             choice = ui.promptChoiceM(showList, "\n1) Choose from list", 5);
-         }else if (number == 2) {
-             showList = ui.randomList(movieList);
-             while(number == 2){
-                 number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
-                 if(number == 1){
-                     choice = ui.promptChoiceM(showList, "\n1) Choose from list", 5);
-                 } else if (number == 2) {
-                     showList = ui.randomList(movieList);
-                 }
+       int number = 0;
+        while(number < 4){
+        number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+       switch (number) {
+           case 1:
+             choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
 
-             } if (number == 3) {
-                 streamning();
-             }
-        } else if (number == 3) {
-             streamning();
-         }
+               choicesForMedia(showList, choice);
+           case 2:
+               showList = ui.randomList(movieList);
+               while(number == 2){
+                   number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+                   if(number == 1){
+                        choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+                       choicesForMedia(showList, choice);
+                   } else if (number == 2) {
+                       showList = ui.randomList(movieList);
+                   }
 
-       int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
+               } if (number == 3) {
+               streamning();
+           }
+           break;
+           case 3:
+           streamning();
+           break;
+             default:
+                 ui.displayMessage("Invalid choice, try again");
+                 selection();
+             break;
+
+            }
+        }
+    }
+
+    public void choicesForMedia(ArrayList<AMedia> showList, int choice){
+        int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
 
         if (input == 2) {
             playMedia(showList.get(choice - 1));

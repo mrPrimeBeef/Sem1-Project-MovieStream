@@ -7,14 +7,12 @@ import java.util.Map;
 
 
 public class Movie extends AMedia {
-
-
     private int seasonNumber;
     private int episodeNumber;
 
 
-    public Movie(String title, ArrayList<String> category, float rating) {
-        super(title, category, rating);
+    public Movie(String title, String year, ArrayList<String> category, float rating) {
+        super(title, year, category, rating);
         //this.seasons = seasons;
         // this.episode = episode;
     }
@@ -29,7 +27,7 @@ public class Movie extends AMedia {
     }
 
     public String toString() {
-        return title;
+        return title + " Release year: " + year;
 
     }
 
