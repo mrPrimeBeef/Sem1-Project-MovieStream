@@ -3,11 +3,13 @@ package application;
 import domain.User;
 import utility.TextUI;
 
+import java.util.ArrayList;
+
+
 public abstract class AMedia implements IMedia {
     public String title;
     public String category;
     TextUI ui = new TextUI();
-    public String title;
     public String year;
     public ArrayList<String> genres;
     public float rating;
