@@ -8,9 +8,11 @@ import application.Series;
 
 public class Search {
 
-
-    public Search() {
-    }
+    HashMap<String, AMedia> mediaByTitle = new HashMap<>();
+    HashMap<String, AMedia> mediaByCategory = new HashMap<>();
+    HashMap<String, AMedia> mediaByRating = new HashMap<>();
+    ArrayList<AMedia> movieCatalog;
+    ArrayList<AMedia> seriesCatalog;
 
     public void makeMovieHashMaps(ArrayList<Movie> movieList){
 
