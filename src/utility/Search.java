@@ -23,6 +23,8 @@ public class Search {
 
     }
 
+
+
     public List<Movie> searchByTitle(String title, Map<String, List<Movie>> moviesByTitle) {
         return moviesByTitle.getOrDefault(title, Collections.emptyList());
     }
