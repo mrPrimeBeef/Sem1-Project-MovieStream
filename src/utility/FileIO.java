@@ -18,16 +18,15 @@ public class FileIO {
 
     private ArrayList<String> listOfMovies = new ArrayList<>();
     private ArrayList<String> listOfSeries = new ArrayList<>();
-    private String moviePath = "data/moviePath.csv";
-    private String seriePath = "data/seriePath.csv";
-    private String favoritesPath = "data/favoritesPath.csv";
-    private String watchedPath = "data/watchedPath.csv";
-    private String userSavePath = "data/UserData.csv";
+    private final String favoritesPath = "data/favoritesPath.csv";
+    private final String watchedPath = "data/watchedPath.csv";
+    private final String userSavePath = "data/UserData.csv";
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
     public ArrayList<String> readMovieData() {
         ArrayList<String> list;
+        String moviePath = "data/moviePath.csv";
         list = scanFile(moviePath);
 
         for (String element : list) {
@@ -41,6 +40,7 @@ public class FileIO {
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
     public ArrayList<String> readSerieData() {
         ArrayList<String> list;
+        String seriePath = "data/seriePath.csv";
         list = scanFile(seriePath);
 
         for (String element : list) {
@@ -51,7 +51,7 @@ public class FileIO {
         return listOfSeries;
     }
 
-    // Køre igennem en fil, og gemmer hvert linje til en arraylist som returneres.
+    // Køre igennem en serie/movie fil, og gemmer hvert linje til en arraylist som returneres.
     private ArrayList<String> scanFile(String path) {
         ArrayList<String> list = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class FileIO {
 
 
     // Indlæser enten hele favorites eller watched filen, og indsætter film eller serie titlen på
-    // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til en bruger.
+    // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til et username.
     private void saveMedia(User currentUser, AMedia media, String path){
 
         int counter = 0;
@@ -133,42 +133,53 @@ public class FileIO {
     }
 
     // Henter User favorites via 'getMedia' (Undgår dobbeltkode)
-    public String getFavorites(User currentUser) {
+    public ArrayList<String> getFavorites(User currentUser) {
         return getMedia(currentUser, favoritesPath);
     }
 
     // Henter User watched via 'getMedia' (Undgår dobbeltkode)
-    public String getWatched(User currentUser) {
+    public ArrayList<String> getWatched(User currentUser) {
         return getMedia(currentUser, watchedPath);
 
     }
 
-    // Leder efter userName i favorites/watched filen, og returnere deres favorites/watched film/movies
-    private String getMedia(User currentUser, String path){
+    // Leder efter userName i favorites/watched filen, og ud fra username returnere
+    // deres favorites/watched film/movies
+    //todo:
+    // Skal ændres til at returnere array, i stedet for en string, da man kan søge i arrayed
+    private ArrayList<String> getMedia(User currentUser, String path){
         File file = new File(path);
+        ArrayList<String> list = new ArrayList<>();
 
         try{
         Scanner scanner = new Scanner(file);
         String str;
 
-        while (scanner.hasNextLine()) { //finder hvor i favorites filen en bruger er
+        while (scanner.hasNextLine()) { //While loopet og if statement prøver at finde brugeren i filen
             String line = scanner.nextLine();
             String[] nameSearch = line.split(";");
 
-            if(currentUser.getUsername().equals(nameSearch[0].trim())){
-                str = nameSearch[1];
-                System.out.println(str);
-                return str;
+            if(currentUser.getUsername().equals(nameSearch[0].trim())){ //returnere brugerens favorites/watched
+                String[] titles = nameSearch[1].split(",");
+                for(String s : titles){
+                    list.add(s.trim());
+                }
+
+                return list;
             }
         }
         scanner.close();
-        return "ingen bruger fundet med dette navn!\n";
+
+        return null;
+
         }catch(FileNotFoundException e){
-            return "Det gik Skidt";
+            System.out.println("File not found");
+            return null;
         }
     }
 
-    // gemmer brugerens username og password i en fil
+    // Gemmer brugerens username og password i userdata, samt gemmer
+    // username i favorites og watched filerne.
     public void saveUserData(User currentUser) {
         try {
             FileWriter userWriter = new FileWriter(userSavePath, true);

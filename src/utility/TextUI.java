@@ -25,6 +25,28 @@ public class TextUI {
         }
     }
 
+    public double promptDouble(String msg) {
+        String input = promptText(msg);
+        if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
+            displayMessage("Invalid input, try again");
+            return promptNumeric(msg); // Returner resultatet af det rekursive kald
+        } else {
+            return Double.parseDouble(input);
+        }
+    }
+    public void showTitle(String media)
+    {
+        displayMessage(" You have chosen " + media);
+    }
+    public void showCategory(String category)
+    {
+        displayMessage("You have chosen " + category);
+    }
+    public void showRating(double rating)
+    {
+        displayMessage("You have chosen " + rating);
+
+    }
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");
@@ -33,18 +55,22 @@ public class TextUI {
 
     }
     public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
-                displayListM(optionslist, "",number);
+        displayListM(optionslist, "",number);
         displayMessage(msg);
         int input = promptNumeric("");
+        if(input > number) {
+            displayMessage("Invalid input, try againASFASF");
+            return promptChoiceM(optionslist, msg, number);
+        }
         return input;
 
     }
     public ArrayList<AMedia> randomList(ArrayList<AMedia> optionslist){
         Random r = new Random();
         ArrayList<AMedia> returnList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             int index = r.nextInt(200);
-            returnList.add(optionslist.get(index+1));
+            returnList.add(optionslist.get(index));
         }
         return returnList;
     }

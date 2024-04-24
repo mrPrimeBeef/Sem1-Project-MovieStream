@@ -1,19 +1,21 @@
 package application;
 
-import domain.User;
 import utility.TextUI;
 
 import java.util.ArrayList;
 
+
 public abstract class AMedia implements IMedia {
-    TextUI ui = new TextUI();
     public String title;
-    public ArrayList<String> genres;
+    TextUI ui = new TextUI();
+    public String year;
+    public ArrayList<String> category;
     public float rating;
 
-    public AMedia(String title, ArrayList<String> genres, float rating) {
+    public AMedia(String title, String year,  ArrayList<String> category, float rating) {
         this.title = title;
-        this.genres = genres;
+        this.year = year;
+        this.category = category;
         this.rating = rating;
     }
 
@@ -21,8 +23,8 @@ public abstract class AMedia implements IMedia {
         return title;
     }
 
-    public ArrayList<String> getGenres() {
-        return genres;
+    public ArrayList<String> getCategory() {
+        return category;
     }
 
     public float getRating() {
@@ -31,6 +33,6 @@ public abstract class AMedia implements IMedia {
 
     @Override
     public String toString() {
-        return "Title: " + title + ", Genre: " + genres + ", Rating: " + rating;
+        return "Title: " + title + ", Genre: " + category + ", Rating: " + rating;
     }
 }
