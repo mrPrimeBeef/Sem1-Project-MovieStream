@@ -93,7 +93,7 @@ public class Streaming {
                     AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number-1));
                     playMedia(media);
                 } else if (choice == 2) {
-                    //io.deleteMedia(io.getFavorites(currentUser).get(number));
+
                 } else {
                     streamning();
                 }
@@ -114,6 +114,7 @@ public class Streaming {
             case 3: // Search
                 ui.displayMessage("Search for a title or category");
                 searchChoice();
+                streamning();
                 break;
             case 4: // Catalog
                 selection();
