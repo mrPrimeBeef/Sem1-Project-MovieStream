@@ -13,6 +13,7 @@ public class Movie extends AMedia {
 
     public Movie(String title, String year, ArrayList<String> category, float rating) {
         super(title, year, category, rating);
+
         //this.seasons = seasons;
         // this.episode = episode;
     }

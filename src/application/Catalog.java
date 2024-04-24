@@ -30,8 +30,6 @@ public class Catalog {
         ArrayList<AMedia> mediaCatalog = new ArrayList<>();
         int movieCount = 0;
 
-    ArrayList<String> genre = new ArrayList<>();
-
         for (String s : list) {
             String[] split = s.split(";");
             String title = split[0].trim();
