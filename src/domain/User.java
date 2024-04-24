@@ -3,7 +3,6 @@ package domain;
 import application.AMedia;
 import application.Movie;
 import utility.FileIO;
-import utility.Search;
 import utility.TextUI;
 
 import java.util.ArrayList;
