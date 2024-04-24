@@ -5,20 +5,29 @@ import java.util.*;
 import application.AMedia;
 import application.Movie;
 import application.Series;
+import utility.TextUI;
+
 
 public class Search {
 
-
-    public Search() {
-    }
+    HashMap<String, AMedia> mediaByTitle = new HashMap<>();
+    HashMap<String, AMedia> mediaByCategory = new HashMap<>();
+    HashMap<String, AMedia> mediaByRating = new HashMap<>();
+    ArrayList<AMedia> movieCatalog;
+    ArrayList<AMedia> seriesCatalog;
 
     public void makeMovieHashMaps(ArrayList<Movie> movieList){
 
     }
 
-    public void makeSeriesHashMaps(ArrayList<Movie> seriesList){
+    public void makeSeriesByTitle(ArrayList<Series> seriesList){
+        for(int i = 0; i < seriesList.size(); i++){
+            seriesByTitle.put(seriesList.get(i).getTitle(), (List<Series>) seriesList.get(i));
+        }
 
     }
+
+
 
     public List<Movie> searchByTitle(String title, Map<String, List<Movie>> moviesByTitle) {
         return moviesByTitle.getOrDefault(title, Collections.emptyList());

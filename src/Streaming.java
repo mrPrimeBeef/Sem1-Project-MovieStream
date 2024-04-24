@@ -14,20 +14,23 @@ public class Streaming {
     private String name;
 
     private User currentUser;
-    TextUI ui;
+    private TextUI ui;
     FileIO io;
     Search search;
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
     Catalog catelog = new Catalog();
-    ArrayList<AMedia> movieList = catelog.showMediaCatalog();
-
+    ArrayList<AMedia> movieList = catelog.showMovieCatalog();
+    ArrayList<AMedia> serieList = catelog.showSerieCatalog();
 
     public Streaming(String name) {
         this.name = name;
 
         userList = new ArrayList();
+
+
+
 
         this.ui = new TextUI();
         this.io = new FileIO();
@@ -95,6 +98,8 @@ public class Streaming {
                 break;
             case 4: // Catalog
                 selection();
+            case 4: // Catalog
+                chooseMovieOrSeries();
                 break;
             case 5: // Log out
                 String logOut = ui.promptText("Do you want to log out? y/n");
@@ -109,6 +114,25 @@ public class Streaming {
         }
 
 
+    }
+    public void searchChoice()
+    {
+        int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
+        switch(choice){
+            case 1:
+                String title = ui.promptText("Skriv titlen:\n");
+                ui.showTitle(title);
+                break;
+            case 2:
+                String category = ui.promptText("Search by category:\n ");
+                search.searchByCategory(category);
+                ui.showCategory(category);
+                break;
+            case 3:
+                double rating = ui.promptDouble("Search by rating: ");
+                search.searchByRating(rating);
+                break;
+        }
     }
 
 
@@ -232,6 +256,11 @@ public class Streaming {
             streamning();
 
         }
+        else
+        {
+            ui.displayMessage("Choose either movies or series to continue (M/S)");
+            chooseMovieOrSeries();
+        }
     }
 
 
@@ -245,7 +274,7 @@ public class Streaming {
         startStreaming();
 
 
-        // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
+    // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
 //    io.saveFavorites();
 //    io.saveWatched();
     }
