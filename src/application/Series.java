@@ -18,6 +18,6 @@ public class Series extends AMedia {
 
     @Override
     public String toString() {
-        return "Title: " + title + ", Genre: " + genres + ", Rating: " + rating + ", Seasons and episodes: " + seasons;
+        return "" + title + ": "+ "Seasons and episodes: " + seasons;
     }
 }

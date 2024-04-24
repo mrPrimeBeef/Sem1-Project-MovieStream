@@ -29,7 +29,7 @@ public class Movie extends AMedia {
     }
 
     public String toString() {
-        return super.toString();
+        return title;
 
     }
 

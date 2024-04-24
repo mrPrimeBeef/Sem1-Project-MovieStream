@@ -217,6 +217,7 @@ public class Streaming {
 
         } else if (input == 3) {
             streamning();
+
         }
     }
 
