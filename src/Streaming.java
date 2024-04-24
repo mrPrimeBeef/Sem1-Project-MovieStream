@@ -7,21 +7,22 @@ import utility.TextUI;
 import domain.User;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Streaming {
 
     private String name;
 
     private User currentUser;
-    private TextUI ui;
+    TextUI ui;
     FileIO io;
     Search search;
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
     Catalog catelog = new Catalog();
-    ArrayList<AMedia> movieList = catelog.showMovieCatalog();
-    ArrayList<AMedia> serieList = catelog.showSerieCatalog();
+    ArrayList<AMedia> movieList = catelog.showMediaCatalog();
+
 
     public Streaming(String name) {
         this.name = name;
@@ -70,12 +71,12 @@ public class Streaming {
     public void streamning(){
         int menuChoice;
 
-    mainMenu = new ArrayList<>();
-    mainMenu.add("View favorite list");
-    mainMenu.add("View watched list");
-    mainMenu.add("Search catalog");
-    mainMenu.add("Show selection");
-    mainMenu.add("Log out");
+        mainMenu = new ArrayList<>();
+        mainMenu.add("View favorite list");
+        mainMenu.add("View watched list");
+        mainMenu.add("Search catalog");
+        mainMenu.add("Show selection");
+        mainMenu.add("Log out");
 
 
         menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
@@ -96,7 +97,7 @@ public class Streaming {
                 // searchCatalog();
                 break;
             case 4: // Catelog
-                chooseMovieOrSeries();
+                selection();
                 break;
             case 5: // Log out
                 String logOut = ui.promptText("Do you want to log out? y/n");
@@ -111,7 +112,7 @@ public class Streaming {
         }
 
 
-}
+    }
 
 
     public User createUser() {
@@ -171,60 +172,66 @@ public class Streaming {
     {
         io.saveWatched(currentUser, media);
         ui.displayMessage( "----------------\n" +
-                "Playing " + media + "\n"
+                "Playing " + media.getTitle() + "\n"
                 + "----------------");
     }
 
-    private void chooseMovieOrSeries()
-    {
-        String choice = ui.promptText("Do you want to view movies or series? (M/S)");
+    private void selection() {
+       ArrayList<AMedia> showList = ui.randomList(movieList);
+       int choice = 0;
+        int number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+         if(number == 1){
+             choice = ui.promptChoiceM(showList, "\n1) Choose from list", 5);
+         }else if (number == 2) {
+             showList = ui.randomList(movieList);
+             while(number == 2){
+                 number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+                 if(number == 1){
+                     choice = ui.promptChoiceM(showList, "\n1) Choose from list", 5);
+                 } else if (number == 2) {
+                     showList = ui.randomList(movieList);
+                 }
 
-        if (choice.equalsIgnoreCase("m")) {
-            int number = ui.promptNumeric("How many movies do you want?");
-            number = ui.promptChoiceM(movieList,"Choose from the list", number);
-            String input = ui.promptText("Want to add to favorite? y/n");
-            if (!input.toLowerCase().equals("y")) {
-                playMedia(movieList.get(number-1));
+             } if (number == 3) {
+                 streamning();
+             }
+        } else if (number == 3) {
+             streamning();
+         }
+
+       int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
+
+        if (input == 2) {
+            playMedia(showList.get(choice - 1));
+            streamning();
+
+        } else if (input == 1) {
+            io.saveFavorites(currentUser, showList.get(choice - 1));
+            String stringInput = ui.promptText("Favorites added successfully, Play movie? y/n");
+            if (stringInput.toLowerCase().equals("y")) {
+                playMedia(showList.get(choice - 1));
                 streamning();
-
-            } else {
-                io.saveFavorites(currentUser, movieList.get(number-1));
-                playMedia(movieList.get(number-1));
+            }else if (stringInput.toLowerCase().equals("n")){
                 streamning();
             }
-        } else if (choice.equalsIgnoreCase("s"))
-        {
-            int number = ui.promptNumeric("How many series do you want?");
-            number = ui.promptChoiceM(serieList,"Choose from the list", number);
-            String input = ui.promptText("Want to add to favorite? y/n");
-            if (!input.toLowerCase().equals("y")) {
-                playMedia(serieList.get(number-1));
-                streamning();
 
-            } else {
-                io.saveFavorites(currentUser, movieList.get(number-1));
-                playMedia(movieList.get(number-1));
-                streamning();
-            }
-        }
-        else
-        {
-            ui.displayMessage("Choose either movies or series to continue (M/S)");
-            chooseMovieOrSeries();
+        } else if (input == 3) {
+            streamning();
         }
     }
+
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
     public void logOut(){
-    currentUser = null;
-    ui.displayMessage("You are now logged out \n \n \n ");
-    startStreaming();
+        currentUser = null;
+        ui.displayMessage("You are now logged out \n \n \n ");
+        startStreaming();
 
 
-    // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
+        // TODO skal de ikke bare tage en user? og deres path, gemme sted skal der være for hver bruger?
 //    io.saveFavorites();
 //    io.saveWatched();
     }

@@ -4,6 +4,7 @@ import application.AMedia;
 import application.Movie;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TextUI {
@@ -32,11 +33,20 @@ public class TextUI {
 
     }
     public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
+                displayListM(optionslist, "",number);
         displayMessage(msg);
-        displayListM(optionslist, "", number);
         int input = promptNumeric("");
         return input;
 
+    }
+    public ArrayList<AMedia> randomList(ArrayList<AMedia> optionslist){
+        Random r = new Random();
+        ArrayList<AMedia> returnList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            int index = r.nextInt(200);
+            returnList.add(optionslist.get(index+1));
+        }
+        return returnList;
     }
 
     public void displayList(ArrayList<String> list, String msg){

@@ -3,27 +3,34 @@ package application;
 import domain.User;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 
 public class Movie extends AMedia {
-    private User user;
 
-    String title;
-    ArrayList<String> category;
-    float rating;
+
+    private int seasonNumber;
+    private int episodeNumber;
+
 
     public Movie(String title, ArrayList<String> category, float rating) {
-        this.user = user;
-        this.title = title;
-        this.category = category;
-        this.rating = rating;
+        super(title, category, rating);
+        //this.seasons = seasons;
+        // this.episode = episode;
     }
 
-    public String getTitle() {
-        return this.title;
+
+    public int getSeasonNumber() {
+        return seasonNumber;
     }
 
-    @Override
+    public int getEpisodeNumber() {
+        return episodeNumber;
+    }
+
     public String toString() {
-        return title;
+        return super.toString();
+
     }
+
 }

@@ -1,23 +1,23 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class Series extends AMedia{
-    private ArrayList<Integer> episode;
-    private ArrayList<Integer> season;
+public class Series extends AMedia {
+    private Map<Integer, Integer> seasons;
+    private int seasonNumber;
+    private int episodeNumber;
 
-    String title;
-    ArrayList<String> category;
-    float rating;
 
-    public Series(String title,  ArrayList<String> category, float rating, ArrayList<Integer> episode, ArrayList<Integer> season) {
-        this.title = title;
-        this.category = category;
-        this.rating = rating;
+    public Series(String title, ArrayList<String> category, float rating, Map<Integer, Integer> seasons) {
+        super(title, category, rating);
+        this.seasons = seasons;
     }
+
+
 
     @Override
     public String toString() {
-        return title;
+        return "Title: " + title + ", Genre: " + genres + ", Rating: " + rating + ", Seasons and episodes: " + seasons;
     }
 }
