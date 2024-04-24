@@ -42,7 +42,7 @@ public class Streaming {
     }
 
     public void startStreaming() {
-        ui.displayMessage("Welcome to " + this.name + "\n");
+        ui.displayMessage("     Welcome to \n" + this.name + "\n");
         userList = io.readUserData();
         int choice;
 
