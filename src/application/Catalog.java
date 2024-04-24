@@ -35,16 +35,16 @@ public class Catalog {
             String title = split[0].trim();
             String year = split[1].trim();
 
-            ArrayList<String> genres = new ArrayList<>();
+            ArrayList<String> category = new ArrayList<>();
             for (String g : split[2].trim().split(", ")) {
-                genres.add(g.trim());
+                category.add(g.trim());
             }
 
             float rating = Float.parseFloat(split[3].trim());
 
 
             if (movieCount < 100) {
-                Movie movie = new Movie(title, year, genres, rating);
+                Movie movie = new Movie(title, year, category, rating);
                 mediaCatalog.add(movie);
             } else {
 
@@ -59,7 +59,7 @@ public class Catalog {
                 }
 
                 // Create a Series object and add it to the catalog
-                Series series = new Series(title, year, genres, rating, seasons, episodes);
+                Series series = new Series(title, year, category, rating, seasons, episodes);
                 mediaCatalog.add(series);
 
             }

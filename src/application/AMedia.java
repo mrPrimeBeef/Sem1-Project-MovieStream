@@ -14,10 +14,10 @@ public abstract class AMedia implements IMedia {
     public ArrayList<String> genres;
     public float rating;
 
-    public AMedia(String title, String year,  ArrayList<String> genres, float rating) {
+    public AMedia(String title, String year,  ArrayList<String> category, float rating) {
         this.title = title;
         this.year = year;
-        this.genres = genres;
+        this.genres = category;
         this.rating = rating;
     }
 
