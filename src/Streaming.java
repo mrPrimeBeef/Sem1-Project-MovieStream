@@ -90,7 +90,7 @@ public class Streaming {
 
                 int choice = ui.promptNumeric("1) Play \n2) Delete\n3) Back to menu");
                 if (choice == 1) {
-                    AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number));
+                    AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number-1));
                     playMedia(media);
                 } else if (choice == 2) {
                     //io.deleteMedia(io.getFavorites(currentUser).get(number));
