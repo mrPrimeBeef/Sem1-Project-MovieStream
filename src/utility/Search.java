@@ -20,12 +20,12 @@ public class Search {
     }
 
     public void makeMediaByCategory(ArrayList<AMedia> mediaList){
-        for(AMedia media : mediaList){
-            for(String category : media.getCategory()){
-                if(!mediaByCategory.containsKey(category)){
+        for (AMedia media : mediaList) {
+            for (String category : media.getCategory()) {
+                if (!mediaByCategory.containsKey(category)) {
                     mediaByCategory.put(category, new ArrayList<>());
                 }
-                mediaByCategory.get(category).add(media);  // Add the media object to the list
+                mediaByCategory.get(category).add(media);  // Ensure media is added here
             }
         }
     }
@@ -37,7 +37,6 @@ public class Search {
             mediaByTitle.put(movieList.get(i).getRating(), (List<AMedia>) movieList.get(i));
         }
     }*/
-
 
     public AMedia searchByTitle(String title) {
         return mediaByTitle.get(title);

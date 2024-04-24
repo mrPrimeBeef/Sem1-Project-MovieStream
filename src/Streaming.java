@@ -7,6 +7,7 @@ import utility.TextUI;
 import domain.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Streaming {
 
@@ -23,6 +24,7 @@ public class Streaming {
     ArrayList<AMedia> mediaList = catelog.showMediaCatalog();
     ArrayList<AMedia> movieList = catelog.showMovieCatalog();
     ArrayList<AMedia> serieList = catelog.showSeriesCatalog();
+
 
     public Streaming(String name) {
         this.name = name;
@@ -42,6 +44,9 @@ public class Streaming {
     }
 
     public void startStreaming() {
+        search.makeMediaByTitle(mediaList);
+        search.makeMediaByCategory(mediaList);
+
         ui.displayMessage("     Welcome to \n" + this.name + "\n");
         userList = io.readUserData();
         int choice;
@@ -118,14 +123,22 @@ public class Streaming {
         int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
         switch(choice){
             case 1:
-                String title = ui.promptText("Skriv titlen:\n");
-                search.searchByTitle(title);
-                ui.showTitle(title);
+                String title = ui.promptText("Enter the title:\n");
+                AMedia media = search.searchByTitle(title);
+                if (media != null) {
+                    media.toString();
+                } else {
+                    ui.displayMessage("No results found for the title: " + title);
+                }
                 break;
             case 2:
                 String category = ui.promptText("Search by category:\n ");
-                search.searchByCategory(category);
-                ui.showCategory(category);
+                List<AMedia> mediaInCategory = search.searchByCategory(category);
+                if (!mediaInCategory.isEmpty()) {
+                    mediaInCategory.toString();
+                } else {
+                    ui.displayMessage("No results found in the category: " + category);
+                }
                 break;
             /*case 3:
                 double rating = ui.promptDouble("Search by rating: ");
