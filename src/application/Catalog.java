@@ -11,15 +11,15 @@ public class Catalog {
     public ArrayList<AMedia> movieCatelog = new ArrayList<>();
     public ArrayList<AMedia> seriesCatelog = new ArrayList<>();
 
-    public ArrayList<AMedia> showMovieCatalog() {
-        createMovieFromString();
-        return movieCatelog;
-    }
+    //public ArrayList<AMedia> showMovieCatalog() {
+    //    createMovieFromString();
+    //    return movieCatelog;
+    //}
 
-    public ArrayList<AMedia> showSeriesCatalog() {
-        createSerieFromString();
-        return seriesCatelog;
-    }
+    //public ArrayList<AMedia> showSeriesCatalog() {
+    //    createSerieFromString();
+    //    return seriesCatelog;
+    //}
 
     public ArrayList<AMedia> createMovieFromString(){
     ArrayList<String> list = io.readMovieData();
