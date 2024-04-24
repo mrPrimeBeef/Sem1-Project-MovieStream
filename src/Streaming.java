@@ -101,8 +101,15 @@ public class Streaming {
                 break;
             case 2: // Seen
                 ui.displayMessage("list of your watched list: ");
-                io.getWatched(currentUser);
-                streamning();
+                 number = ui.promptChoice(io.getWatched(currentUser),"Choose a title");
+
+                choice = ui.promptNumeric("1) Play \n2) Back to menu");
+                if (choice == 1) {
+                    AMedia media = search.searchByTitle(io.getWatched(currentUser).get(number-1));
+                    playMedia(media);
+                } else {
+                    streamning();
+                }
                 break;
             case 3: // Search
                 ui.displayMessage("Search for a title or category");
