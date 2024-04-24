@@ -19,6 +19,11 @@ public class Catalog {
         seriesCatalog = createSerieFromString();
         return seriesCatalog;
     }
+    /*public ArrayList<AMedia> showMediaList()
+    {
+        mediaList = createMediaFromString();
+        return mediaList;
+    }*/
 
     public ArrayList<AMedia> createMovieFromString(){
     ArrayList<String> list = io.readMovieData();
