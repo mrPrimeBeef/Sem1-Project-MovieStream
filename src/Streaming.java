@@ -93,7 +93,7 @@ public class Streaming {
                 break;
             case 3: // Search
                 ui.displayMessage("Search for a title or category");
-                // searchCatalog();
+                searchChoice();
                 break;
             case 4: // Catalog
                 chooseMovieOrSeries();
