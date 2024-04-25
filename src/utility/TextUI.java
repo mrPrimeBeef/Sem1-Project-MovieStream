@@ -156,7 +156,7 @@ public class TextUI {
         int input = promptNumeric("");
         if(input > number) {
             displayMessage("Invalid input, try again");
-            input = promptNumericFive("");
+            input = promptNumericThree("");
         }
         return input;
 
