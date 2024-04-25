@@ -156,10 +156,10 @@ public class Streaming {
                     ui.displayMessage("No results found in the category: " + category);
                 }
                 break;
-            /*case 3:
-                double rating = ui.promptDouble("Search by rating: ");
+            case 3:
+                float rating = ui.promptNumeric("Search by rating: ");
                 search.searchByRating(rating);
-                break;*/
+                break;
         }
     }
 

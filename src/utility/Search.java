@@ -51,10 +51,14 @@ public class Search {
         }
     }
 
-    /*
-    public List<Movie> searchByRating(double rating) {
-        return mediaByRating.getOrDefault(rating, Collections.emptyList());
+
+    public List<AMedia> searchByRating(float rating) {
+        if (mediaByRating.containsKey(rating))
+        {
+            return mediaByRating.get(rating);
+        }
+        return Collections.emptyList();
     }
-    */
+
 
 }
