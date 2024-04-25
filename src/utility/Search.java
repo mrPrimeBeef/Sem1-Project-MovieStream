@@ -8,7 +8,7 @@ import application.AMedia;
 public class Search {
 
     HashMap<String, AMedia> mediaByTitle = new HashMap<>();
-    HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
+    HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
     HashMap<String, AMedia> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
@@ -55,6 +55,18 @@ public class Search {
         return returnList;
     }
 
+    public ArrayList<AMedia> searchByCategoryInput(String category) {
+        ArrayList<AMedia> returnList = new ArrayList<>();
+        // Check if the category exists in the map
+        for (Map.Entry<String, ArrayList<AMedia>> entry : mediaByCategory.entrySet()) {
+            String mediaCategory = entry.getKey().toLowerCase();
+            if (mediaCategory.contains(category.toLowerCase())) {
+                returnList.addAll(entry.getValue());
+            }
+        }
+        return returnList;
+    }
+
     public List<AMedia> searchByCategory(String category) {
         // Check if the category exists in the map
         if (mediaByCategory.containsKey(category)) {
@@ -63,6 +75,8 @@ public class Search {
             return Collections.emptyList(); // Return an empty list if category not found
         }
     }
+
+
 
     /*
     public List<Movie> searchByRating(double rating) {

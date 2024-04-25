@@ -142,7 +142,7 @@ public class Streaming {
             case 1:
                 String title = ui.promptText("Enter the title:\n");
                 ArrayList<AMedia> media = search.searchByTitleinput(title);
-                ui.displayMessage("Choose form list");
+                ui.displayMessage("Choose from list");
                 int number = ui.promptChoiceM(media,"",media.size());
                 int Userchoice = ui.promptNumericTwo("1) play\n2) Back to menu");
                 if (Userchoice == 1) {
@@ -154,11 +154,14 @@ public class Streaming {
                 break;
             case 2:
                 String category = ui.promptText("Search by category:\n ");
-                List<AMedia> mediaInCategory = search.searchByCategory(category);
-                if (!mediaInCategory.isEmpty()) {
-                    mediaInCategory.toString();
-                } else {
-                    ui.displayMessage("No results found in the category: " + category);
+                ArrayList<AMedia> mediaC  = search.searchByCategoryInput(category);
+                ui.displayMessage("Choose from list");
+                int numberC = ui.promptChoiceM(mediaC,"",mediaC.size());
+                int UserchoiceC = ui.promptNumericTwo("1) play\n2) Back to menu");
+                if (UserchoiceC == 1) {
+                    playMedia(mediaC.get(numberC-1));
+                } else if (UserchoiceC == 2) {
+                    streamning();
                 }
                 break;
             /*case 3:
@@ -235,18 +238,18 @@ public class Streaming {
         int choice = 0;
         int number = 0;
         while(number < 4){
-            number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+            number = ui.promptChoiceMThree(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
             switch (number) {
                 case 1:
-                    choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+                    choice = ui.promptChoiceMFive(showList, "\nChoose from list", 5);
 
                     choicesForMedia(showList, choice);
                 case 2:
                     showList = ui.randomList(mediaList);
                     while(number == 2){
-                        number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+                        number = ui.promptChoiceMThree(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
                         if(number == 1){
-                            choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+                            choice = ui.promptChoiceMFive(showList, "\nChoose from list", 5);
                             choicesForMedia(showList, choice);
                         } else if (number == 2) {
                             showList = ui.randomList(mediaList);
