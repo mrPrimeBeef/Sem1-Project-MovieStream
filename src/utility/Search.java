@@ -67,17 +67,6 @@ public class Search {
         return returnList;
     }
 
-    public List<AMedia> searchByCategory(String category) {
-        // Check if the category exists in the map
-        if (mediaByCategory.containsKey(category)) {
-            return mediaByCategory.get(category);
-        } else {
-            return Collections.emptyList(); // Return an empty list if category not found
-        }
-    }
-
-
-
     /*
     public List<Movie> searchByRating(double rating) {
         return mediaByRating.getOrDefault(rating, Collections.emptyList());

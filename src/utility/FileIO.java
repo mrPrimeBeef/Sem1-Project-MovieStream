@@ -14,7 +14,6 @@ public class FileIO {
     private final String favoritesPath = "data/favoritesPath.csv";
     private final String watchedPath = "data/watchedPath.csv";
     private final String userSavePath = "data/UserData.csv";
-    Search search = new Search();
 
     // Metode til at læse data fra fil.
     // Da håndtering af data til moviePath of seriePath

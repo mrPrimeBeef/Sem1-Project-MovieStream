@@ -7,23 +7,19 @@ import utility.TextUI;
 import domain.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Streaming {
 
     private String name;
-
     private User currentUser;
     private TextUI ui;
     FileIO io;
     Search search = new Search();
+    Catalog catelog = new Catalog();
     ArrayList<User> userList;
     ArrayList<String> startmenu;
     ArrayList<String> mainMenu;
-    Catalog catelog = new Catalog();
     ArrayList<AMedia> mediaList = catelog.showMediaCatalog();
-    ArrayList<AMedia> movieList = catelog.showMovieCatalog();
-    ArrayList<AMedia> serieList = catelog.showSeriesCatalog();
 
 
     public Streaming(String name) {
@@ -218,11 +214,6 @@ public class Streaming {
         }
         ui.displayMessage(credential + " is available");
         return true; // Credential is available
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-
     }
 
     private void playMedia(AMedia media)
