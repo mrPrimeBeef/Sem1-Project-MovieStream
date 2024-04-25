@@ -43,6 +43,7 @@ public class Streaming {
     public void startStreaming() {
         search.makeMediaByTitle(mediaList);
         search.makeMediaByCategory(mediaList);
+        search.makeMediaByRating(mediaList);
 
         ui.displayMessage("     Welcome to \n" + this.name + "\n");
         userList = io.readUserData();
@@ -158,7 +159,8 @@ public class Streaming {
                 break;
             case 3:
                 float rating = ui.promptNumeric("Search by rating: ");
-                search.searchByRating(rating);
+                search.searchByRating(String.valueOf(rating));
+
                 break;
         }
     }
