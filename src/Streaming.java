@@ -168,6 +168,7 @@ public class Streaming {
             case 3:
                 float rating = ui.promptNumeric("Search by rating: ");
                 //search.searchByRating(String.valueOf(rating));
+                streamning();
 
                 break;
         }
