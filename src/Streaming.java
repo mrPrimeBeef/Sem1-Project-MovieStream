@@ -81,14 +81,14 @@ public class Streaming {
         mainMenu.add("Log out");
 
 
-        menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
+        menuChoice = ui.promptChoiceStreamning(mainMenu, "Choose 1-5 from below");
 
         switch(menuChoice) {
             case 1: // Favs
                 ui.displayMessage("list of your favorites list: ");
                 int number = ui.promptChoice(io.getFavorites(currentUser),"Choose a title");
 
-                int choice = ui.promptNumeric("1) Play \n2) Delete\n3) Back to menu");
+                int choice = ui.promptNumericThree("1) Play \n2) Delete\n3) Back to menu");
                 if (choice == 1) {
                     AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number-1));
                     playMedia(media);
@@ -103,10 +103,11 @@ public class Streaming {
                 ui.displayMessage("list of your watched list: ");
                  number = ui.promptChoice(io.getWatched(currentUser),"Choose a title");
 
-                choice = ui.promptNumeric("1) Play \n2) Back to menu");
+                choice = ui.promptNumericTwo("1) Play \n2) Back to menu");
                 if (choice == 1) {
                     AMedia media = search.searchByTitle(io.getWatched(currentUser).get(number-1));
                     playMedia(media);
+                    streamning();
                 } else {
                     streamning();
                 }
@@ -135,7 +136,7 @@ public class Streaming {
     }
     public void searchChoice()
     {
-        int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
+        int choice = ui.promptNumericThree("1: Title\n2: Category\n3: Rating\n");
         switch(choice){
             case 1:
                 String title = ui.promptText("Enter the title:\n");
@@ -263,7 +264,7 @@ public class Streaming {
     }
 
     public void choicesForMedia(ArrayList<AMedia> showList, int choice){
-        int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
+        int input = ui.promptNumericThree("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
 
         if (input == 2) {
             playMedia(showList.get(choice - 1));
