@@ -52,9 +52,7 @@ class Series {
 
     +playMedia(AMedia media)
 }
-class Episode{
 
-}
 }
 
 package domain{
