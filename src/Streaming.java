@@ -115,6 +115,7 @@ public class Streaming {
             case 3: // Search
                 ui.displayMessage("Search for a title or category");
                 searchChoice();
+
                 streamning();
                 break;
             case 4: // Catalog
@@ -140,12 +141,16 @@ public class Streaming {
         switch(choice){
             case 1:
                 String title = ui.promptText("Enter the title:\n");
-                AMedia media = search.searchByTitle(title);
-                if (media != null) {
-                    media.toString();
-                } else {
-                    ui.displayMessage("No results found for the title: " + title);
+                ArrayList<AMedia> media = search.searchByTitleinput(title);
+                ui.displayMessage("Choose form list");
+                int number = ui.promptChoiceM(media,"",media.size());
+                int Userchoice = ui.promptNumericTwo("1) play\n2) Back to menu");
+                if (Userchoice == 1) {
+                    playMedia(media.get(number-1));
+                } else if (Userchoice == 2) {
+                    streamning();
                 }
+
                 break;
             case 2:
                 String category = ui.promptText("Search by category:\n ");

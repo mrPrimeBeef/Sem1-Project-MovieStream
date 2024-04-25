@@ -42,6 +42,19 @@ public class Search {
         return mediaByTitle.get(title);
     }
 
+    public ArrayList<AMedia> searchByTitleinput(String title) {
+        ArrayList<AMedia> returnList = new ArrayList<>();
+        String regex = title.toLowerCase();
+
+        for (Map.Entry<String, AMedia> entry : mediaByTitle.entrySet()) {
+            String mediaTitle = entry.getKey().toLowerCase();
+            if (mediaTitle.contains(regex)) {
+                returnList.add(searchByTitle(entry.getKey()));
+            }
+        }
+        return returnList;
+    }
+
     public List<AMedia> searchByCategory(String category) {
         // Check if the category exists in the map
         if (mediaByCategory.containsKey(category)) {
