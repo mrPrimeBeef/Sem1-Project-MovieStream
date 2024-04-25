@@ -84,7 +84,7 @@ public class Search {
     }
 
 
-    public List<AMedia> searchByRating(String rating) {
+    public ArrayList<AMedia> searchByRating(String rating) {
         ArrayList<AMedia> returnList = new ArrayList<>();
         // Check if the category exists in the map
         for (Map.Entry<String, ArrayList<AMedia>> entry : mediaByRating.entrySet()) {

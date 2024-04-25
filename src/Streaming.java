@@ -123,7 +123,7 @@ public class Streaming {
                 selection();
                 break;
             case 5: // Log out
-                String logOut = ui.promptText("Do you want to log out? y/n");
+                String logOut = ui.promptTextYN("Do you want to log out? y/n");
                 if (logOut.toLowerCase().equals("y")) {
                     logOut();
                 }else if(logOut.toLowerCase().equals("n"))  {
@@ -167,7 +167,11 @@ public class Streaming {
                 break;
             case 3:
                 float rating = ui.promptNumeric("Search by rating: ");
-                //search.searchByRating(String.valueOf(rating));
+                //
+                ArrayList<AMedia> mediaR  = search.searchByRating(String.valueOf(rating));
+                ui.displayMessage("Choose from list");
+                int numberR = ui.promptChoiceM(mediaR,"",mediaR.size());
+
 
                 break;
         }

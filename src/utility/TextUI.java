@@ -139,6 +139,18 @@ public class TextUI {
         return input;
 
     }
+
+    public String promptChoiceR(ArrayList<AMedia> optionslist, String msg, String number){
+        displayListM(optionslist, "",Integer.parseInt(number));
+        displayMessage(msg);
+        String input = promptText("");
+        if(Integer.parseInt(input) > Integer.parseInt(number)) {
+            displayMessage("Invalid input, try again");
+            input = promptText("");
+        }
+        return input;
+
+    }
     public int promptChoiceMFive(ArrayList<AMedia> optionslist, String msg, int number){
         displayListM(optionslist, "",number);
         displayMessage(msg);
