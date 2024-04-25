@@ -1,19 +1,15 @@
 package utility;
 
-import java.sql.Array;
 import java.util.*;
 
 import application.AMedia;
-
-import static java.lang.String.valueOf;
 
 
 public class Search {
 
     HashMap<String, AMedia> mediaByTitle = new HashMap<>();
     HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
-    HashMap<String, ArrayList<AMedia>> mediaByRating = new HashMap<>();
-    //HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
+    HashMap<String, AMedia> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
 
@@ -35,15 +31,12 @@ public class Search {
     }
 
 
-
-    public void makeMediaByRating(ArrayList<AMedia> mediaList) {
-        for (AMedia media : mediaList) {
-            String rating = String.valueOf(media.getRating()); // Convert float rating to string
-            if (!mediaByRating.containsKey(rating)) {
-                mediaByRating.put(rating, new ArrayList<>());
-            }
+    /*
+    public void makeMediaByRating(ArrayList<AMedia> movieList){
+        for(int i = 0; i < movieList.size(); i++){
+            mediaByTitle.put(movieList.get(i).getRating(), (List<AMedia>) movieList.get(i));
         }
-    }
+    }*/
 
     public AMedia searchByTitle(String title) {
         return mediaByTitle.get(title);
@@ -74,27 +67,10 @@ public class Search {
         return returnList;
     }
 
-    public List<AMedia> searchByCategory(String category) {
-        // Check if the category exists in the map
-        if (mediaByCategory.containsKey(category)) {
-            return mediaByCategory.get(category);
-        } else {
-            return Collections.emptyList(); // Return an empty list if category not found
-        }
+    /*
+    public List<Movie> searchByRating(double rating) {
+        return mediaByRating.getOrDefault(rating, Collections.emptyList());
     }
-
-
-    public List<AMedia> searchByRating(String rating) {
-        ArrayList<AMedia> returnList = new ArrayList<>();
-        // Check if the category exists in the map
-        for (Map.Entry<String, ArrayList<AMedia>> entry : mediaByRating.entrySet()) {
-            String mediaRating = entry.getKey().toLowerCase();
-            if (mediaRating.contains(rating.toLowerCase())) {
-                returnList.addAll(entry.getValue());
-            }
-        }
-        return returnList;
-    }
-
+    */
 
 }

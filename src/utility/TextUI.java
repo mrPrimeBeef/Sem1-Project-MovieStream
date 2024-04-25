@@ -1,7 +1,6 @@
 package utility;
 
 import application.AMedia;
-import application.Movie;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -86,28 +85,6 @@ public class TextUI {
         }
     }
 
-    public double promptDouble(String msg) {
-        String input = promptText(msg);
-        if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
-            displayMessage("Invalid input, try again");
-            return promptNumeric(msg); // Returner resultatet af det rekursive kald
-        } else {
-            return Double.parseDouble(input);
-        }
-    }
-    public void showTitle(String media)
-    {
-        displayMessage(" You have chosen " + media);
-    }
-    public void showCategory(String category)
-    {
-        displayMessage("You have chosen " + category);
-    }
-    public void showRating(double rating)
-    {
-        displayMessage("You have chosen " + rating);
-
-    }
     public int promptChoice(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");
