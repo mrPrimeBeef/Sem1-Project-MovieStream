@@ -13,7 +13,7 @@ public class Search {
     HashMap<String, AMedia> mediaByTitle = new HashMap<>();
     HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
     HashMap<String, AMedia> mediaByRating = new HashMap<>();
-    HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
+    //HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
     HashMap<String, List<AMedia>> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
