@@ -25,6 +25,52 @@ public class TextUI {
         }
     }
 
+    public int promptNumericTwo(String msg) {
+        String input = promptText(msg);
+        switch (input) {
+            case "1":
+                return Integer.parseInt(input);
+            case "2":
+                return Integer.parseInt(input);
+            default:
+                displayMessage("Invalid input, try again");
+                return promptNumericTwo(msg);
+        }
+    }
+    public int promptNumericThree(String msg) {
+        String input = promptText(msg);
+        switch (input) {
+            case "1":
+                return Integer.parseInt(input);
+            case "2":
+                return Integer.parseInt(input);
+            case "3":
+                return Integer.parseInt(input);
+            default:
+                displayMessage("Invalid input, try again");
+                return promptNumericThree(msg);
+        }
+    }
+
+    public int promptNumericFive(String msg) {
+        String input = promptText(msg);
+        switch (input) {
+            case "1":
+                return Integer.parseInt(input);
+            case "2":
+                return Integer.parseInt(input);
+            case "3":
+                return Integer.parseInt(input);
+            case "4":
+                return Integer.parseInt(input);
+            case "5":
+                return Integer.parseInt(input);
+            default:
+                displayMessage("Invalid input, try again");
+                return promptNumericThree(msg);
+        }
+    }
+
     public double promptDouble(String msg) {
         String input = promptText(msg);
         if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
@@ -52,6 +98,19 @@ public class TextUI {
         displayList(optionslist, "");
         int input = promptNumeric("");
         return input;
+    }
+    public int promptChoiceLogin(ArrayList<String> optionslist, String msg){
+        displayMessage(msg);
+        displayList(optionslist, "");
+        int input = promptNumericTwo("");
+        return input;
+    }
+
+    public int promptChoiceStreamning(ArrayList<String> optionslist, String msg){
+        displayMessage(msg);
+        displayList(optionslist, "");
+        int input = promptNumericFive("");
+        return input;
 
     }
     public int promptChoiceM(ArrayList<AMedia> optionslist, String msg, int number){
@@ -59,8 +118,8 @@ public class TextUI {
         displayMessage(msg);
         int input = promptNumeric("");
         if(input > number) {
-            displayMessage("Invalid input, try againASFASF");
-            return promptChoiceM(optionslist, msg, number);
+            displayMessage("Invalid input, try again");
+            input = promptNumericThree("");
         }
         return input;
 

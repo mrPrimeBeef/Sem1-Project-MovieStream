@@ -7,6 +7,7 @@ import utility.TextUI;
 import domain.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Streaming {
 
@@ -24,6 +25,7 @@ public class Streaming {
     ArrayList<AMedia> movieList = catelog.showMovieCatalog();
     ArrayList<AMedia> serieList = catelog.showSeriesCatalog();
 
+
     public Streaming(String name) {
         this.name = name;
 
@@ -39,11 +41,14 @@ public class Streaming {
     }
 
     public void startStreaming() {
+        search.makeMediaByTitle(mediaList);
+        search.makeMediaByCategory(mediaList);
+
         ui.displayMessage("     Welcome to \n" + this.name + "\n");
         userList = io.readUserData();
         int choice;
 
-        choice = ui.promptChoice(startmenu, "Create a user or login:");
+        choice = ui.promptChoiceLogin(startmenu, "Create a user or login:");
 
         switch (choice) {
             case 1:
@@ -76,19 +81,19 @@ public class Streaming {
         mainMenu.add("Log out");
 
 
-        menuChoice = ui.promptChoice(mainMenu, "Choose 1-5 from below");
+        menuChoice = ui.promptChoiceStreamning(mainMenu, "Choose 1-5 from below");
 
         switch(menuChoice) {
             case 1: // Favs
                 ui.displayMessage("list of your favorites list: ");
                 int number = ui.promptChoice(io.getFavorites(currentUser),"Choose a title");
 
-                int choice = ui.promptNumeric("1) Play \n2) Delete\n3) Back to menu");
+                int choice = ui.promptNumericThree("1) Play \n2) Delete\n3) Back to menu");
                 if (choice == 1) {
-                    AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number));
+                    AMedia media = search.searchByTitle(io.getFavorites(currentUser).get(number-1));
                     playMedia(media);
                 } else if (choice == 2) {
-                    //io.deleteMedia(io.getFavorites(currentUser).get(number));
+                    io.deleteFavorites(io.getFavorites(currentUser).get(number-1), currentUser);
                 } else {
                     streamning();
                 }
@@ -96,12 +101,21 @@ public class Streaming {
                 break;
             case 2: // Seen
                 ui.displayMessage("list of your watched list: ");
-                io.getWatched(currentUser);
-                streamning();
+                 number = ui.promptChoice(io.getWatched(currentUser),"Choose a title");
+
+                choice = ui.promptNumericTwo("1) Play \n2) Back to menu");
+                if (choice == 1) {
+                    AMedia media = search.searchByTitle(io.getWatched(currentUser).get(number-1));
+                    playMedia(media);
+                    streamning();
+                } else {
+                    streamning();
+                }
                 break;
             case 3: // Search
                 ui.displayMessage("Search for a title or category");
                 searchChoice();
+                streamning();
                 break;
             case 4: // Catalog
                 selection();
@@ -122,17 +136,25 @@ public class Streaming {
     }
     public void searchChoice()
     {
-        int choice = ui.promptNumeric("1: Title\n2: Category\n3: Rating\n");
+        int choice = ui.promptNumericThree("1: Title\n2: Category\n3: Rating\n");
         switch(choice){
             case 1:
-                String title = ui.promptText("Skriv titlen:\n");
-                search.searchByTitle(title);
-                ui.showTitle(title);
+                String title = ui.promptText("Enter the title:\n");
+                AMedia media = search.searchByTitle(title);
+                if (media != null) {
+                    media.toString();
+                } else {
+                    ui.displayMessage("No results found for the title: " + title);
+                }
                 break;
             case 2:
                 String category = ui.promptText("Search by category:\n ");
-                search.searchByCategory(category);
-                ui.showCategory(category);
+                List<AMedia> mediaInCategory = search.searchByCategory(category);
+                if (!mediaInCategory.isEmpty()) {
+                    mediaInCategory.toString();
+                } else {
+                    ui.displayMessage("No results found in the category: " + category);
+                }
                 break;
             /*case 3:
                 double rating = ui.promptDouble("Search by rating: ");
@@ -197,7 +219,7 @@ public class Streaming {
 
     private void playMedia(AMedia media)
     {
-        io.saveWatched(currentUser, media);
+        io.saveWatched(currentUser, media.getTitle());
         ui.displayMessage( "----------------\n" +
                 "Playing " + media + "\n"
                 + "----------------");
@@ -242,14 +264,14 @@ public class Streaming {
     }
 
     public void choicesForMedia(ArrayList<AMedia> showList, int choice){
-        int input = ui.promptNumeric("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
+        int input = ui.promptNumericThree("1) Want to add to favorite? \n" + "2) Play \n" + "3) Back to menu");
 
         if (input == 2) {
             playMedia(showList.get(choice - 1));
             streamning();
 
         } else if (input == 1) {
-            io.saveFavorites(currentUser, showList.get(choice - 1));
+            io.saveFavorites(currentUser, showList.get(choice - 1).getTitle());
             String stringInput = ui.promptText("Favorites added successfully, Play movie? y/n");
             if (stringInput.toLowerCase().equals("y")) {
                 playMedia(showList.get(choice - 1));

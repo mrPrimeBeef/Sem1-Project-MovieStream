@@ -21,6 +21,7 @@ public class FileIO {
     private final String favoritesPath = "data/favoritesPath.csv";
     private final String watchedPath = "data/watchedPath.csv";
     private final String userSavePath = "data/UserData.csv";
+    Search search = new Search();
 
     // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
@@ -71,21 +72,34 @@ public class FileIO {
     }
 
     // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
-    public void saveFavorites(User currentUser, AMedia media) {
-        saveMedia(currentUser, media, favoritesPath);
+    public void saveFavorites(User currentUser, String title) {
+        saveMedia(currentUser, title, favoritesPath);
 
     }
 
     // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
-    public void saveWatched(User currentUser, AMedia media) {
-        saveMedia(currentUser, media, watchedPath);
+    public void saveWatched(User currentUser, String title) {
+        saveMedia(currentUser, title, watchedPath);
 
     }
 
+    public String deleteFavorites(String title, User currentUser){
+        ArrayList<String> favMovies = getFavorites(currentUser);
+
+        for(String element : favMovies){
+            if(!element.contains(title)){
+                saveMedia(currentUser, title, watchedPath);
+            }
+        }
+
+
+        System.out.println("qwertyuytrewq");
+        return title + " has been removed from your favorites";
+    }
 
     // Indlæser enten hele favorites eller watched filen, og indsætter film eller serie titlen på
     // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til et username.
-    private void saveMedia(User currentUser, AMedia media, String path){
+    private void saveMedia(User currentUser, String title, String path){
 
         int counter = 0;
 
@@ -110,7 +124,7 @@ public class FileIO {
             }
 
             String[] arrayToEdit = lineToEdit.split(";");
-            arrayToEdit[0] += "; " + media.getTitle() + ", ";
+            arrayToEdit[0] += "; " + title + ", ";
 
             PrintWriter deleteData = new PrintWriter(path);
             deleteData.print("");
