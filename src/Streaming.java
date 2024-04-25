@@ -238,18 +238,18 @@ public class Streaming {
         int choice = 0;
         int number = 0;
         while(number < 4){
-            number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+            number = ui.promptChoiceMThree(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
             switch (number) {
                 case 1:
-                    choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+                    choice = ui.promptChoiceMFive(showList, "\nChoose from list", 5);
 
                     choicesForMedia(showList, choice);
                 case 2:
                     showList = ui.randomList(mediaList);
                     while(number == 2){
-                        number = ui.promptChoiceM(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
+                        number = ui.promptChoiceMThree(showList, "\n1) Choose from list \n" + "2) 5 new \n" + "3) back to menu", 5);
                         if(number == 1){
-                            choice = ui.promptChoiceM(showList, "\nChoose from list", 5);
+                            choice = ui.promptChoiceMFive(showList, "\nChoose from list", 5);
                             choicesForMedia(showList, choice);
                         } else if (number == 2) {
                             showList = ui.randomList(mediaList);

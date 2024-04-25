@@ -124,6 +124,28 @@ public class TextUI {
         return input;
 
     }
+    public int promptChoiceMFive(ArrayList<AMedia> optionslist, String msg, int number){
+        displayListM(optionslist, "",number);
+        displayMessage(msg);
+        int input = promptNumeric("");
+        if(input > number) {
+            displayMessage("Invalid input, try again");
+            input = promptNumericFive("");
+        }
+        return input;
+
+    }
+    public int promptChoiceMThree(ArrayList<AMedia> optionslist, String msg, int number){
+        displayListM(optionslist, "",number);
+        displayMessage(msg);
+        int input = promptNumeric("");
+        if(input > number) {
+            displayMessage("Invalid input, try again");
+            input = promptNumericFive("");
+        }
+        return input;
+
+    }
     public ArrayList<AMedia> randomList(ArrayList<AMedia> optionslist){
         Random r = new Random();
         ArrayList<AMedia> returnList = new ArrayList<>();
