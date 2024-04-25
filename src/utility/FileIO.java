@@ -3,16 +3,9 @@ package utility;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-import application.AMedia;
-import application.Movie;
-import application.Series;
 import domain.User;
-import org.w3c.dom.ls.LSOutput;
-import utility.TextUI;
 
 public class FileIO {
 
@@ -23,7 +16,8 @@ public class FileIO {
     private final String userSavePath = "data/UserData.csv";
     Search search = new Search();
 
-    // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
+    // Metode til at læse data fra fil.
+    // Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
     public ArrayList<String> readMovieData() {
         ArrayList<String> list;
@@ -37,7 +31,8 @@ public class FileIO {
         return listOfMovies;
     }
 
-    // Metode til at læse data fra fil. Da håndtering af data til moviePath of seriePath
+    // Metode til at læse data fra fil.
+    // Da håndtering af data til moviePath of seriePath
     // håndteres på samme måde, er der lavet en scanFile metode for at undgå dobbelt kode
     public ArrayList<String> readSerieData() {
         ArrayList<String> list;
@@ -61,7 +56,7 @@ public class FileIO {
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
-                list.add(scanner.nextLine()); // den er ændre fra next() --> nextLine()
+                list.add(scanner.nextLine());
             }
 
             scanner.close();
@@ -71,73 +66,96 @@ public class FileIO {
         return list;
     }
 
-    // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
+    // Giver det nuværende user og nuværende movie objekter videre til 'mediaSaveOrRemove' (Undgår dobbeltkode)
     public void saveFavorites(User currentUser, String title) {
-        saveMedia(currentUser, title, favoritesPath);
+        mediaSaveOrRemove(currentUser, title, favoritesPath, false);
 
     }
 
-    // Giver det nuværende user og nuværende movie objekter videre til 'saveMedia' (Undgår dobbeltkode)
+    // Giver det nuværende user og nuværende movie objekter videre til 'mediaSaveOrRemove' (Undgår dobbeltkode)
     public void saveWatched(User currentUser, String title) {
-        saveMedia(currentUser, title, watchedPath);
+        mediaSaveOrRemove(currentUser, title, watchedPath, false);
 
     }
 
-    public String deleteFavorites(String title, User currentUser){
-        ArrayList<String> favMovies = getFavorites(currentUser);
-
-        for(String element : favMovies){
-            if(!element.contains(title)){
-                saveMedia(currentUser, title, watchedPath);
-            }
-        }
-
-
-        System.out.println("qwertyuytrewq");
-        return title + " has been removed from your favorites";
+    // Sletter film fra brugerens favorites via mediaSaveOrRemove
+    public void deleteFavorites(String title, User currentUser) {
+        mediaSaveOrRemove(currentUser, title, favoritesPath, true);
     }
 
     // Indlæser enten hele favorites eller watched filen, og indsætter film eller serie titlen på
     // den korrekte linje efter brugernavnet, så pågældende film/serie kan kobles til et username.
-    private void saveMedia(User currentUser, String title, String path){
+    private void mediaSaveOrRemove(User currentUser, String title, String path, boolean willRemove) {
 
         int counter = 0;
 
         try {
+            //Fil indlæsning
             File file = new File(path);
             Scanner scanner = new Scanner(file);
             FileWriter writer = new FileWriter(path, true);
+            List<String> lines = Files.readAllLines(Path.of(path));
 
-            while (scanner.hasNextLine()) { //finder hvor i filen en bruger er
+            //finder hvilken linje i filen en bruger står på
+            while (scanner.hasNextLine()) {
                 String[] nameSearch = scanner.nextLine().split(";");
-                if(currentUser.getUsername().equals(nameSearch[0].trim())){
+                if (currentUser.getUsername().equals(nameSearch[0].trim())) {
                     break;
                 }
                 counter++;
             }
             scanner.close();
 
-            List<String> lines = Files.readAllLines(Path.of(path));
+            //Skriver alle linjer fra index 0, og til (men ikke med!) brugerens index tilbage til writer
             String lineToEdit = lines.get(counter);
-            for(int i = 0; i < counter; i++){
+            for (int i = 0; i < counter; i++) {
                 writer.append(lines.get(i) + "\n");
             }
 
-            String[] arrayToEdit = lineToEdit.split(";");
-            arrayToEdit[0] += "; " + title + ", ";
 
+            //Tilføjer titlen til brugerens favorites eller watched
+            String[] arrayToEdit = lineToEdit.split(";");
+            if(willRemove){
+                arrayToEdit[0] += ";";
+            }else{
+                if(!arrayToEdit[1].contains(title)) {
+                    arrayToEdit[0] += "; " + title + ",";
+                }else{
+                    arrayToEdit[0] += ";";
+                }
+            }
+
+            // Sletter dokumentet (data dog stadig gemt i variablerne)
             PrintWriter deleteData = new PrintWriter(path);
             deleteData.print("");
             deleteData.close();
 
-            for(String element : arrayToEdit){
-                writer.append(element);
+            // tilføjer resten af titlerne
+            if(willRemove != true) {
+                for (String element : arrayToEdit) {
+                    if(!element.equals(" ")) {
+                        writer.append(element);
+                    }
+                }
             }
 
-            for(int i = counter + 1; i < lines.size(); i++){
+            // Sletter titlen som brugeren har valgt
+            if(willRemove){
+                writer.append(currentUser.getUsername() + "; ");
+                String[] userTitles = arrayToEdit[1].split(",");
+                for (String element : userTitles) {
+                    if(!element.trim().equals(title) && !element.equals(" ")) {
+                        writer.append(element.trim() + ", ");
+                    }
+                }
+            }
+
+            // Skriver alle linjer fra (men ikke med!) brugerens index til slut af arrayet tilbage til writer
+            for (int i = counter + 1; i < lines.size(); i++) {
                 writer.append("\n" + lines.get(i));
             }
 
+            // skriver alt gemt data til filen
             writer.close();
 
         } catch (IOException e) {
@@ -159,34 +177,33 @@ public class FileIO {
 
     // Leder efter userName i favorites/watched filen, og ud fra username returnere
     // deres favorites/watched film/movies
-    //todo:
-    // Skal ændres til at returnere array, i stedet for en string, da man kan søge i arrayed
-    private ArrayList<String> getMedia(User currentUser, String path){
+    private ArrayList<String> getMedia(User currentUser, String path) {
         File file = new File(path);
         ArrayList<String> list = new ArrayList<>();
 
-        try{
-        Scanner scanner = new Scanner(file);
-        String str;
+        try {
+            Scanner scanner = new Scanner(file);
+            String str;
 
-        while (scanner.hasNextLine()) { //While loopet og if statement prøver at finde brugeren i filen
-            String line = scanner.nextLine();
-            String[] nameSearch = line.split(";");
+            // While loopet og if statement prøver at finde brugeren i filen
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] nameSearch = line.split(";");
 
-            if(currentUser.getUsername().equals(nameSearch[0].trim())){ //returnere brugerens favorites/watched
-                String[] titles = nameSearch[1].split(",");
-                for(String s : titles){
-                    list.add(s.trim());
+                // returnere alle brugerens favorites/watched
+                if (currentUser.getUsername().equals(nameSearch[0].trim())) {
+                    String[] titles = nameSearch[1].split(",");
+                    for (String s : titles) {
+                        list.add(s.trim());
+                    }
+                    return list;
                 }
-
-                return list;
             }
-        }
-        scanner.close();
+            scanner.close();
 
-        return null;
+            return null;
 
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File not found");
             return null;
         }
@@ -196,6 +213,9 @@ public class FileIO {
     // username i favorites og watched filerne.
     public void saveUserData(User currentUser) {
         try {
+            // Når der bliver lavet en bruger, bliver der lavet et entry i 'userSavePath',
+            // 'favoritesPath' og 'watchedPath'. Dette er for at være sikker på at brugeren
+            // eksistere i alle de nødvendige filer
             FileWriter userWriter = new FileWriter(userSavePath, true);
             FileWriter favoritesWriter = new FileWriter(favoritesPath, true);
             FileWriter watchedWriter = new FileWriter(watchedPath, true);
