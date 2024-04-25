@@ -12,9 +12,8 @@ public class Search {
 
     HashMap<String, AMedia> mediaByTitle = new HashMap<>();
     HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
-    HashMap<String, AMedia> mediaByRating = new HashMap<>();
+    HashMap<String, ArrayList<AMedia>> mediaByRating = new HashMap<>();
     //HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
-   // HashMap<String, List<AMedia>> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
 
@@ -37,18 +36,14 @@ public class Search {
 
 
 
-    /*public void makeMediaByRating(ArrayList<AMedia> mediaList){
-        for (AMedia media : mediaList)
-        {
-            for (int i = 0; i<mediaList.size();i++) {
-                if (!mediaByRating.containsKey(String.valueOf(media.getRating()))) {
-                  mediaByRating.put(String.valueOf(media.getRating()), new ArrayList<>());
-                }
-                mediaByRating.get(media.getRating()).add(media);
+    public void makeMediaByRating(ArrayList<AMedia> mediaList) {
+        for (AMedia media : mediaList) {
+            String rating = String.valueOf(media.getRating()); // Convert float rating to string
+            if (!mediaByRating.containsKey(rating)) {
+                mediaByRating.put(rating, new ArrayList<>());
             }
         }
-
-    }*/
+    }
 
     public AMedia searchByTitle(String title) {
         return mediaByTitle.get(title);
@@ -89,12 +84,17 @@ public class Search {
     }
 
 
-    /*public List<AMedia> searchByRating(String rating) {
-        if (mediaByRating.containsKey(rating))
-        {
-            return mediaByRating.get(rating);
+    public List<AMedia> searchByRating(String rating) {
+        ArrayList<AMedia> returnList = new ArrayList<>();
+        // Check if the category exists in the map
+        for (Map.Entry<String, ArrayList<AMedia>> entry : mediaByRating.entrySet()) {
+            String mediaRating = entry.getKey().toLowerCase();
+            if (mediaRating.contains(rating.toLowerCase())) {
+                returnList.addAll(entry.getValue());
+            }
         }
-        return Collections.emptyList();
-    }*/
+        return returnList;
+    }
+
 
 }
