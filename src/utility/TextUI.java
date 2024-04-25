@@ -14,6 +14,21 @@ public class TextUI {
         displayMessage(msg);
         return scanner.nextLine();
     }
+    public String promptTextYN(String msg){
+        displayMessage(msg);
+        String input = scanner.nextLine().toLowerCase();
+        switch (input){
+            case "y":
+                return input;
+            case "n":
+                return input;
+            default:
+                displayMessage("Invalid input");
+                return promptTextYN(msg);
+
+        }
+
+    }
 
     public int promptNumeric(String msg) {
         String input = promptText(msg);
