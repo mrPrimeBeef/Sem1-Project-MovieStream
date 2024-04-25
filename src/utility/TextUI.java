@@ -67,7 +67,7 @@ public class TextUI {
                 return Integer.parseInt(input);
             default:
                 displayMessage("Invalid input, try again");
-                return promptNumericThree(msg);
+                return promptNumericFive(msg);
         }
     }
 
