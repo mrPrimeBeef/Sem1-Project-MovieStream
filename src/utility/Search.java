@@ -1,8 +1,11 @@
 package utility;
 
+import java.sql.Array;
 import java.util.*;
 
 import application.AMedia;
+
+import static java.lang.String.valueOf;
 
 
 public class Search {
@@ -31,12 +34,23 @@ public class Search {
     }
 
 
-    /*
-    public void makeMediaByRating(ArrayList<AMedia> movieList){
-        for(int i = 0; i < movieList.size(); i++){
-            mediaByTitle.put(movieList.get(i).getRating(), (List<AMedia>) movieList.get(i));
+
+    public void makeMediaByRating(ArrayList<AMedia> mediaList){
+        /*for (AMedia media : mediaList)
+        */{
+            for (int i = 0; i<mediaList.size();i++)
+            {
+                mediaByRating.put(mediaList.get(Float.toString(i).getRating(), mediaList.get(i));
+            }/*
+            for (float rating : media.getRating()) {
+                if (!mediaByRating.containsKey(rating)) {
+                  mediaByRating.put(rating, new ArrayList<>());
+                }
+                mediaByRating.get(rating).add(media);
+            }*/
         }
-    }*/
+
+    }
 
     public AMedia searchByTitle(String title) {
         return mediaByTitle.get(title);

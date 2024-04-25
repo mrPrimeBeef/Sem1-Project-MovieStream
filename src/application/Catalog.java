@@ -26,7 +26,7 @@ public class Catalog {
     }
 
     public ArrayList<AMedia> createMediaFromString() {
-        ArrayList<String> list = io.readMovieData();
+        ArrayList<String> list = io.readMovieData(); // film + serier
         ArrayList<AMedia> mediaCatalog = new ArrayList<>();
         int movieCount = 0;
 
