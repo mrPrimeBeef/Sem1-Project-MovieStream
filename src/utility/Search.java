@@ -14,7 +14,7 @@ public class Search {
     HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
     HashMap<String, AMedia> mediaByRating = new HashMap<>();
     //HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
-    HashMap<String, List<AMedia>> mediaByRating = new HashMap<>();
+   // HashMap<String, List<AMedia>> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
 
@@ -37,7 +37,7 @@ public class Search {
 
 
 
-    public void makeMediaByRating(ArrayList<AMedia> mediaList){
+    /*public void makeMediaByRating(ArrayList<AMedia> mediaList){
         for (AMedia media : mediaList)
         {
             for (int i = 0; i<mediaList.size();i++) {
@@ -48,7 +48,7 @@ public class Search {
             }
         }
 
-    }
+    }*/
 
     public AMedia searchByTitle(String title) {
         return mediaByTitle.get(title);
@@ -89,13 +89,12 @@ public class Search {
     }
 
 
-    public List<AMedia> searchByRating(String rating) {
+    /*public List<AMedia> searchByRating(String rating) {
         if (mediaByRating.containsKey(rating))
         {
             return mediaByRating.get(rating);
         }
         return Collections.emptyList();
-    }
-
+    }*/
 
 }

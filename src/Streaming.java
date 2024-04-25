@@ -43,7 +43,7 @@ public class Streaming {
     public void startStreaming() {
         search.makeMediaByTitle(mediaList);
         search.makeMediaByCategory(mediaList);
-        search.makeMediaByRating(mediaList);
+        //search.makeMediaByRating(mediaList);
 
         ui.displayMessage("     Welcome to \n" + this.name + "\n");
         userList = io.readUserData();
@@ -167,7 +167,7 @@ public class Streaming {
                 break;
             case 3:
                 float rating = ui.promptNumeric("Search by rating: ");
-                search.searchByRating(String.valueOf(rating));
+                //search.searchByRating(String.valueOf(rating));
 
                 break;
         }
@@ -282,7 +282,7 @@ public class Streaming {
 
         } else if (input == 1) {
             io.saveFavorites(currentUser, showList.get(choice - 1).getTitle());
-            String stringInput = ui.promptText("Favorites added successfully, Play movie? y/n");
+            String stringInput = ui.promptTextYN("Favorites added successfully, Play movie? y/n");
             if (stringInput.toLowerCase().equals("y")) {
                 playMedia(showList.get(choice - 1));
                 streamning();
