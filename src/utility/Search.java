@@ -1,11 +1,8 @@
 package utility;
 
-import java.sql.Array;
 import java.util.*;
 
 import application.AMedia;
-
-import static java.lang.String.valueOf;
 
 
 public class Search {
@@ -13,8 +10,6 @@ public class Search {
     HashMap<String, AMedia> mediaByTitle = new HashMap<>();
     HashMap<String, ArrayList<AMedia>> mediaByCategory = new HashMap<>();
     HashMap<String, AMedia> mediaByRating = new HashMap<>();
-    //HashMap<String, List<AMedia>> mediaByCategory = new HashMap<>();
-   // HashMap<String, List<AMedia>> mediaByRating = new HashMap<>();
     ArrayList<AMedia> movieCatalog;
     ArrayList<AMedia> seriesCatalog;
 
@@ -36,18 +31,11 @@ public class Search {
     }
 
 
-
-    /*public void makeMediaByRating(ArrayList<AMedia> mediaList){
-        for (AMedia media : mediaList)
-        {
-            for (int i = 0; i<mediaList.size();i++) {
-                if (!mediaByRating.containsKey(String.valueOf(media.getRating()))) {
-                  mediaByRating.put(String.valueOf(media.getRating()), new ArrayList<>());
-                }
-                mediaByRating.get(media.getRating()).add(media);
-            }
+    /*
+    public void makeMediaByRating(ArrayList<AMedia> movieList){
+        for(int i = 0; i < movieList.size(); i++){
+            mediaByTitle.put(movieList.get(i).getRating(), (List<AMedia>) movieList.get(i));
         }
-
     }*/
 
     public AMedia searchByTitle(String title) {
@@ -79,22 +67,10 @@ public class Search {
         return returnList;
     }
 
-    public List<AMedia> searchByCategory(String category) {
-        // Check if the category exists in the map
-        if (mediaByCategory.containsKey(category)) {
-            return mediaByCategory.get(category);
-        } else {
-            return Collections.emptyList(); // Return an empty list if category not found
-        }
+    /*
+    public List<Movie> searchByRating(double rating) {
+        return mediaByRating.getOrDefault(rating, Collections.emptyList());
     }
-
-
-    /*public List<AMedia> searchByRating(String rating) {
-        if (mediaByRating.containsKey(rating))
-        {
-            return mediaByRating.get(rating);
-        }
-        return Collections.emptyList();
-    }*/
+    */
 
 }
