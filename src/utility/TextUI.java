@@ -98,7 +98,12 @@ public class TextUI {
         displayList(optionslist, "");
         int input = promptNumeric("");
         return input;
-
+    }
+    public int promptChoiceLogin(ArrayList<String> optionslist, String msg){
+        displayMessage(msg);
+        displayList(optionslist, "");
+        int input = promptNumericTwo("");
+        return input;
     }
 
     public int promptChoiceStreamning(ArrayList<String> optionslist, String msg){

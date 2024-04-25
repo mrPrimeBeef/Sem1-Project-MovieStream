@@ -48,7 +48,7 @@ public class Streaming {
         userList = io.readUserData();
         int choice;
 
-        choice = ui.promptChoice(startmenu, "Create a user or login:");
+        choice = ui.promptChoiceLogin(startmenu, "Create a user or login:");
 
         switch (choice) {
             case 1:
